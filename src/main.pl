@@ -2,7 +2,7 @@
 /* supporting files */
 
 :- include('map.pl').
-
+:- include('quest.pl').
 
 
 startGame:- 
@@ -42,10 +42,12 @@ help:-
     write('% 7. a      : gerak ke barat 1 langkah                                         %'),nl,
     write('% 8. help   : menampilkan segala bantuan                                       %'),nl,
     write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%').
-    
-
 
 :- dynamic(isStarted/1).
 start                   :- isStarted(_) -> write('you already start your journey!'), !.
 
 start                   :- \+isStarted(_), asserta(isStarted(true)), createMap.
+
+:- dynamic(isQuest/1).
+quest                   :- isQuest(_) -> write('You have an on-going quest!');
+                            \+ isQuest(_), player(X,Y), X =:= 12, Y =:= 8 -> asserta(isQuest(true)), getQuest.
