@@ -45,7 +45,7 @@ move(BeforeX, BeforeY, AfterX, AfterY) :-   wall(AfterX, AfterY) -> write('Oh No
                                             marketplace(AfterX,AfterY) -> write('You are in marketplace!');
                                             digged(AfterX,AfterY) -> write('you are standing on digged tile!')).
 
-map :-                  isStarted(_) -> (map(0, 16), nl) ; (write("You have to start your game first!")).
+map :-                  isStarted(_) -> (map(0, 16), nl) ; (write('You have to start your game first!')).
 
 map(X, Y) :-            (wall(X, Y) -> write('#');
                         player(X, Y) -> write('P');
