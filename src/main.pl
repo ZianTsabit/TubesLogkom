@@ -27,9 +27,8 @@ startGame:-
     write(' % 6. d      : gerak ke ke timur 1 langkah                                      %'),nl,
     write(' % 7. a      : gerak ke barat 1 langkah                                         %'),nl,
     write(' % 8. help   : menampilkan segala bantuan                                       %'),nl,
-    write(' %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'),nl,nl,
-    write('Ketik 1 untuk mulai (belom dibikin opsi lain).'),read_integer(Choice),
-    Choice = 1 -> (write('Hello, Player, welcome to <nama game>'), nl, start, !).
+    write(' %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%').
+
 
 help:-
     write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'),nl,
