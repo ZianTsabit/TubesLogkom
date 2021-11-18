@@ -6,16 +6,11 @@
 :- dynamic(horizontal/1).
 :- dynamic(vertical/1).
 
-generate(X,Y) :-        (X = 0, Y = 0 -> asserta(coordinate(0, 0));
-                        X = 0 -> asserta(coordinate(0,Y)), NewY is Y - 1, generate(X, NewY);
-                        Y = 0 -> asserta(coordinate(X,Y)), NewY = 16, NewX is X - 1, generate(NewX, NewY);
-		                asserta(coordinate(X, Y)), NewY is Y - 1, generate(X, NewY)).
+wall(X, Y) :-           (Y =:= 16, (X >= 0, X =< 16));
+                        (X =:= 16, (Y >= 0, Y =< 16));
+                        (Y =:= 0, (X >= 0, X =< 16));
+                        (X =:= 0, (Y >= 0, Y =< 16)).
 
-
-wall(X, Y) :-         Y =:= 16, coordinate(X, Y).
-wall(X, Y) :-         X =:= 0, coordinate(X, Y).
-wall(X, Y) :-         X =:= 16, coordinate(X, Y).
-wall(X, Y) :-         Y =:= 0, coordinate(X, Y).
 
 :- dynamic(player/2).
 :- dynamic(house/2).
@@ -24,8 +19,7 @@ wall(X, Y) :-         Y =:= 0, coordinate(X, Y).
 :- dynamic(marketplace/2).
 :- dynamic(digged/2).
 
-createMap :-            generate(16,16),
-                        asserta(player(4,10)),
+createMap :-            asserta(player(4,10)),
                         asserta(house(4,10)),
                         asserta(ranch(2,9)),
                         asserta(quest(12,8)),
