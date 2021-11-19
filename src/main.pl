@@ -8,6 +8,8 @@
 :- dynamic(isStarted/1).
 :- dynamic(isQuest/1).
 
+/*** Start Game ***/
+
 startGame:- 
     write('  _   _                          _                '),nl,   
     write(' | | | | __ _ __ __    ___   ___| |_              '),nl, 
@@ -33,6 +35,8 @@ startGame:-
     write(' %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%').
 
 
+/*** Help ***/
+
 help:-
     write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'),nl,
     write('%                              ~Harvest Star~                                  %'),nl,
@@ -47,9 +51,10 @@ help:-
     write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%').
 
 
-start                   :- isStarted(_) -> write('you already start your journey!'), !.
+/*** Start ***/
 
-start                   :- \+isStarted(_), asserta(isStarted(true)), createMap, 
+start                   :-  isStarted(_) -> write('You already start your journey!');
+                            (\+ isStarted(_), asserta(isStarted(true)), createMap, 
                             write('Welcome to Harvest Star. Choose your job'), nl,
                             write('1. Fisherman'), nl,
                             write('2. Farmer'), nl,
@@ -58,9 +63,18 @@ start                   :- \+isStarted(_), asserta(isStarted(true)), createMap,
                             ((Choice = 1 -> initStatus(fisherman), write('You choose Fisherman, lets start fishing'));
                             (Choice = 2 -> initStatus(farmer), write('You choose Farmer, lets start farming'));
                             (Choice = 3 -> initStatus(rancher), write('You choose Rancher, lets start ranching'));
-                            ((Choice > 3; Choice < 1) -> retract(isStarted(_)), write('Game is not started'), nl, write('Input invalid'))).
+                            ((Choice > 3; Choice < 1) -> retract(isStarted(_)), write('Game is not started'), nl, write('Input invalid')))).
+
+
+/*** Player ***/
+
+status                  :- playerStatus.
+
+
+/*** Quest ***/
 
 quest                   :- isQuest(_) -> write('You have an on-going quest!');
                             \+ isQuest(_), player(X,Y), X =:= 12, Y =:= 8 -> asserta(isQuest(true)), getQuest.
 
-status                  :- playerStatus.
+
+/*** House ***/
