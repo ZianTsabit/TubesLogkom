@@ -20,3 +20,12 @@ clockAfterSleep :-  retractall(clock),
 clockAfterMove :-   retract(clock(X)), NewX is X+5,
                     asserta(clock(NewX)), clockRules.
 
+/* belum ditentuin waktunya mau berapa lama */
+clockAfterFishing :-retract(clock(X)), NewX is X+5,
+                    asserta(clock(NewX)), clockRules.
+
+clockAfterFarming :-retract(clock(X)), NewX is X+5,
+                    asserta(clock(NewX)), clockRules.
+
+clockAfterRanching :-retract(clock(X)), NewX is X+5,
+                    asserta(clock(NewX)), clockRules.
