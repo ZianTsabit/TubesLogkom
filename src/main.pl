@@ -9,6 +9,7 @@
 :- dynamic(isStarted/1).
 :- dynamic(isQuest/1).
 :- dynamic(day/1).
+:- dynamic(isHouse/1).
 :- dynamic(diaryList/1).
 
 /*** Start Game ***/
@@ -82,7 +83,9 @@ quest                   :-  isQuest(_) -> write('You have an on-going quest!');
 
 /*** House ***/
 
-house                   :-  player(X,Y), X =:= 4, Y =:= 10 -> writeActHouse; write('You are not in house').
-sleep                   :-  goSleep.
-writeDiary              :-  writeInDiary.
-readDiary               :-  readTheDiary.
+house                   :-  player(X,Y), X =:= 4, Y =:= 10, (\+ isHouse(_), writeActHouse, asserta(isHouse(true));
+                            write('You are already in house menu')); write('You are not in house').
+sleep                   :-  isHouse(_), goSleep; failHouse.
+writeDiary              :-  isHouse(_), writeInDiary; failHouse.
+readDiary               :-  isHouse(_), readTheDiary; failHouse.
+exit                    :-  retract(isHouse(_)).

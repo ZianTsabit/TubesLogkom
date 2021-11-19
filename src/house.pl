@@ -12,6 +12,8 @@ readDiaryDay([A|B]) :- write('- Day '), write(A), nl, readDiaryDay(B).
 
 /* Code utama house */
 
+failHouse                       :-  write('You are not in house menu').
+
 writeActHouse                   :-  write('What do you want to do?'), nl,
                                     write('- sleep'), nl,
                                     write('- writeDiary'), nl,
@@ -22,10 +24,11 @@ goSleep                         :-  write('You went to sleep'), nl, nl,
                                     retract(day(Before)), After is Before + 1, asserta(day(After)),
                                     write('Day '), write(After).
 
-writeInDiary                    :-  day(X), write('Write your diary for Day '), write(X), nl, nl,
-                                    write('yes'), nl, write('| ?- '), read(Y),
-                                    asserta(diary(X,Y)), retract(diaryList(A)), insertDiary(A,X,Z), asserta(diaryList(Z)),
-                                    write('Day '), write(X), write(' entry saved').
+writeInDiary                    :-  day(X), (\+ diary(X,_) -> write('Write your diary for Day '); write('Replace your diary for Day ')), 
+                                    write(X), nl, nl, write('yes'), nl, write('| ?- '), read(Y),
+                                    retract(diaryList(A)), insertDiary(A,X,Z), asserta(diaryList(Z)),
+                                    write('Day '), write(X), write(' entry saved'), (\+ diary(X,_) -> asserta(diary(X,Y));
+                                    retract(diary(X,_)), asserta(diary(X,Y))).
 
 readTheDiary                    :-  write('Here are the list of your entries:'), nl,
                                     diaryList(X), readDiaryDay(X), nl, nl,
