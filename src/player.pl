@@ -1,7 +1,8 @@
 :- dynamic(player/11).
 
-initStatus(X)                   :-  asserta(player(X,1,1,0,1,0,1,0,0,100,0)).
+/* Code utama player */
 
+initStatus(X)                   :-  asserta(player(X,1,1,0,1,0,1,0,0,100,0)).
 
 playerStatus                    :-  player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_,Gold),
                                     write('Your status:'), nl,

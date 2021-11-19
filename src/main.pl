@@ -4,9 +4,12 @@
 :- include('map.pl').
 :- include('quest.pl').
 :- include('player.pl').
+:- include('house.pl').
 
 :- dynamic(isStarted/1).
 :- dynamic(isQuest/1).
+:- dynamic(day/1).
+:- dynamic(diaryList/1).
 
 /*** Start Game ***/
 
@@ -54,7 +57,7 @@ help:-
 /*** Start ***/
 
 start                   :-  isStarted(_) -> write('You already start your journey!');
-                            (\+ isStarted(_), asserta(isStarted(true)), createMap, 
+                            (\+ isStarted(_), asserta(isStarted(true)), createMap, asserta(day(1)), asserta(diaryList([])),
                             write('Welcome to Harvest Star. Choose your job'), nl,
                             write('1. Fisherman'), nl,
                             write('2. Farmer'), nl,
@@ -63,18 +66,22 @@ start                   :-  isStarted(_) -> write('You already start your journe
                             ((Choice = 1 -> initStatus(fisherman), write('You choose Fisherman, lets start fishing'));
                             (Choice = 2 -> initStatus(farmer), write('You choose Farmer, lets start farming'));
                             (Choice = 3 -> initStatus(rancher), write('You choose Rancher, lets start ranching'));
-                            ((Choice > 3; Choice < 1) -> retract(isStarted(_)), write('Game is not started'), nl, write('Input invalid')))).
+                            ((Choice > 3; Choice < 1) -> retract(day(_)) ,retract(isStarted(_)), write('Game is not started'), nl, write('Input invalid')))).
 
 
 /*** Player ***/
 
-status                  :- playerStatus.
+status                  :-  playerStatus.
 
 
 /*** Quest ***/
 
-quest                   :- isQuest(_) -> write('You have an on-going quest!');
+quest                   :-  isQuest(_) -> write('You have an on-going quest!');
                             \+ isQuest(_), player(X,Y), X =:= 12, Y =:= 8 -> asserta(isQuest(true)), getQuest.
 
 
 /*** House ***/
+
+house                   :-  player(X,Y), X =:= 4, Y =:= 10 -> writeActHouse; write('You are not in house').
+writeDiary              :-  writeInDiary.
+readDiary               :-  readTheDiary.
