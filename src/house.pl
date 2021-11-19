@@ -18,6 +18,10 @@ writeActHouse                   :-  write('What do you want to do?'), nl,
                                     write('- readDiary'), nl,
                                     write('- exit').
 
+goSleep                         :-  write('You went to sleep'), nl, nl,
+                                    retract(day(Before)), After is Before + 1, asserta(day(After)),
+                                    write('Day '), write(After).
+
 writeInDiary                    :-  day(X), write('Write your diary for Day '), write(X), nl, nl,
                                     write('yes'), nl, write('| ?- '), read(Y),
                                     asserta(diary(X,Y)), retract(diaryList(A)), insertDiary(A,X,Z), asserta(diaryList(Z)),

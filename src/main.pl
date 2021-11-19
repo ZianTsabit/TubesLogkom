@@ -83,5 +83,6 @@ quest                   :-  isQuest(_) -> write('You have an on-going quest!');
 /*** House ***/
 
 house                   :-  player(X,Y), X =:= 4, Y =:= 10 -> writeActHouse; write('You are not in house').
+sleep                   :-  goSleep.
 writeDiary              :-  writeInDiary.
 readDiary               :-  readTheDiary.
