@@ -5,6 +5,8 @@
 :- include('quest.pl').
 :- include('player.pl').
 :- include('house.pl').
+:- include('inventory.pl').
+:- include('role.pl').
 
 :- dynamic(isStarted/1).
 :- dynamic(isQuest/1).

@@ -1,17 +1,12 @@
 /* map.pl */
 
-/* creating coordinate */
-
-:- dynamic(coordinate/2).
-:- dynamic(horizontal/1).
-:- dynamic(vertical/1).
-
+/* Definisi Wall */
 wall(X, Y) :-           (Y =:= 16, (X >= 0, X =< 16));
                         (X =:= 16, (Y >= 0, Y =< 16));
                         (Y =:= 0, (X >= 0, X =< 16));
                         (X =:= 0, (Y >= 0, Y =< 16)).
 
-
+/* Fact yang digunakan */
 :- dynamic(player/2).
 :- dynamic(house/2).
 :- dynamic(ranch/2).
@@ -19,6 +14,7 @@ wall(X, Y) :-           (Y =:= 16, (X >= 0, X =< 16));
 :- dynamic(marketplace/2).
 :- dynamic(digged/2).
 
+/* Isi map */
 createMap :-            asserta(player(4,10)),
                         asserta(house(4,10)),
                         asserta(ranch(2,9)),
@@ -36,16 +32,9 @@ createRiver :-          asserta(water(15,5)),
                         asserta(water(15,2)),asserta(water(14,2)),asserta(water(13,2)),asserta(water(12,2)),asserta(water(11,2)),
                         asserta(water(15,1)),asserta(water(14,1)),asserta(water(13,1)),asserta(water(12,1)),asserta(water(11,1)),asserta(water(10,1)).
 
-move(BeforeX, BeforeY, AfterX, AfterY) :-   wall(AfterX, AfterY) -> write('Oh No! the wall is too huge!'),
-                                            retract(player(AfterX,AfterY)), asserta(player(BeforeX, BeforeY)), nl, !;
-                                            water(AfterX, AfterY) -> write('You can not walk on the water, fellas...'), nl, !,
-                                            retract(player(AfterX,AfterY)), asserta(player(BeforeX, BeforeY));
-                                            (house(AfterX,AfterY) -> write('You are in your house!');
-                                            ranch(AfterX,AfterY) -> write('You are in your ranch!');
-                                            marketplace(AfterX,AfterY) -> write('You are in marketplace!');
-                                            digged(AfterX,AfterY) -> write('you are standing on digged tile!')).
+/* tampilin map */
 
-map :-                  isStarted(_) -> (map(0, 16), nl) ; (write('You have to start your game first!')).
+map :-                  isStarted(_) -> (map(0, 16), nl) ; (write('You have not start your game!'), nl, write('Use start command to play!'),nl).
 
 map(X, Y) :-            (wall(X, Y) -> write('#');
                         player(X, Y) -> write('P');
@@ -60,6 +49,16 @@ map(X, Y) :-            (wall(X, Y) -> write('#');
                         X = 16 -> nl, X1 = 0, Y1 is Y - 1, map(X1, Y1);
                         map(X2, Y)).
 
+/* Rules move */
+move(BeforeX, BeforeY, AfterX, AfterY) :-   wall(AfterX, AfterY) -> write('Oops! The wall is too huge!'),
+                                            retract(player(AfterX,AfterY)), asserta(player(BeforeX, BeforeY)), nl, !;
+                                            water(AfterX, AfterY) -> write('you can not walk on the water, fellas!'), nl, !,
+                                            retract(player(AfterX,AfterY)), asserta(player(BeforeX, BeforeY));
+                                            (house(AfterX,AfterY) -> write('You are in your house!');
+                                            ranch(AfterX,AfterY) -> write('You are in your ranch!');
+                                            marketplace(AfterX,AfterY) -> write('You are in marketplace!');
+                                            digged(AfterX,AfterY) -> write('You are standing on digged tile!')).
+                                            
 w :-                    retract(player(BeforeX, BeforeY)),
                         AfterY is BeforeY + 1, 
                         asserta(player(BeforeX, AfterY)),
