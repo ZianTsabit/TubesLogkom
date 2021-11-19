@@ -4,8 +4,6 @@
 :- dynamic(inventoryI/6).
 :- dynamic(capacity/1).
 
-capacity(0).
-
 /* Hitung jumlah barang */
 
 /* Basis */
@@ -48,24 +46,24 @@ inventory :-            write('Your inventory: '),
 
 
 
-addItem(ID,JobItem,Jumlah) :-  item(ID,Nama,JobItem),capacity(X),
+addItem(ID,JobItem,Jumlah) :-   item(ID,Nama,JobItem),capacity(X),
                                 X =< 100,
                                 \+inventoryI(ID,_,item,JobItem,_,_), 
                                 asserta(inventoryI(ID,Nama,item,JobItem,1,Jumlah)), kapasitas,!.
 
-addItem(ID,JobItem,Jumlah) :-  item(ID,Nama,JobItem),capacity(X),
+addItem(ID,JobItem,Jumlah) :-   item(ID,Nama,JobItem),capacity(X),
                                 X =< 100,
                                 inventoryI(ID,_,item,JobItem,_,JumlahC),
                                 retract(inventoryI(ID,_,item,JobItem,_,_)),
                                 NewJumlah is JumlahC + Jumlah, 
                                 asserta(inventoryI(ID,Nama,item,JobItem,1,NewJumlah)), kapasitas,!.
 
-addConsumable(ID, Jumlah) :-   consumable(ID,Nama),capacity(X),
+addConsumable(ID, Jumlah) :-    consumable(ID,Nama),capacity(X),
                                 X =< 100,
                                 \+inventoryI(ID,_,consumable,_,_,_),
                                 asserta(inventoryI(ID,Nama,consumable,non,-1,Jumlah)), kapasitas,!.
 
-addConsumable(ID, Jumlah) :-   consumable(ID,Nama),capacity(X),
+addConsumable(ID, Jumlah) :-    consumable(ID,Nama),capacity(X),
                                 X =< 100,
                                 inventoryI(ID,_,consumable,_,_,JumlahC),
                                 retract(inventoryI(ID,_,consumable,_,_,_)),

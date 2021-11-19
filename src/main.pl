@@ -8,6 +8,7 @@
 :- include('inventory.pl').
 :- include('role.pl').
 :- include('marketplace.pl').
+:- include('clock.pl').
 
 :- dynamic(isStarted/1).
 :- dynamic(isQuest/1).
@@ -61,7 +62,7 @@ help:-
 /*** Start ***/
 
 start                   :-  isStarted(_) -> write('You already start your journey!');
-                            (\+ isStarted(_), asserta(isStarted(true)), createMap, asserta(day(1)), asserta(diaryList([])),
+                            (\+ isStarted(_), asserta(isStarted(true)), createMap, asserta(day(1)), asserta(diaryList([])), asserta(clock(360)), asserta(capacity(0)),
                             write('Welcome to Harvest Star. Choose your job'), nl,
                             write('1. Fisherman'), nl,
                             write('2. Farmer'), nl,

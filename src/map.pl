@@ -34,7 +34,9 @@ createRiver :-          asserta(water(15,5)),
 
 /* tampilin map */
 
-map :-                  isStarted(_) -> (map(0, 16), nl) ; (write('You have not start your game!'), nl, write('Use start command to play!'),nl).
+map :-                  isStarted(_) -> 
+                        (map(0, 16), nl, showClock, write(' Day '), day(X), write(X), nl); 
+                        (write('You have not start your game!'), nl, write('Use start command to play!'),nl).
 
 map(X, Y) :-            (wall(X, Y) -> write('#');
                         player(X, Y) -> write('P');
@@ -54,6 +56,7 @@ move(BeforeX, BeforeY, AfterX, AfterY) :-   wall(AfterX, AfterY) -> write('Oops!
                                             retract(player(AfterX,AfterY)), asserta(player(BeforeX, BeforeY)), nl, !;
                                             water(AfterX, AfterY) -> write('you can not walk on the water, fellas!'), nl, !,
                                             retract(player(AfterX,AfterY)), asserta(player(BeforeX, BeforeY));
+                                            clockAfterMove,
                                             (house(AfterX,AfterY) -> write('You are in your house!');
                                             ranch(AfterX,AfterY) -> write('You are in your ranch!');
                                             marketplace(AfterX,AfterY) -> write('You are in marketplace!');
