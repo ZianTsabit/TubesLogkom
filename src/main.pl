@@ -3,7 +3,10 @@
 
 :- include('map.pl').
 :- include('quest.pl').
+:- include('player.pl').
 
+:- dynamic(isStarted/1).
+:- dynamic(isQuest/1).
 
 startGame:- 
     write('  _   _                          _                '),nl,   
@@ -43,9 +46,7 @@ help:-
     write('% 8. help   : menampilkan segala bantuan                                       %'),nl,
     write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%').
 
-:- dynamic(job/1).
-:- dynamic(isStarted/1).
-:- dynamic(isQuest/1).
+
 start                   :- isStarted(_) -> write('you already start your journey!'), !.
 
 start                   :- \+isStarted(_), asserta(isStarted(true)), createMap, 
@@ -54,9 +55,11 @@ start                   :- \+isStarted(_), asserta(isStarted(true)), createMap,
                             write('2. Farmer'), nl,
                             write('3. Rancher'), nl,
                             write('> '), read_integer(Choice),
-                            (Choice = 1 -> write('You choose Fisherman, lets start fishing'), asserta(job(fisherman))),
-                            (Choice = 2 -> write('You choose Farmer, lets start farming'), asserta(job(farmer))),
-                            (Choice = 3 -> write('You choose Rancher, lets start ranching'), asserta(job(rancher))).
+                            (Choice = 1 -> initStatus(fisherman), write('You choose Fisherman, lets start fishing')),
+                            (Choice = 2 -> initStatus(farmer), write('You choose Farmer, lets start farming')),
+                            (Choice = 3 -> initStatus(rancher), write('You choose Rancher, lets start ranching')).
 
 quest                   :- isQuest(_) -> write('You have an on-going quest!');
                             \+ isQuest(_), player(X,Y), X =:= 12, Y =:= 8 -> asserta(isQuest(true)), getQuest.
+
+status                  :- playerStatus.
