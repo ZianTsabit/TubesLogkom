@@ -55,9 +55,10 @@ start                   :- \+isStarted(_), asserta(isStarted(true)), createMap,
                             write('2. Farmer'), nl,
                             write('3. Rancher'), nl,
                             write('> '), read_integer(Choice),
-                            (Choice = 1 -> initStatus(fisherman), write('You choose Fisherman, lets start fishing')),
-                            (Choice = 2 -> initStatus(farmer), write('You choose Farmer, lets start farming')),
-                            (Choice = 3 -> initStatus(rancher), write('You choose Rancher, lets start ranching')).
+                            ((Choice = 1 -> initStatus(fisherman), write('You choose Fisherman, lets start fishing'));
+                            (Choice = 2 -> initStatus(farmer), write('You choose Farmer, lets start farming'));
+                            (Choice = 3 -> initStatus(rancher), write('You choose Rancher, lets start ranching'));
+                            ((Choice > 3; Choice < 1) -> retract(isStarted(_)), write('Game is not started'), nl, write('Input invalid'))).
 
 quest                   :- isQuest(_) -> write('You have an on-going quest!');
                             \+ isQuest(_), player(X,Y), X =:= 12, Y =:= 8 -> asserta(isQuest(true)), getQuest.
