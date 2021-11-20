@@ -56,7 +56,7 @@ move(BeforeX, BeforeY, AfterX, AfterY) :-   wall(AfterX, AfterY) -> write('Oops!
                                             retract(player(AfterX,AfterY)), asserta(player(BeforeX, BeforeY)), nl, !;
                                             water(AfterX, AfterY) -> write('you can not walk on the water, fellas!'), nl, !,
                                             retract(player(AfterX,AfterY)), asserta(player(BeforeX, BeforeY));
-                                            clockAfterMove,
+                                            clockAfterMove;
                                             (house(AfterX,AfterY) -> write('You are in your house!');
                                             ranch(AfterX,AfterY) -> write('You are in your ranch!');
                                             marketplace(AfterX,AfterY) -> write('You are in marketplace!');
@@ -81,3 +81,8 @@ d :-                    retract(player(BeforeX, BeforeY)),
                         AfterX is BeforeX + 1, 
                         asserta(player(AfterX, BeforeY)),
                         move(BeforeX,BeforeY,AfterX, BeforeY).
+
+/* RULES TEMPAT MANCING DAN FARMING */
+canDig(X,Y)             :- \+ wall(X,Y),\+ water(X,Y),\+ house(X,Y),\+ marketplace(X,Y),\+ quest(X,Y),\+ ranch(X,Y),\+ digged(X,Y).
+
+canFish(X,Y)            :- water(A,B),(((Y =:= B),((A =:= X-1);(A =:= X+1)));((X =:= A),((B =:= Y-1);(A =:= Y+1)))).
