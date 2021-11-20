@@ -44,9 +44,16 @@ buyOption :- write('What do you want to buy ?'),nl,
 chili :- \+isStarted(_), write('You have to start your game first !'),!.
 chili :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
 chili :- isStarted(_), isMarketplace(_), \+isBuy(_), write('You have not selected the buy option !'),!.
-chili :- player(_,_,_,_,_,_,_,_,_,_,Gold), price(chili,X), Gold < X,
-         write('You dont have enough money !'),!.
-chili :- player(_,_,_,_,_,_,_,_,_,_,Gold), price(chili,X), Gold >= X, ,.
+chili :- write('How many do you want to buy ? \n'),
+         read(Jumlah),
+         player(_,_,_,_,_,_,_,_,_,Gold),
+         price(chili,X),
+         newPrice is Jumlah * X,
+         newGold is Gold - newPrice,
+         retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
+         asserta(player(_,_,_,_,_,_,_,_,_,newGold)),
+         write(newPrice),!.
+
 
 paddy :- \+isStarted(_), write('You have to start your game first !'),!.
 paddy :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
@@ -154,13 +161,13 @@ level2_fishing_rod :- isStarted(_), isMarketplace(_), player(_,_,_,_,_,_,_,_,_,_
 level3_fishing_rod :- \+isStarted(_), write('You have to start your game first !'),!.
 level3_fishing_rod :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
 level3_fishing_rod :- isStarted(_), isMarketplace(_), \+isBuy(_), write('You have not selected the buy option !'),!.
-level3_fishing_rod :- player(_,_,_,_,_,_,_,_,_,_,Gold), price(level3_fishing_rod,X), Gold < X,,
+level3_fishing_rod :- player(_,_,_,_,_,_,_,_,_,_,Gold), price(level3_fishing_rod,X), Gold < X,
                       write('You dont have enough money !'),!.
 
 bait :- \+isStarted(_), write('You have to start your game first !'),!.
 bait :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
 bait :- isStarted(_), isMarketplace(_), \+isBuy(_), write('You have not selected the buy option !'),!.
-bait :- player(_,_,_,_,_,_,_,_,_,_,Gold), price(bait,X), Gold < X,,
+bait :- player(_,_,_,_,_,_,_,_,_,_,Gold), price(bait,X), Gold < X,
         write('You dont have enough money !'),!.
 
 

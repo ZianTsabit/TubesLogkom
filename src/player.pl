@@ -2,9 +2,9 @@
 
 /* Code utama player */
 
-initStatus(X)                   :-  asserta(player(X,1,1,0,1,0,1,0,0,100,0)).
+initStatus(X)                   :-  asserta(player(X,1,1,0,1,0,1,0,0,1000)).
 
-playerStatus                    :-  player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_,Gold),
+playerStatus                    :-  player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,Gold),
                                     write('Your status:'), nl,
                                     write('Job: '), write(Job), nl,
                                     write('Level: '), write(Level), nl,
