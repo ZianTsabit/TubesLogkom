@@ -1,4 +1,4 @@
-:- dynamic(player/11).
+:- dynamic(player/10).
 
 /* Code utama player */
 

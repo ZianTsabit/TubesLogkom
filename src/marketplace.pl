@@ -45,7 +45,7 @@ chili :- \+isStarted(_), write('You have to start your game first !'),!.
 chili :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
 chili :- isStarted(_), isMarketplace(_), \+isBuy(_), write('You have not selected the buy option !'),!.
 chili :- write('How many do you want to buy ? \n'),
-         read(Jumlah),
+         read_integer(Jumlah),
          player(_,_,_,_,_,_,_,_,_,Gold),
          price(chili,X),
          newPrice is Jumlah * X,
