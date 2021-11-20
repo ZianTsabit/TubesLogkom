@@ -11,29 +11,29 @@ jobID(farmer,2).
 jobID(rancher,3).
 
 /***    FAKTA DAN RULE ITEM   ***/
-/* item(ID, nama). {belum tahu lagi apa} */
+/* item(ID, Nama, JobItem). {belum tahu lagi apa} */
 
 
 /* ITEM FISHERMAN */
-item(1,fishing_rod).
+item(1,fishing_rod,fisherman).
 
 
 /* ITEM FARMER */
-item(2,shovel).
-item(3,watering_can).
+item(2,shovel,farmer).
+item(3,watering_can,farmer).
 
 
 /* ITEM RANCHER */
-item(4, milking_equipment).
-item(5, scissors).
+item(4, milking_equipment, rancher).
+item(5, scissors, rancher).
 
 /* ITEM UPGRADE*/
-item(6, level2_shovel).
-item(7, level3_shovel).
-item(8, level2_watering_can).
-item(9, level3_watering_can).
-item(10, level2_fishing_rod).
-item(11, level3_fishing_rod).
+item(6, level2_shovel, farmer).
+item(7, level3_shovel, farmer).
+item(8, level2_watering_can, farmer).
+item(9, level3_watering_can, farmer).
+item(10, level2_fishing_rod, fisherman).
+item(11, level3_fishing_rod, fisherman).
 
 
 
