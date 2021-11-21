@@ -81,10 +81,17 @@ status                  :-  playerStatus.
 
 /*** Quest ***/
 
-quest                   :-  isQuest(_) -> write('You have an on-going quest!');
-                            \+ isQuest(_), player(X,Y), X =:= 12, Y =:= 8 -> asserta(isQuest(true)), getQuest.
-
-
+quest                   :-  isStarted(_), isQuest(_) -> write('You have an on-going quest!').
+quest                   :-  isStarted(_), \+ isQuest(_),
+                            player(Px, Py), quest(Qx, Qy),
+                            Px =:= Qx, Py =:= Qy ->
+                                asserta(isQuest(true)),
+                                getQuest,
+                                retract(quest(Qx, Qy)).
+quest                   :-  isStarted(_), \+ isQuest(_),
+                            player(Px, Py), quest(Qx, Qy),
+                            \+ (Px =:= Qx, Py =:= Qy) -> 
+                                write('Not in Quest Tile!'), nl.
 /*** House ***/
 
 house                   :-  player(X,Y), X =:= 4, Y =:= 10, (\+ isHouse(_), writeActHouse, asserta(isHouse(true));

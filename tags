@@ -1,0 +1,153 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_EXCMD	mixed	/number, pattern, mixed, or combineV2/
+!_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
+!_TAG_PROC_CWD	/home/malifpy/Alif/Git/TubesLogkom/	//
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	5.9.0	/p5.9.20210905.0/
+TubesLogkom	README.md	/^# TubesLogkom$/;"	c
+a	src/map.pl	/^a :-                    retract(player(BeforeX, BeforeY)),$/;"	l
+bait	src/marketplace.pl	/^bait :- $/;"	l
+bait	src/marketplace.pl	/^bait :- \\+isStarted(_), write('You have to start your game first !'),!.$/;"	l
+bait	src/marketplace.pl	/^bait :- isStarted(_), \\+isMarketplace(_), write('You are not in the marketplace !'),!.$/;"	l
+bait	src/marketplace.pl	/^bait :- isStarted(_), isMarketplace(_), \\+isBuy(_), write('You have not selected the buy option/;"	l
+buy	src/marketplace.pl	/^buy :- \\+isStarted(_), write('You have to start your game first!'),!.$/;"	l
+buy	src/marketplace.pl	/^buy :- isStarted(_), \\+isMarketplace(_), write('You are not in the marketplace'),!.$/;"	l
+buy	src/marketplace.pl	/^buy :- isStarted(_), isMarketplace(_),(\\+isBuy(_), buyOption, asserta(isBuy(true));$/;"	l
+buyOption	src/marketplace.pl	/^buyOption :- write('What do you want to buy ?'),nl,$/;"	l
+buy_chili_seed	src/marketplace.pl	/^buy_chili_seed :- $/;"	l
+checkAfter	src/inventory.pl	/^checkAfter                 :-   capacity(X), X > 100.$/;"	l
+chicken	src/marketplace.pl	/^chicken :- $/;"	l
+chicken	src/marketplace.pl	/^chicken :- \\+isStarted(_), write('You have to start your game first !'),!.$/;"	l
+chicken	src/marketplace.pl	/^chicken :- isStarted(_), \\+isMarketplace(_), write('You are not in the marketplace !'),!.$/;"	l
+chicken	src/marketplace.pl	/^chicken :- isStarted(_), isMarketplace(_), \\+isBuy(_), write('You have not selected the buy opt/;"	l
+chicken_feed	src/marketplace.pl	/^chicken_feed :- $/;"	l
+chicken_feed	src/marketplace.pl	/^chicken_feed :- \\+isStarted(_), write('You have to start your game first !'),!.$/;"	l
+chicken_feed	src/marketplace.pl	/^chicken_feed :- isStarted(_), \\+isMarketplace(_), write('You are not in the marketplace !'),!.$/;"	l
+chicken_feed	src/marketplace.pl	/^chicken_feed :- isStarted(_), isMarketplace(_), \\+isBuy(_), write('You have not selected the bu/;"	l
+chili_seed	src/marketplace.pl	/^chili_seed :- \\+isStarted(_), write('You have to start your game first !'),!.$/;"	l
+chili_seed	src/marketplace.pl	/^chili_seed :- isStarted(_), \\+isMarketplace(_), write('You are not in the marketplace !'),!.$/;"	l
+chili_seed	src/marketplace.pl	/^chili_seed :- isStarted(_), isMarketplace(_), $/;"	l
+clockAfterFarming	src/clock.pl	/^clockAfterFarming :-retract(clock(X)), NewX is X+5,$/;"	l
+clockAfterFishing	src/clock.pl	/^clockAfterFishing :-retract(clock(X)), NewX is X+5,$/;"	l
+clockAfterMove	src/clock.pl	/^clockAfterMove :-   retract(clock(X)), NewX is X+5,$/;"	l
+clockAfterRanching	src/clock.pl	/^clockAfterRanching :-retract(clock(X)), NewX is X+5,$/;"	l
+clockAfterSleep	src/clock.pl	/^clockAfterSleep :-  retractall(clock),$/;"	l
+clockRules	src/clock.pl	/^clockRules :-       clock(X), X > 1439, $/;"	l
+completeQuest	src/quest.pl	/^completeQuest   :-  finalQuest(harvest, HTarget), finalQuest(fish, FTarget), finalQuest(ranch, R/;"	l
+cow	src/marketplace.pl	/^cow :- $/;"	l
+cow	src/marketplace.pl	/^cow :- \\+isStarted(_), write('You have to start your game first !'),!.$/;"	l
+cow	src/marketplace.pl	/^cow :- isStarted(_), \\+isMarketplace(_), write('You are not in the marketplace !'),!.$/;"	l
+cow	src/marketplace.pl	/^cow :- isStarted(_), isMarketplace(_), \\+isBuy(_), write('You have not selected the buy option /;"	l
+cow_feed	src/marketplace.pl	/^cow_feed :- $/;"	l
+cow_feed	src/marketplace.pl	/^cow_feed :- \\+isStarted(_), write('You have to start your game first !'),!.$/;"	l
+cow_feed	src/marketplace.pl	/^cow_feed :- isStarted(_), \\+isMarketplace(_), write('You are not in the marketplace !'),!.$/;"	l
+cow_feed	src/marketplace.pl	/^cow_feed :- isStarted(_), isMarketplace(_), \\+isBuy(_), write('You have not selected the buy op/;"	l
+createMap	src/map.pl	/^createMap :-            asserta(player(4,10)),$/;"	l
+createPond	src/map.pl	/^createPond :-           asserta(water(4,4)),asserta(water(5,4)),$/;"	l
+createRiver	src/map.pl	/^createRiver :-          asserta(water(15,5)),$/;"	l
+d	src/map.pl	/^d :-                    retract(player(BeforeX, BeforeY)),$/;"	l
+exit	src/main.pl	/^exit                    :-  retract(isHouse(_)).$/;"	l
+exitBuy	src/marketplace.pl	/^exitBuy :- retract(isBuy(_)),exitMarket,market,!.$/;"	l
+exitMarket	src/marketplace.pl	/^exitMarket :- write('Thanks for coming !!!'),nl,$/;"	l
+exitSell	src/marketplace.pl	/^exitSell :- retract(isSell(_)),exitMarket,market,!.$/;"	l
+failHouse	src/house.pl	/^failHouse                       :-  write('You are not in house menu').$/;"	l
+getQuest	src/quest.pl	/^getQuest                :-  random(3, 10, RHarvest), random(3, 10, RFish), random(3, 10, RRanch)/;"	l
+goSleep	src/house.pl	/^goSleep                         :-  write('You went to sleep'), nl, nl,$/;"	l
+help	src/main.pl	/^help:-$/;"	l
+horse	src/marketplace.pl	/^horse :- $/;"	l
+horse	src/marketplace.pl	/^horse :- \\+isStarted(_), write('You have to start your game first !'),!.$/;"	l
+horse	src/marketplace.pl	/^horse :- isStarted(_), \\+isMarketplace(_), write('You are not in the marketplace !'),!.$/;"	l
+horse	src/marketplace.pl	/^horse :- isStarted(_), isMarketplace(_), \\+isBuy(_), write('You have not selected the buy optio/;"	l
+horse_feed	src/marketplace.pl	/^horse_feed :- $/;"	l
+horse_feed	src/marketplace.pl	/^horse_feed :- \\+isStarted(_), write('You have to start your game first !'),!.$/;"	l
+horse_feed	src/marketplace.pl	/^horse_feed :- isStarted(_), \\+isMarketplace(_), write('You are not in the marketplace !'),!.$/;"	l
+horse_feed	src/marketplace.pl	/^horse_feed :- isStarted(_), isMarketplace(_), \\+isBuy(_), write('You have not selected the buy /;"	l
+house	src/main.pl	/^house                   :-  player(X,Y), X =:= 4, Y =:= 10, (\\+ isHouse(_), writeActHouse, asse/;"	l
+inventory	src/inventory.pl	/^inventory :-            write('Your inventory: '),$/;"	l
+kapasitas	src/inventory.pl	/^kapasitas :-            findall(Jumlah, inventoryI(_,_,_,_,_,Jumlah), ListJumlah),$/;"	l
+level_2_fishing_rod	src/marketplace.pl	/^level_2_fishing_rod :- \\+isStarted(_), write('You have to start your game first !'),!.$/;"	l
+level_2_fishing_rod	src/marketplace.pl	/^level_2_fishing_rod :- isStarted(_), \\+isMarketplace(_), write('You are not in the marketplace /;"	l
+level_2_fishing_rod	src/marketplace.pl	/^level_2_fishing_rod :- isStarted(_), isMarketplace(_), \\+isBuy(_), write('You have not selected/;"	l
+level_2_fishing_rod	src/marketplace.pl	/^level_2_fishing_rod :-$/;"	l
+level_2_shovel	src/marketplace.pl	/^level_2_shovel :- $/;"	l
+level_2_shovel	src/marketplace.pl	/^level_2_shovel :- \\+isStarted(_), write('You have to start your game first !'),!.$/;"	l
+level_2_shovel	src/marketplace.pl	/^level_2_shovel :- isStarted(_), \\+isMarketplace(_), write('You are not in the marketplace !'),!/;"	l
+level_2_shovel	src/marketplace.pl	/^level_2_shovel :- isStarted(_), isMarketplace(_), \\+isBuy(_), write('You have not selected the /;"	l
+level_2_watering_can	src/marketplace.pl	/^level_2_watering_can :- $/;"	l
+level_2_watering_can	src/marketplace.pl	/^level_2_watering_can :- \\+isStarted(_), write('You have to start your game first !'),!.$/;"	l
+level_2_watering_can	src/marketplace.pl	/^level_2_watering_can :- isStarted(_), \\+isMarketplace(_), write('You are not in the marketplace/;"	l
+level_2_watering_can	src/marketplace.pl	/^level_2_watering_can :- isStarted(_), isMarketplace(_), \\+isBuy(_), write('You have not selecte/;"	l
+level_3_fishing_rod	src/marketplace.pl	/^level_3_fishing_rod :- $/;"	l
+level_3_fishing_rod	src/marketplace.pl	/^level_3_fishing_rod :- \\+isStarted(_), write('You have to start your game first !'),!.$/;"	l
+level_3_fishing_rod	src/marketplace.pl	/^level_3_fishing_rod :- isStarted(_), \\+isMarketplace(_), write('You are not in the marketplace /;"	l
+level_3_fishing_rod	src/marketplace.pl	/^level_3_fishing_rod :- isStarted(_), isMarketplace(_), \\+isBuy(_), write('You have not selected/;"	l
+level_3_shovel	src/marketplace.pl	/^level_3_shovel :- $/;"	l
+level_3_shovel	src/marketplace.pl	/^level_3_shovel :- \\+isStarted(_), write('You have to start your game first !'),!.$/;"	l
+level_3_shovel	src/marketplace.pl	/^level_3_shovel :- isStarted(_), \\+isMarketplace(_), write('You are not in the marketplace !'),!/;"	l
+level_3_shovel	src/marketplace.pl	/^level_3_shovel :- isStarted(_), isMarketplace(_), \\+isBuy(_), write('You have not selected the /;"	l
+level_3_watering_can	src/marketplace.pl	/^level_3_watering_can :- $/;"	l
+level_3_watering_can	src/marketplace.pl	/^level_3_watering_can :- \\+isStarted(_), write('You have to start your game first !'),!.$/;"	l
+level_3_watering_can	src/marketplace.pl	/^level_3_watering_can :- isStarted(_), \\+isMarketplace(_), write('You are not in the marketplace/;"	l
+level_3_watering_can	src/marketplace.pl	/^level_3_watering_can :- isStarted(_), isMarketplace(_), \\+isBuy(_), write('You have not selecte/;"	l
+listConsumable	src/inventory.pl	/^listConsumable :-       findall(Jumlah,inventoryI(_,_,consumable,_,_,Jumlah), ListJumlahConsumab/;"	l
+listItem	src/inventory.pl	/^listItem :-             findall(Jumlah,inventoryI(_,_,item,_,_,Jumlah), ListJumlahItem),$/;"	l
+map	src/map.pl	/^map :-                  isStarted(_) -> $/;"	l
+market	src/marketplace.pl	/^market :- \\+isStarted(_), write('You have to start your game first!'),!.$/;"	l
+market	src/marketplace.pl	/^market :- isStarted(_), \\+isMarketplace(_),write('You are not in the marketplace !'),!.$/;"	l
+market	src/marketplace.pl	/^market :- isStarted(_),player(X,Y), X =:= 12, Y =:= 12, (\\+ isMarketplace(_), $/;"	l
+marketOption	src/marketplace.pl	/^marketOption :- write('What do you want to do ?'),nl,$/;"	l
+paddy_seed	src/marketplace.pl	/^paddy_seed :- $/;"	l
+paddy_seed	src/marketplace.pl	/^paddy_seed :- \\+isStarted(_), write('You have to start your game first !'),!.$/;"	l
+paddy_seed	src/marketplace.pl	/^paddy_seed :- isStarted(_), \\+isMarketplace(_), write('You are not in the marketplace !'),!.$/;"	l
+paddy_seed	src/marketplace.pl	/^paddy_seed :- isStarted(_), isMarketplace(_), \\+isBuy(_), write('You have not selected the buy /;"	l
+pineapple_seed	src/marketplace.pl	/^pineapple_seed :- $/;"	l
+pineapple_seed	src/marketplace.pl	/^pineapple_seed :- \\+isStarted(_), write('You have to start your game first !'),!.$/;"	l
+pineapple_seed	src/marketplace.pl	/^pineapple_seed :- isStarted(_), \\+isMarketplace(_), write('You are not in the marketplace !'),!/;"	l
+pineapple_seed	src/marketplace.pl	/^pineapple_seed :- isStarted(_), isMarketplace(_), \\+isBuy(_), write('You have not selected the /;"	l
+playerStatus	src/player.pl	/^playerStatus                    :-  player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Lev/;"	l
+quest	src/main.pl	/^quest                   :-  isStarted(_), \\+ isQuest(_),$/;"	l
+quest	src/main.pl	/^quest                   :-  isStarted(_), isQuest(_) -> write('You have an on-going quest!').$/;"	l
+questAddFish	src/quest.pl	/^questAddFish    :-  isQuest(_)  ->  retract(runQuest(fish, FishNum)),$/;"	l
+questAddHarvest	src/quest.pl	/^questAddHarvest :-  isQuest(_)  ->  retract(runQuest(harvest, HarvestNum)),$/;"	l
+questAddRanch	src/quest.pl	/^questAddRanch   :-  isQuest(_)  ->  retract(runQuest(ranch, RanchNum)),$/;"	l
+questInfo	src/quest.pl	/^questInfo       :-  (isQuest(_) -> questProgress ; write('No Quest Running'), nl).$/;"	l
+questProgress	src/quest.pl	/^questProgress   :-  write('Current Quest Progress:'), nl, nl,$/;"	l
+readDiary	src/main.pl	/^readDiary               :-  isHouse(_), readTheDiary; failHouse.$/;"	l
+readTheDiary	src/house.pl	/^readTheDiary                    :-  write('Here are the list of your entries:'), nl,$/;"	l
+refreshQuest	src/quest.pl	/^refreshQuest    :-  \\+ quest(_, _),$/;"	l
+s	src/map.pl	/^s :-                    retract(player(BeforeX, BeforeY)),$/;"	l
+sell	src/marketplace.pl	/^sell :- \\+isStarted(_), write('You have to start your game first!'),!.$/;"	l
+sell	src/marketplace.pl	/^sell :- isStarted(_), \\+isMarketplace(_), write('You are not in the marketplace !'),!.$/;"	l
+sell	src/marketplace.pl	/^sell :- isStarted(_), isMarketplace(_), (\\+isSell(_), sellOption, asserta(isSell(true));$/;"	l
+sellOption	src/marketplace.pl	/^sellOption :- isStarted(_), isMarketplace(_),$/;"	l
+sell_chili_seed	src/marketplace.pl	/^sell_chili_seed :- $/;"	l
+sheep	src/marketplace.pl	/^sheep :- $/;"	l
+sheep	src/marketplace.pl	/^sheep :- \\+isStarted(_), write('You have to start your game first !'),!.$/;"	l
+sheep	src/marketplace.pl	/^sheep :- isStarted(_), \\+isMarketplace(_), write('You are not in the marketplace !'),!.$/;"	l
+sheep	src/marketplace.pl	/^sheep :- isStarted(_), isMarketplace(_), \\+isBuy(_), write('You have not selected the buy optio/;"	l
+sheep_feed	src/marketplace.pl	/^sheep_feed :- $/;"	l
+sheep_feed	src/marketplace.pl	/^sheep_feed :- \\+isStarted(_), write('You have to start your game first !'),!.$/;"	l
+sheep_feed	src/marketplace.pl	/^sheep_feed :- isStarted(_), \\+isMarketplace(_), write('You are not in the marketplace !'),!.$/;"	l
+sheep_feed	src/marketplace.pl	/^sheep_feed :- isStarted(_), isMarketplace(_), \\+isBuy(_), write('You have not selected the buy /;"	l
+showClock	src/clock.pl	/^showClock :-        clock(X), Jam is X \/\/ 60, Menit is X mod 60,$/;"	l
+sleep	src/main.pl	/^sleep                   :-  isHouse(_), goSleep; failHouse.$/;"	l
+start	src/main.pl	/^start                   :-  isStarted(_) -> write('You already start your journey!');$/;"	l
+startGame	src/main.pl	/^startGame:- $/;"	l
+status	src/main.pl	/^status                  :-  playerStatus.$/;"	l
+strawberry_seed	src/marketplace.pl	/^strawberry_seed :- $/;"	l
+strawberry_seed	src/marketplace.pl	/^strawberry_seed :- \\+isStarted(_), write('You have to start your game first !'),!.$/;"	l
+strawberry_seed	src/marketplace.pl	/^strawberry_seed :- isStarted(_), \\+isMarketplace(_), write('You are not in the marketplace !'),/;"	l
+strawberry_seed	src/marketplace.pl	/^strawberry_seed :- isStarted(_), isMarketplace(_), \\+isBuy(_), write('You have not selected the/;"	l
+tomato_seed	src/marketplace.pl	/^tomato_seed :- $/;"	l
+tomato_seed	src/marketplace.pl	/^tomato_seed :- \\+isStarted(_), write('You have to start your game first !'),!.$/;"	l
+tomato_seed	src/marketplace.pl	/^tomato_seed :- isStarted(_), \\+isMarketplace(_), write('You are not in the marketplace !'),!.$/;"	l
+tomato_seed	src/marketplace.pl	/^tomato_seed :- isStarted(_), isMarketplace(_), \\+isBuy(_), write('You have not selected the buy/;"	l
+w	src/map.pl	/^w :-                    retract(player(BeforeX, BeforeY)),$/;"	l
+writeActHouse	src/house.pl	/^writeActHouse                   :-  write('What do you want to do?'), nl,$/;"	l
+writeDiary	src/main.pl	/^writeDiary              :-  isHouse(_), writeInDiary; failHouse.$/;"	l
+writeInDiary	src/house.pl	/^writeInDiary                    :-  day(X), (\\+ diary(X,_) -> write('Write your diary for Day '/;"	l

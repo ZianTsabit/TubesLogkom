@@ -70,7 +70,7 @@ buy_chili_seed :-
 sell_chili_seed :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
-       ,!.
+       !.
 
 paddy_seed :- \+isStarted(_), write('You have to start your game first !'),!.
 paddy_seed :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
