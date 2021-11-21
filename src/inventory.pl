@@ -70,5 +70,5 @@ addConsumable(ID, Jumlah) :-    consumable(ID,Nama),capacity(X),
                                 NewJumlah is JumlahC + Jumlah,
                                 asserta(inventoryI(ID,Nama,consumable,non,-1,NewJumlah)), kapasitas,!.
 
-
-
+cekConsumableExist(ID, Name) :-  \+inventoryI(ID,Name,consumable,_,_,_),!,fail.
+cekConsumableExist(ID, Name) :- inventoryI(ID,Name,consumable,_,_,_).
