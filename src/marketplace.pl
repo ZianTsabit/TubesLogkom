@@ -70,12 +70,33 @@ buy_chili_seed :-
 sell_chili_seed :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
-       !.
+       player(_,_,_,_,_,_,_,_,_,Gold),
+       sellprice(chili_seed,X),
+       inventoryI(6, chili_seed,_,_,_, Jumlah),
+       ((\+cekConsumableExist(6, chili_seed),
+       write('There is no such item in your inventory!\nPlease check again!\n'));
+       (cekConsumableExist(6, chili_seed),
+       (Jumlah >= Amount,
+       NewPrice is Amount*X,
+       NewGold is Gold+NewPrice,
+       retract(player(_,_,_,_,_,_,_,_,_,_)),
+       asserta(player(_,_,_,_,_,_,_,_,_,NewGold)),
+       deleteConsumable(6, Amount),
+       write('You sold '),write(Amount), write(' chili seeds'),nl,
+       write('You received '), write(NewPrice), write(' golds')
+       );
+       Jumlah < Amount,
+       write('Invalid amount!\nPlease check again!\n')
+       )),!.
 
 paddy_seed :- \+isStarted(_), write('You have to start your game first !'),!.
 paddy_seed :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
 paddy_seed :- isStarted(_), isMarketplace(_), \+isBuy(_), write('You have not selected the buy option !'),!.
-paddy_seed :- 
+paddy_seed :- isStarted(_), isMarketplace(_), 
+              ((isBuy(_), buy_paddy_seed);(isSell(_), sell_paddy_seed)
+              ),!.
+
+buy_paddy_seed :- 
        write('How many do you want to buy? \n'),
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
@@ -93,10 +114,36 @@ paddy_seed :-
         asserta(player(_,_,_,_,_,_,_,_,_,NewGold)))     
        ),!.
 
+sell_paddy_seed :- 
+       write('How many do you want to sell? \n'),
+       write('> '),read_integer(Amount),
+       player(_,_,_,_,_,_,_,_,_,Gold),
+       sellprice(paddy_seed,X),
+       inventoryI(7, paddy_seed,_,_,_, Jumlah),
+       ((\+cekConsumableExist(7, paddy_seed),
+       write('There is no such item in your inventory!\nPlease check again!\n'));
+       (cekConsumableExist(7, paddy_seed),
+       (Jumlah >= Amount,
+       NewPrice is Amount*X,
+       NewGold is Gold+NewPrice,
+       retract(player(_,_,_,_,_,_,_,_,_,_)),
+       asserta(player(_,_,_,_,_,_,_,_,_,NewGold)),
+       deleteConsumable(6, Amount),
+       write('You sold '),write(Amount), write(' paddy seeds'),nl,
+       write('You received '), write(NewPrice), write(' golds')
+       );
+       Jumlah < Amount,
+       write('Invalid amount!\nPlease check again!\n')
+       )),!.
+
 tomato_seed :- \+isStarted(_), write('You have to start your game first !'),!.
 tomato_seed :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
 tomato_seed :- isStarted(_), isMarketplace(_), \+isBuy(_), write('You have not selected the buy option !'),!.
-tomato_seed :- 
+tomato_seed :- isStarted(_), isMarketplace(_), 
+              ((isBuy(_), buy_tomato_seed);(isSell(_), sell_tomato_seed)
+              ),!.
+
+buy_tomato_seed :- 
        write('How many do you want to buy? \n'),
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
@@ -114,10 +161,36 @@ tomato_seed :-
         asserta(player(_,_,_,_,_,_,_,_,_,NewGold)))     
        ),!.
 
+sell_tomato_seed :- 
+       write('How many do you want to sell? \n'),
+       write('> '),read_integer(Amount),
+       player(_,_,_,_,_,_,_,_,_,Gold),
+       sellprice(tomato_seed,X),
+       inventoryI(8, tomato_seed,_,_,_, Jumlah),
+       ((\+cekConsumableExist(8, tomato_seed),
+       write('There is no such item in your inventory!\nPlease check again!\n'));
+       (cekConsumableExist(8, tomato_seed),
+       (Jumlah >= Amount,
+       NewPrice is Amount*X,
+       NewGold is Gold+NewPrice,
+       retract(player(_,_,_,_,_,_,_,_,_,_)),
+       asserta(player(_,_,_,_,_,_,_,_,_,NewGold)),
+       deleteConsumable(6, Amount),
+       write('You sold '),write(Amount), write(' tomato seeds'),nl,
+       write('You received '), write(NewPrice), write(' golds')
+       );
+       Jumlah < Amount,
+       write('Invalid amount!\nPlease check again!\n')
+       )),!.
+
 pineapple_seed :- \+isStarted(_), write('You have to start your game first !'),!.
 pineapple_seed :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
 pineapple_seed :- isStarted(_), isMarketplace(_), \+isBuy(_), write('You have not selected the buy option !'),!.
-pineapple_seed :- 
+pineapple_seed :- isStarted(_), isMarketplace(_), 
+              ((isBuy(_), buy_pineapple_seed);(isSell(_), sell_pineapple_seed)
+              ),!.
+
+buy_pineapple_seed :- 
        write('How many do you want to buy? \n'),
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
@@ -135,10 +208,35 @@ pineapple_seed :-
         asserta(player(_,_,_,_,_,_,_,_,_,NewGold)))     
        ),!.
 
+sell_pineapple_seed :- 
+       write('How many do you want to sell? \n'),
+       write('> '),read_integer(Amount),
+       player(_,_,_,_,_,_,_,_,_,Gold),
+       sellprice(pineapple_seed,X),
+       inventoryI(9, pineapple_seed,_,_,_, Jumlah),
+       ((\+cekConsumableExist(9, pineapple_seed),
+       write('There is no such item in your inventory!\nPlease check again!\n'));
+       (cekConsumableExist(9, pineapple_seed),
+       (Jumlah >= Amount,
+       NewPrice is Amount*X,
+       NewGold is Gold+NewPrice,
+       retract(player(_,_,_,_,_,_,_,_,_,_)),
+       asserta(player(_,_,_,_,_,_,_,_,_,NewGold)),
+       deleteConsumable(6, Amount),
+       write('You sold '),write(Amount), write(' pineapple seeds'),nl,
+       write('You received '), write(NewPrice), write(' golds')
+       );
+       Jumlah < Amount,
+       write('Invalid amount!\nPlease check again!\n')
+       )),!.
+
+
 strawberry_seed :- \+isStarted(_), write('You have to start your game first !'),!.
 strawberry_seed :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
 strawberry_seed :- isStarted(_), isMarketplace(_), \+isBuy(_), write('You have not selected the buy option !'),!.
-strawberry_seed :- 
+
+
+buy_strawberry_seed :- 
        write('How many do you want to buy? \n'),
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
@@ -156,9 +254,32 @@ strawberry_seed :-
         asserta(player(_,_,_,_,_,_,_,_,_,NewGold)))     
        ),!.
 
+sell_strawberry_seed :- 
+       write('How many do you want to sell? \n'),
+       write('> '),read_integer(Amount),
+       player(_,_,_,_,_,_,_,_,_,Gold),
+       sellprice(strawberry_seed,X),
+       inventoryI(10, strawberry_seed,_,_,_, Jumlah),
+       ((\+cekConsumableExist(10, strawberry_seed),
+       write('There is no such item in your inventory!\nPlease check again!\n'));
+       (cekConsumableExist(10, strawberry_seed),
+       (Jumlah >= Amount,
+       NewPrice is Amount*X,
+       NewGold is Gold+NewPrice,
+       retract(player(_,_,_,_,_,_,_,_,_,_)),
+       asserta(player(_,_,_,_,_,_,_,_,_,NewGold)),
+       deleteConsumable(6, Amount),
+       write('You sold '),write(Amount), write(' strawberry seeds'),nl,
+       write('You received '), write(NewPrice), write(' golds')
+       );
+       Jumlah < Amount,
+       write('Invalid amount!\nPlease check again!\n')
+       )),!.
+
 chicken :- \+isStarted(_), write('You have to start your game first !'),!.
 chicken :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
 chicken :- isStarted(_), isMarketplace(_), \+isBuy(_), write('You have not selected the buy option !'),!.
+
 chicken :- 
        write('How many do you want to buy? \n'),
        write('> '),read_integer(Amount),
