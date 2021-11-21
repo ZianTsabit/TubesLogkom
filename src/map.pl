@@ -62,22 +62,26 @@ move(BeforeX, BeforeY, AfterX, AfterY) :-   wall(AfterX, AfterY) -> write('Oops!
                                             marketplace(AfterX,AfterY) -> write('You are in marketplace!');
                                             digged(AfterX,AfterY) -> write('You are standing on digged tile!')).
                                             
-w :-                    retract(player(BeforeX, BeforeY)),
+w :-                    \+ (isMarketplace(_)), \+ (isHouse(_)) ->
+                        retract(player(BeforeX, BeforeY)),
                         AfterY is BeforeY + 1, 
                         asserta(player(BeforeX, AfterY)),
                         move(BeforeX,BeforeY,BeforeX, AfterY).
 
-a :-                    retract(player(BeforeX, BeforeY)),
+a :-                    \+ (isMarketplace(_)), \+ (isHouse(_)) ->
+                        retract(player(BeforeX, BeforeY)),
                         AfterX is BeforeX - 1, 
                         asserta(player(AfterX, BeforeY)),
                         move(BeforeX,BeforeY,AfterX, BeforeY).
 
-s :-                    retract(player(BeforeX, BeforeY)),
+s :-                    \+ (isMarketplace(_)), \+ (isHouse(_)) ->
+                        retract(player(BeforeX, BeforeY)),
                         AfterY is BeforeY - 1, 
                         asserta(player(BeforeX, AfterY)),
                         move(BeforeX,BeforeY,BeforeX, AfterY).
 
-d :-                    retract(player(BeforeX, BeforeY)),
+d :-                    \+ (isMarketplace(_)), \+ (isHouse(_)) ->
+                        retract(player(BeforeX, BeforeY)),
                         AfterX is BeforeX + 1, 
                         asserta(player(AfterX, BeforeY)),
                         move(BeforeX,BeforeY,AfterX, BeforeY).
@@ -86,3 +90,4 @@ d :-                    retract(player(BeforeX, BeforeY)),
 canDig(X,Y)             :- \+ wall(X,Y),\+ water(X,Y),\+ house(X,Y),\+ marketplace(X,Y),\+ quest(X,Y),\+ ranch(X,Y),\+ digged(X,Y).
 
 canFish(X,Y)            :- water(A,B),(((Y =:= B),((A =:= X-1);(A =:= X+1)));((X =:= A),((B =:= Y-1);(A =:= Y+1)))).
+
