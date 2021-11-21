@@ -106,3 +106,6 @@ deleteConsumable(ID, Jumlah) :-  consumable(ID,Nama),
                                  inventoryI(ID,Nama,consumable,_,_,JumlahC),
                                  JumlahC < Jumlah,
                                  write('invalid amount!'), !.
+                                 
+cekConsumableExist(ID, Name) :-  \+inventoryI(ID,Name,consumable,_,_,_),!,fail.
+cekConsumableExist(ID, Name) :- inventoryI(ID,Name,consumable,_,_,_).

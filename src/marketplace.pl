@@ -18,7 +18,7 @@ marketOption :- write('What do you want to do ?'),nl,
 
 buy :- \+isStarted(_), write('You have to start your game first!'),!.
 buy :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace'),!.
-buy :- isStarted(_), isMarketplace(_), (\+isBuy(_), buyOption, asserta(isBuy(true));
+buy :- isStarted(_), isMarketplace(_),(\+isBuy(_), buyOption, asserta(isBuy(true));
        write('You are already chose buy option !')),!.
 
 buyOption :- write('What do you want to buy ?'),nl,
@@ -45,8 +45,11 @@ buyOption :- write('What do you want to buy ?'),nl,
 
 chili_seed :- \+isStarted(_), write('You have to start your game first !'),!.
 chili_seed :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-chili_seed :- isStarted(_), isMarketplace(_), \+isBuy(_), write('You have not selected the buy option !'),!.
-chili_seed :- 
+chili_seed :- isStarted(_), isMarketplace(_), 
+              ((isBuy(_), buy_chili_seed);(isSell(_), sell_chili_seed)
+              ),!.
+
+buy_chili_seed :- 
        write('How many do you want to buy? \n'),
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
@@ -63,7 +66,12 @@ chili_seed :-
         retract(player(_,_,_,_,_,_,_,_,_,_)),
         asserta(player(_,_,_,_,_,_,_,_,_,NewGold)))     
        ),!.
-       
+
+sell_chili_seed :- 
+       write('How many do you want to sell? \n'),
+       write('> '),read_integer(Amount),
+       ,!.
+
 paddy_seed :- \+isStarted(_), write('You have to start your game first !'),!.
 paddy_seed :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
 paddy_seed :- isStarted(_), isMarketplace(_), \+isBuy(_), write('You have not selected the buy option !'),!.
