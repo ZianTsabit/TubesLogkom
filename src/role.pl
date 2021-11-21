@@ -49,11 +49,17 @@ consumable(5, bait).
 
 
 /* CONSUMABLE FARMER */
-consumable(6, chili).
-consumable(7, paddy).
-consumable(8, tomato).
-consumable(9, pineapple).
-consumable(10, strawberry).
+consumable(6, chili_seed).
+consumable(7, paddy_seed).
+consumable(8, tomato_seed).
+consumable(9, pineapple_seed).
+consumable(10, strawberry_seed).
+
+consumable(23, chili).
+consumable(24, paddy).
+consumable(25, tomato).
+consumable(26, pineapple).
+consumable(27, strawberry).
 
 /* CONSUMABLE RANCHER */
 consumable(11, chicken_feed).
@@ -69,16 +75,18 @@ consumable(20, milk).
 consumable(21, horse_milk).
 consumable(22, wool).
 
+
+
 /*    FAKTA DAN RULE PRICE TIAP ITEM DAN CONSUMABLES */
 
 /* ITEM */
 /* price(item or consumable, nominal)*/
 
-price(chili, 100).
-price(paddy, 50).
-price(tomato, 100).
-price(pineapple, 200).
-price(strawberry, 150).
+price(chili_seed, 100).
+price(paddy_seed, 50).
+price(tomato_seed, 100).
+price(pineapple_seed, 200).
+price(strawberry_seed, 150).
 price(chicken_feed, 150).
 price(sheep_feed, 175).
 price(cow_feed, 200).
@@ -98,6 +106,11 @@ price(level3_fishing_rod, 700).
 /* Consumables */
 /*sellprice(consumable, nominal)*/
 
+sellprice(chili_seed, 100).
+sellprice(paddy_seed, 50).
+sellprice(tomato_seed, 100).
+sellprice(pineapple_seed, 200).
+sellprice(strawberry_seed, 150).
 sellprice(chili, 300).
 sellprice(tomato, 275).
 sellprice(strawberry, 350).

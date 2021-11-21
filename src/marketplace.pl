@@ -43,14 +43,14 @@ buyOption :- write('What do you want to buy ?'),nl,
              write('19. Level 3 fishing rod (700 golds)'),nl,
              write('20. Bait (15 golds)').
 
-chili :- \+isStarted(_), write('You have to start your game first !'),!.
-chili :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-chili :- isStarted(_), isMarketplace(_), \+isBuy(_), write('You have not selected the buy option !'),!.
-chili :- 
+chili_seed :- \+isStarted(_), write('You have to start your game first !'),!.
+chili_seed :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
+chili_seed :- isStarted(_), isMarketplace(_), \+isBuy(_), write('You have not selected the buy option !'),!.
+chili_seed :- 
        write('How many do you want to buy? \n'),
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
-       price(chili,X),
+       price(chili_seed,X),
        NewPrice is Amount*X,
        (
         (NewPrice > Gold -> 
@@ -64,14 +64,14 @@ chili :-
         asserta(player(_,_,_,_,_,_,_,_,_,NewGold)))     
        ),!.
        
-paddy :- \+isStarted(_), write('You have to start your game first !'),!.
-paddy :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-paddy :- isStarted(_), isMarketplace(_), \+isBuy(_), write('You have not selected the buy option !'),!.
-paddy :- 
+paddy_seed :- \+isStarted(_), write('You have to start your game first !'),!.
+paddy_seed :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
+paddy_seed :- isStarted(_), isMarketplace(_), \+isBuy(_), write('You have not selected the buy option !'),!.
+paddy_seed :- 
        write('How many do you want to buy? \n'),
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
-       price(paddy,X),
+       price(paddy_seed,X),
        NewPrice is Amount*X,
        (
         (NewPrice > Gold -> 
@@ -85,14 +85,14 @@ paddy :-
         asserta(player(_,_,_,_,_,_,_,_,_,NewGold)))     
        ),!.
 
-tomato :- \+isStarted(_), write('You have to start your game first !'),!.
-tomato :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-tomato :- isStarted(_), isMarketplace(_), \+isBuy(_), write('You have not selected the buy option !'),!.
-tomato :- 
+tomato_seed :- \+isStarted(_), write('You have to start your game first !'),!.
+tomato_seed :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
+tomato_seed :- isStarted(_), isMarketplace(_), \+isBuy(_), write('You have not selected the buy option !'),!.
+tomato_seed :- 
        write('How many do you want to buy? \n'),
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
-       price(tomato,X),
+       price(tomato_seed,X),
        NewPrice is Amount*X,
        (
         (NewPrice > Gold -> 
@@ -106,14 +106,14 @@ tomato :-
         asserta(player(_,_,_,_,_,_,_,_,_,NewGold)))     
        ),!.
 
-pineapple :- \+isStarted(_), write('You have to start your game first !'),!.
-pineapple :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-pineapple :- isStarted(_), isMarketplace(_), \+isBuy(_), write('You have not selected the buy option !'),!.
-pineapple :- 
+pineapple_seed :- \+isStarted(_), write('You have to start your game first !'),!.
+pineapple_seed :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
+pineapple_seed :- isStarted(_), isMarketplace(_), \+isBuy(_), write('You have not selected the buy option !'),!.
+pineapple_seed :- 
        write('How many do you want to buy? \n'),
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
-       price(pineapple,X),
+       price(pineapple_seed,X),
        NewPrice is Amount*X,
        (
         (NewPrice > Gold -> 
@@ -127,14 +127,14 @@ pineapple :-
         asserta(player(_,_,_,_,_,_,_,_,_,NewGold)))     
        ),!.
 
-strawberry :- \+isStarted(_), write('You have to start your game first !'),!.
-strawberry :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-strawberry :- isStarted(_), isMarketplace(_), \+isBuy(_), write('You have not selected the buy option !'),!.
-strawberry :- 
+strawberry_seed :- \+isStarted(_), write('You have to start your game first !'),!.
+strawberry_seed :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
+strawberry_seed :- isStarted(_), isMarketplace(_), \+isBuy(_), write('You have not selected the buy option !'),!.
+strawberry_seed :- 
        write('How many do you want to buy? \n'),
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
-       price(strawberry,X),
+       price(strawberry_seed,X),
        NewPrice is Amount*X,
        (
         (NewPrice > Gold -> 
