@@ -5,12 +5,14 @@
 :- dynamic(isSell/1).
 
 market :- \+isStarted(_), write('You have to start your game first!'),!.
-market :- isStarted(_),player(X,Y), X =:= 12, Y =:= 12, (\+ isMarketplace(_), marketOption, asserta(isMarketplace(true));
+market :- isStarted(_),player(X,Y), X =:= 12, Y =:= 12, (\+ isMarketplace(_), 
+          write('Wellcome to marketplace !'),nl,
+          marketOption,
+          asserta(isMarketplace(true));
           write('You are already in the marketplace !')),!. 
 market :- isStarted(_), \+isMarketplace(_),write('You are not in the marketplace !'),!.
 
-marketOption :- write('Wellcome to marketplace !!!'),nl,
-                write('What do you want to do ?'),nl,
+marketOption :- write('What do you want to do ?'),nl,
                 write('1. Buy'),nl,
                 write('2. Sell'),!.
 
@@ -58,6 +60,7 @@ chili :-
         write('You are charged '), write(NewPrice), write(' golds'),nl,
         NewGold is Gold-NewPrice,
         addConsumable(6, Amount),
+        retract(player(_,_,_,_,_,_,_,_,_,_)),
         asserta(player(_,_,_,_,_,_,_,_,_,NewGold)))     
        ),!.
        
@@ -78,6 +81,7 @@ paddy :-
         write('You are charged '), write(NewPrice), write(' golds'),nl,
         NewGold is Gold-NewPrice,
         addConsumable(7, Amount),
+        retract(player(_,_,_,_,_,_,_,_,_,_)),
         asserta(player(_,_,_,_,_,_,_,_,_,NewGold)))     
        ),!.
 
@@ -98,6 +102,7 @@ tomato :-
         write('You are charged '), write(NewPrice), write(' golds'),nl,
         NewGold is Gold-NewPrice,
         addConsumable(8, Amount),
+        retract(player(_,_,_,_,_,_,_,_,_,_)),
         asserta(player(_,_,_,_,_,_,_,_,_,NewGold)))     
        ),!.
 
@@ -118,6 +123,7 @@ pineapple :-
         write('You are charged '), write(NewPrice), write(' golds'),nl,
         NewGold is Gold-NewPrice,
         addConsumable(9, Amount),
+        retract(player(_,_,_,_,_,_,_,_,_,_)),
         asserta(player(_,_,_,_,_,_,_,_,_,NewGold)))     
        ),!.
 
@@ -138,6 +144,7 @@ strawberry :-
         write('You are charged '), write(NewPrice), write(' golds'),nl,
         NewGold is Gold-NewPrice,
         addConsumable(10, Amount),
+        retract(player(_,_,_,_,_,_,_,_,_,_)),
         asserta(player(_,_,_,_,_,_,_,_,_,NewGold)))     
        ),!.
 
@@ -158,6 +165,7 @@ chicken :-
         write('You are charged '), write(NewPrice), write(' golds'),nl,
         NewGold is Gold-NewPrice,
         addConsumable(15, Amount),
+        retract(player(_,_,_,_,_,_,_,_,_,_)),
         asserta(player(_,_,_,_,_,_,_,_,_,NewGold)))     
        ),!.
 
@@ -178,6 +186,7 @@ sheep :-
         write('You are charged '), write(NewPrice), write(' golds'),nl,
         NewGold is Gold-NewPrice,
         addConsumable(16, Amount),
+        retract(player(_,_,_,_,_,_,_,_,_,_)),
         asserta(player(_,_,_,_,_,_,_,_,_,NewGold)))     
        ),!.
 
@@ -198,6 +207,7 @@ cow :-
         write('You are charged '), write(NewPrice), write(' golds'),nl,
         NewGold is Gold-NewPrice,
         addConsumable(17, Amount),
+        retract(player(_,_,_,_,_,_,_,_,_,_)),
         asserta(player(_,_,_,_,_,_,_,_,_,NewGold)))     
        ),!.
 
@@ -218,6 +228,7 @@ horse :-
         write('You are charged '), write(NewPrice), write(' golds'),nl,
         NewGold is Gold-NewPrice,
         addConsumable(18, Amount),
+        retract(player(_,_,_,_,_,_,_,_,_,_)),
         asserta(player(_,_,_,_,_,_,_,_,_,NewGold)))     
        ),!.
 
@@ -238,6 +249,7 @@ chicken_feed :-
         write('You are charged '), write(NewPrice), write(' golds'),nl,
         NewGold is Gold-NewPrice,
         addConsumable(11, Amount),
+        retract(player(_,_,_,_,_,_,_,_,_,_)),
         asserta(player(_,_,_,_,_,_,_,_,_,NewGold)))     
        ),!.
 
@@ -258,6 +270,7 @@ sheep_feed :-
         write('You are charged '), write(NewPrice), write(' golds'),nl,
         NewGold is Gold-NewPrice,
         addConsumable(12, Amount),
+        retract(player(_,_,_,_,_,_,_,_,_,_)),
         asserta(player(_,_,_,_,_,_,_,_,_,NewGold)))     
        ),!.
 
@@ -278,6 +291,7 @@ cow_feed :-
         write('You are charged '), write(NewPrice), write(' golds'),nl,
         NewGold is Gold-NewPrice,
         addConsumable(13, Amount),
+        retract(player(_,_,_,_,_,_,_,_,_,_)),
         asserta(player(_,_,_,_,_,_,_,_,_,NewGold)))     
        ),!.
 
@@ -298,6 +312,7 @@ horse_feed :-
         write('You are charged '), write(NewPrice), write(' golds'),nl,
         NewGold is Gold-NewPrice,
         addConsumable(14, Amount),
+        retract(player(_,_,_,_,_,_,_,_,_,_)),
         asserta(player(_,_,_,_,_,_,_,_,_,NewGold)))     
        ),!.
 
@@ -412,7 +427,6 @@ level_2_fishing_rod :-
        ))
        )),!.
        
-
 level_3_fishing_rod :- \+isStarted(_), write('You have to start your game first !'),!.
 level_3_fishing_rod :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
 level_3_fishing_rod :- isStarted(_), isMarketplace(_), \+isBuy(_), write('You have not selected the buy option !'),!.
@@ -451,19 +465,29 @@ bait :-
         write('You are charged '), write(NewPrice), write(' golds'),nl,
         NewGold is Gold-NewPrice,
         addConsumable(5, Amount),
+        retract(player(_,_,_,_,_,_,_,_,_,_)),
         asserta(player(_,_,_,_,_,_,_,_,_,NewGold)))     
        ),!.
 
+exitBuy :- retract(isBuy(_)),exitMarket,market,!.
 
 
 
 sell :- \+isStarted(_), write('You have to start your game first!'),!.
 sell :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-sell :- isStarted(_), isMarketplace(_),
+sell :- isStarted(_), isMarketplace(_), (\+isSell(_), sellOption, asserta(isSell(true));
+       write('You are already chose sell option !')),!.
+
+sellOption :- isStarted(_), isMarketplace(_),
             write('Here are the items in your inventory'),nl,
-            /*Masih dummy dulu*/
             listConsumable,
             write('What do you want to sell ?'),!.
+
+exitSell :- retract(isSell(_)),exitMarket,market,!.
+
+
+
+
 
 exitMarket :- write('Thanks for coming !!!'),nl,
             retract(isMarketplace(_)),!.
