@@ -94,9 +94,9 @@ quest                   :-  isStarted(_), \+ isQuest(_),
                                 write('Not in Quest Tile!'), nl.
 /*** House ***/
 
-house                   :-  player(X,Y), X =:= 4, Y =:= 10, (\+ isHouse(_), writeActHouse, asserta(isHouse(true));
+house                   :-  player(X,Y), X =:= 4, Y =:= 10, (\+ isHouse(_), writeActHouse, asserta(isHouse(true)), !;
                             write('You are already in house menu')); write('You are not in house').
-sleep                   :-  isHouse(_), goSleep; failHouse.
-writeDiary              :-  isHouse(_), writeInDiary; failHouse.
-readDiary               :-  isHouse(_), readTheDiary; failHouse.
+sleep                   :-  isHouse(_), goSleep, !; failHouse.
+writeDiary              :-  isHouse(_), writeInDiary, !; failHouse.
+readDiary               :-  isHouse(_), readTheDiary, !; failHouse.
 exit                    :-  retract(isHouse(_)).
