@@ -21,8 +21,8 @@ writeActHouse                   :-  write('What do you want to do?'), nl,
                                     write('- exit').
 
 goSleep                         :-  write('You went to sleep'), nl, nl,
-                                    retract(day(Before)), After is Before + 1, asserta(day(After)),
-                                    write('Day '), write(After).
+                                    clockAfterSleep, day(After),
+                                    write('Day '), write(After), !.
 
 writeInDiary                    :-  day(X), (\+ diary(X,_) -> write('Write your diary for Day '); write('Replace your diary for Day ')), 
                                     write(X), nl, nl, write('yes'), nl, write('| ?- '), read(Y),

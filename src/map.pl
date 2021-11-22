@@ -66,25 +66,25 @@ w :-                    \+ (isMarketplace(_)), \+ (isHouse(_)) ->
                         retract(player(BeforeX, BeforeY)),
                         AfterY is BeforeY + 1, 
                         asserta(player(BeforeX, AfterY)),
-                        move(BeforeX,BeforeY,BeforeX, AfterY).
+                        move(BeforeX,BeforeY,BeforeX, AfterY),!.
 
 a :-                    \+ (isMarketplace(_)), \+ (isHouse(_)) ->
                         retract(player(BeforeX, BeforeY)),
                         AfterX is BeforeX - 1, 
                         asserta(player(AfterX, BeforeY)),
-                        move(BeforeX,BeforeY,AfterX, BeforeY).
+                        move(BeforeX,BeforeY,AfterX, BeforeY),!.
 
 s :-                    \+ (isMarketplace(_)), \+ (isHouse(_)) ->
                         retract(player(BeforeX, BeforeY)),
                         AfterY is BeforeY - 1, 
                         asserta(player(BeforeX, AfterY)),
-                        move(BeforeX,BeforeY,BeforeX, AfterY).
+                        move(BeforeX,BeforeY,BeforeX, AfterY),!.
 
 d :-                    \+ (isMarketplace(_)), \+ (isHouse(_)) ->
                         retract(player(BeforeX, BeforeY)),
                         AfterX is BeforeX + 1, 
                         asserta(player(AfterX, BeforeY)),
-                        move(BeforeX,BeforeY,AfterX, BeforeY).
+                        move(BeforeX,BeforeY,AfterX, BeforeY),!.
 
 /* RULES TEMPAT MANCING DAN FARMING */
 canDig(X,Y)             :- \+ wall(X,Y),\+ water(X,Y),\+ house(X,Y),\+ marketplace(X,Y),\+ quest(X,Y),\+ ranch(X,Y),\+ digged(X,Y).

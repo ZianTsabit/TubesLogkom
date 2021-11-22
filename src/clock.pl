@@ -14,18 +14,28 @@ clockRules :-       clock(X), X > 1439,
                     retract(day(Y)),NewY is Y+1,asserta(day(NewY)),
                     retract(clock(X)),NewX is X-1440,asserta(clock(NewX)), !.
 
-clockAfterSleep :-  retractall(clock),
-                    asserta(clock(360)).
+punishTired :-     clock(Y), Y < 360,
+                    write('player : "... What is happening to me?"'),nl,nl,
+                    write('you are fainted, try not to push yourself to hard!'),
+                    retract(player(_,_)),retract(clock(_)), asserta(player(4,10)), asserta(clock(600)), !. 
+
+
+clockAfterSleep :-  retract(clock(X)),
+                    X =< 1320 -> asserta(clock(1800)), clockRules;
+                    asserta(clock(1920)), clockRules.
 
 clockAfterMove :-   retract(clock(X)), NewX is X+5,
-                    asserta(clock(NewX)), clockRules.
+                    asserta(clock(NewX)), clockRules, punishTired.
 
 /* belum ditentuin waktunya mau berapa lama */
 clockAfterFishing :-retract(clock(X)), NewX is X+5,
-                    asserta(clock(NewX)), clockRules.
+                    asserta(clock(NewX)), clockRules, punishTired.
 
 clockAfterFarming :-retract(clock(X)), NewX is X+5,
-                    asserta(clock(NewX)), clockRules.
+                    asserta(clock(NewX)), clockRules, punishTired.
 
 clockAfterRanching :-retract(clock(X)), NewX is X+5,
-                    asserta(clock(NewX)), clockRules.
+                    asserta(clock(NewX)), clockRules, punishTired.
+
+clockAfterMarket :- retract(clock(X)), NewX is X+5,
+                    asserta(clock(NewX)), clockRules, punishTired.
