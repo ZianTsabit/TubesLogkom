@@ -63,8 +63,8 @@ buy_chili_seed :-
         write('You are charged '), write(NewPrice), write(' golds'),nl,
         NewGold is Gold-NewPrice,
         addConsumable(6, Amount),
-        retract(player(_,_,_,_,_,_,_,_,_,_)),
-        asserta(player(_,_,_,_,_,_,_,_,_,NewGold)))     
+        retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
+        asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold)))     
        ),!.
 
 sell_chili_seed :- 
@@ -110,8 +110,9 @@ buy_paddy_seed :-
         write('You are charged '), write(NewPrice), write(' golds'),nl,
         NewGold is Gold-NewPrice,
         addConsumable(7, Amount),
-        retract(player(_,_,_,_,_,_,_,_,_,_)),
-        asserta(player(_,_,_,_,_,_,_,_,_,NewGold)))     
+        retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
+        asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold))
+       )     
        ),!.
 
 sell_paddy_seed :- 
@@ -157,8 +158,9 @@ buy_tomato_seed :-
         write('You are charged '), write(NewPrice), write(' golds'),nl,
         NewGold is Gold-NewPrice,
         addConsumable(8, Amount),
-        retract(player(_,_,_,_,_,_,_,_,_,_)),
-        asserta(player(_,_,_,_,_,_,_,_,_,NewGold)))     
+        retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
+        asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold))
+        )     
        ),!.
 
 sell_tomato_seed :- 
@@ -204,8 +206,9 @@ buy_pineapple_seed :-
         write('You are charged '), write(NewPrice), write(' golds'),nl,
         NewGold is Gold-NewPrice,
         addConsumable(9, Amount),
-        retract(player(_,_,_,_,_,_,_,_,_,_)),
-        asserta(player(_,_,_,_,_,_,_,_,_,NewGold)))     
+        retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
+        asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold))
+        )     
        ),!.
 
 sell_pineapple_seed :- 
@@ -250,8 +253,9 @@ buy_strawberry_seed :-
         write('You are charged '), write(NewPrice), write(' golds'),nl,
         NewGold is Gold-NewPrice,
         addConsumable(10, Amount),
-        retract(player(_,_,_,_,_,_,_,_,_,_)),
-        asserta(player(_,_,_,_,_,_,_,_,_,NewGold)))     
+        retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
+        asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold))
+        )     
        ),!.
 
 sell_strawberry_seed :- 
@@ -294,8 +298,9 @@ chicken :-
         write('You are charged '), write(NewPrice), write(' golds'),nl,
         NewGold is Gold-NewPrice,
         addConsumable(15, Amount),
-        retract(player(_,_,_,_,_,_,_,_,_,_)),
-        asserta(player(_,_,_,_,_,_,_,_,_,NewGold)))     
+        retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
+        asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold))
+        )     
        ),!.
 
 sheep :- \+isStarted(_), write('You have to start your game first !'),!.
@@ -315,8 +320,9 @@ sheep :-
         write('You are charged '), write(NewPrice), write(' golds'),nl,
         NewGold is Gold-NewPrice,
         addConsumable(16, Amount),
-        retract(player(_,_,_,_,_,_,_,_,_,_)),
-        asserta(player(_,_,_,_,_,_,_,_,_,NewGold)))     
+        retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
+        asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold))
+        )     
        ),!.
 
 cow :- \+isStarted(_), write('You have to start your game first !'),!.
@@ -336,8 +342,9 @@ cow :-
         write('You are charged '), write(NewPrice), write(' golds'),nl,
         NewGold is Gold-NewPrice,
         addConsumable(17, Amount),
-        retract(player(_,_,_,_,_,_,_,_,_,_)),
-        asserta(player(_,_,_,_,_,_,_,_,_,NewGold)))     
+        retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
+        asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold))
+        )     
        ),!.
 
 horse :- \+isStarted(_), write('You have to start your game first !'),!.
@@ -357,8 +364,9 @@ horse :-
         write('You are charged '), write(NewPrice), write(' golds'),nl,
         NewGold is Gold-NewPrice,
         addConsumable(18, Amount),
-        retract(player(_,_,_,_,_,_,_,_,_,_)),
-        asserta(player(_,_,_,_,_,_,_,_,_,NewGold)))     
+        retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
+        asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold))
+        )     
        ),!.
 
 chicken_feed :- \+isStarted(_), write('You have to start your game first !'),!.
@@ -378,8 +386,9 @@ chicken_feed :-
         write('You are charged '), write(NewPrice), write(' golds'),nl,
         NewGold is Gold-NewPrice,
         addConsumable(11, Amount),
-        retract(player(_,_,_,_,_,_,_,_,_,_)),
-        asserta(player(_,_,_,_,_,_,_,_,_,NewGold)))     
+        retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
+        asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold))
+        )     
        ),!.
 
 sheep_feed :- \+isStarted(_), write('You have to start your game first !'),!.
@@ -399,8 +408,9 @@ sheep_feed :-
         write('You are charged '), write(NewPrice), write(' golds'),nl,
         NewGold is Gold-NewPrice,
         addConsumable(12, Amount),
-        retract(player(_,_,_,_,_,_,_,_,_,_)),
-        asserta(player(_,_,_,_,_,_,_,_,_,NewGold)))     
+        retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
+        asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold))
+        )     
        ),!.
 
 cow_feed :- \+isStarted(_), write('You have to start your game first !'),!.
@@ -420,8 +430,9 @@ cow_feed :-
         write('You are charged '), write(NewPrice), write(' golds'),nl,
         NewGold is Gold-NewPrice,
         addConsumable(13, Amount),
-        retract(player(_,_,_,_,_,_,_,_,_,_)),
-        asserta(player(_,_,_,_,_,_,_,_,_,NewGold)))     
+        retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
+        asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold))
+        )     
        ),!.
 
 horse_feed :- \+isStarted(_), write('You have to start your game first !'),!.
@@ -441,8 +452,9 @@ horse_feed :-
         write('You are charged '), write(NewPrice), write(' golds'),nl,
         NewGold is Gold-NewPrice,
         addConsumable(14, Amount),
-        retract(player(_,_,_,_,_,_,_,_,_,_)),
-        asserta(player(_,_,_,_,_,_,_,_,_,NewGold)))     
+        retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
+        asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold))
+        )     
        ),!.
 
 level_2_shovel :- \+isStarted(_), write('You have to start your game first !'),!.
@@ -461,8 +473,8 @@ level_2_shovel :-
        write('Congrats !!! You have successfully purchased level 2 shovel !!!'),
        addItem(6,Role,1),
        NewGold is Gold-X,
-       retract(player(_,_,_,_,_,_,_,_,_,_)),
-       asserta(player(_,_,_,_,_,_,_,_,_,NewGold))
+       retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
+       asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold))
        ))
        )
        ),!.
@@ -483,8 +495,8 @@ level_3_shovel :-
        write('Congrats !!! You have successfully purchased level 3 shovel !!!'),
        addItem(7,Role,1),
        NewGold is Gold-X,
-       retract(player(_,_,_,_,_,_,_,_,_,_)),
-       asserta(player(_,_,_,_,_,_,_,_,_,NewGold))
+       retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
+       asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold))
        ))
        )
        ),!.
@@ -506,8 +518,8 @@ level_2_watering_can :-
        write('Congrats !!! You have successfully purchased level 2 watering can !!!'),
        addItem(8,Role,1),
        NewGold is Gold-X,
-       retract(player(_,_,_,_,_,_,_,_,_,_)),
-       asserta(player(_,_,_,_,_,_,_,_,_,NewGold))
+       retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
+       asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold))
        ))
        )
        ),!.
@@ -529,8 +541,8 @@ level_3_watering_can :-
        write('Congrats !!! You have successfully purchased level 3 watering can !!!'),
        addItem(9,Role,1),
        NewGold is Gold-X,
-       retract(player(_,_,_,_,_,_,_,_,_,_)),
-       asserta(player(_,_,_,_,_,_,_,_,_,NewGold))
+       retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
+       asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold))
        ))
        )),!.
        
@@ -551,8 +563,8 @@ level_2_fishing_rod :-
        write('Congrats !!! You have successfully purchased level 2 fishing rod !!!'),
        addItem(10,Role,1),
        NewGold is Gold-X,
-       retract(player(_,_,_,_,_,_,_,_,_,_)),
-       asserta(player(_,_,_,_,_,_,_,_,_,NewGold))
+       retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
+       asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold))
        ))
        )),!.
        
@@ -572,8 +584,8 @@ level_3_fishing_rod :-
        write('Congrats !!! You have successfully purchased level 3 fishing rod !!!'),
        addItem(11,Role,1),
        NewGold is Gold-X,
-       retract(player(_,_,_,_,_,_,_,_,_,_)),
-       asserta(player(_,_,_,_,_,_,_,_,_,NewGold))
+       retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
+       asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold))
        ))
        )),!.
 
@@ -594,8 +606,9 @@ bait :-
         write('You are charged '), write(NewPrice), write(' golds'),nl,
         NewGold is Gold-NewPrice,
         addConsumable(5, Amount),
-        retract(player(_,_,_,_,_,_,_,_,_,_)),
-        asserta(player(_,_,_,_,_,_,_,_,_,NewGold)))     
+        retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
+        asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold))
+        )     
        ),!.
 
 exitBuy :- retract(isBuy(_)),exitMarket,market,!.
