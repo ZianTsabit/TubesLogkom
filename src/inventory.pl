@@ -48,7 +48,7 @@ kapasitas :-            \+(inventoryI(_,_,_,_,_,_)),
 inventory :-            write('Your inventory: '),
                         capacity(Kapasitas),
                         write(Kapasitas), write(' / 100'),nl,
-                        listItem, listConsumable, nl, nl, write('Use drop command to drop item').
+                        listItem, listConsumable, nl, nl, write('Use throw command to throw item').
 
 /* Logic add item to inventory */
 checkAfter                 :-   capacity(X), X > 100.
@@ -125,9 +125,9 @@ deleteConsumable(ID, Jumlah) :-  consumable(ID,Nama),
 cekConsumableExist(ID, Name) :-  \+inventoryI(ID,Name,consumable,_,_,_),!,fail.
 cekConsumableExist(ID, Name) :- inventoryI(ID,Name,consumable,_,_,_).
 
-drop                         :- inventoryI(_,_,consumable,_,_,_),
-                                write('which one you want to drop?'),nl,
+throw                         :- inventoryI(_,_,consumable,_,_,_),
+                                write('which one you want to throw?'),nl,
                                 listConsumable,nl,
                                 write('input ID: '), read_integer(X),
-                                inventoryI(X,_,consumable,_,_,_) -> write('How many do you want to drop?'),nl,write('input amount: '), read_integer(Y), deleteConsumable(X,Y), !;
-                                write('There is nothing to drop!').
+                                inventoryI(X,_,consumable,_,_,_) -> write('How many do you want to throw?'),nl,write('input amount: '), read_integer(Y), deleteConsumable(X,Y), !;
+                                write('There is nothing to throw!').
