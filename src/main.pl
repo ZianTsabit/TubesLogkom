@@ -101,3 +101,9 @@ sleep                   :-  isHouse(_), goSleep, !; failHouse.
 writeDiary              :-  isHouse(_), writeInDiary, !; failHouse.
 readDiary               :-  isHouse(_), readTheDiary, !; failHouse.
 exit                    :-  retract(isHouse(_)).
+
+/*** Alchemist ***/
+
+alchemist               :-  alchemistMenu, !.
+rich                    :-  richPotion, !.
+speed                   :-  speedPotion, !.
