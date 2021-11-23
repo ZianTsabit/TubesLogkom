@@ -76,7 +76,6 @@ consumable(21, horse_milk).
 consumable(22, wool).
 
 
-
 /*    FAKTA DAN RULE PRICE TIAP ITEM DAN CONSUMABLES */
 
 /* ITEM */
@@ -128,3 +127,4 @@ sellprice(tuna_fish, 200).
 sellprice(mackerel_fish, 150).
 sellprice(sardines_fish, 100).
 sellprice(puffer_fish, 250).
+sellprice(bait, 15).
