@@ -9,6 +9,7 @@
 :- include('role.pl').
 :- include('marketplace.pl').
 :- include('clock.pl').
+:- include('alchemist.pl').
 
 :- dynamic(isStarted/1).
 :- dynamic(isQuest/1).

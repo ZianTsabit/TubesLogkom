@@ -46,6 +46,7 @@ map(X, Y) :-            (wall(X, Y) -> write('#');
                         marketplace(X, Y) -> write('M');
                         digged(X,Y) -> write('=');
                         water(X,Y) -> write('o');
+                        alchemist(X,Y) -> write('A');
                         write('-')), X2 is X + 1, 
                         (X = 16, Y = 0 -> nl;
                         X = 16 -> nl, X1 = 0, Y1 is Y - 1, map(X1, Y1);
