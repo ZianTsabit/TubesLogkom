@@ -125,6 +125,9 @@ deleteConsumable(ID, Jumlah) :-  consumable(ID,Nama),
 cekConsumableExist(ID, Name) :-  \+inventoryI(ID,Name,consumable,_,_,_),!,fail.
 cekConsumableExist(ID, Name) :- inventoryI(ID,Name,consumable,_,_,_).
 
+cekItemExist(ID, Name) :-  \+inventoryI(ID,Name,item,_,_,_),!,fail.
+cekItemExist(ID, Name) :- inventoryI(ID,Name,item,_,_,_).
+
 throw                         :- inventoryI(_,_,consumable,_,_,_),
                                 write('which one you want to throw?'),nl,
                                 listConsumable,nl,
