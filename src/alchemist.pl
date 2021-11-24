@@ -1,6 +1,8 @@
 :- dynamic(isAlchemist/1).
 :- dynamic(isRich/1).
 :- dynamic(isSpeed/1).
+:- dynamic(richBoost/1).
+:- dynamic(speedBoost/1).
 
 writeSleep                  :-  write('      ______________________'), nl,
                                 write('     /            ___      /'), nl,
@@ -11,10 +13,10 @@ writeSleep                  :-  write('      ______________________'), nl,
                                 write('/_____________________/     ').
                                 
 
-writePotion                 :-  (\+ isRich(_), \+ isSpeed(_), write('- Rich Potion (3000 gold)'), nl, write('- Speed Potion (3000 gold)');
-                                \+ isRich(_), write('- Rich Potion (3000 gold)');
-                                \+ isSpeed(_), write('- Speed Potion (3000 gold)')),
-                                nl, write('- Secret Potion (0 gold)').
+writePotion                 :-  (\+ isRich(_), \+ isSpeed(_), write('- Rich Potion (5000 gold)'), nl, write('- Speed Potion (7000 gold)');
+                                \+ isRich(_), write('- Rich Potion (5000 gold)');
+                                \+ isSpeed(_), write('- Speed Potion (7000 gold)')),
+                                nl, write('- Secret Potion (? gold)').
 
 alchemistMenu               :-  player(X,Y), (X \= 1; Y \= 1), write('You are not in alchemist house');
                                 player(X,Y), X = 1, Y = 1, alchemist(_,_), \+ isAlchemist(_), asserta(isAlchemist(true)), 
@@ -22,19 +24,19 @@ alchemistMenu               :-  player(X,Y), (X \= 1; Y \= 1), write('You are no
                                 isAlchemist(_), write('You are already in alchemist menu');
                                 write('What are you doing here?').
 
-richPotion                  :-  isAlchemist(_), (\+ isRich(_), (player(_,_,_,_,_,_,_,_,_,Gold), Gold < 3000, 
+richPotion                  :-  isAlchemist(_), (\+ isRich(_), (player(_,_,_,_,_,_,_,_,_,Gold), Gold < 5000, 
                                 write('You must work harder to get money');
-                                retract(player(A,B,C,D,E,F,G,H,I,Gold)), NewGold is Gold - 3000,
-                                asserta(player(A,B,C,D,E,F,G,H,I,NewGold)), asserta(isRich(true)),
-                                write('Your Rich Potion is active now!'));
+                                retract(player(A,B,C,D,E,F,G,H,I,Gold)), NewGold is Gold - 5000,
+                                asserta(player(A,B,C,D,E,F,G,H,I,NewGold)), asserta(isRich(true)), asserta(richBoost(true)),
+                                write('Your Rich Potion is active now!'), nl, write('You will get 40 gold everyday'));
                                 write('You already bought this potion'));
                                 write('You are not in achemist menu').
 
-speedPotion                 :-  isAlchemist(_), (\+ isSpeed(_), (player(_,_,_,_,_,_,_,_,_,Gold), Gold < 3000, 
+speedPotion                 :-  isAlchemist(_), (\+ isSpeed(_), (player(_,_,_,_,_,_,_,_,_,Gold), Gold < 7000, 
                                 write('You must work harder to get money');
-                                retract(player(A,B,C,D,E,F,G,H,I,Gold)), NewGold is Gold - 3000,
-                                asserta(player(A,B,C,D,E,F,G,H,I,NewGold)), asserta(isSpeed(true)),
-                                write('Your Speed Potion is active now!'));
+                                retract(player(A,B,C,D,E,F,G,H,I,Gold)), NewGold is Gold - 7000,
+                                asserta(player(A,B,C,D,E,F,G,H,I,NewGold)), asserta(isSpeed(true)), asserta(speedBoost(true)),
+                                write('Your Speed Potion is active now!'), nl, write('You move faster than before'));
                                 write('You already bought this potion'));
                                 write('You are not in achemist menu').
                             
