@@ -8,6 +8,7 @@ wall(X, Y) :-           (Y =:= 16, (X >= 0, X =< 16));
 
 /* Fact yang digunakan */
 :- dynamic(player/2).
+:- dynamic(chili/2).
 :- dynamic(house/2).
 :- dynamic(ranch/2).
 :- dynamic(quest/2).
@@ -47,6 +48,7 @@ map(X, Y) :-            (wall(X, Y) -> write('#');
                         digged(X,Y) -> write('=');
                         water(X,Y) -> write('o');
                         alchemist(X,Y) -> write('A');
+                        chili(X,Y) -> write('c');
                         write('-')), X2 is X + 1, 
                         (X = 16, Y = 0 -> nl;
                         X = 16 -> nl, X1 = 0, Y1 is Y - 1, map(X1, Y1);
