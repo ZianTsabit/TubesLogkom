@@ -22,7 +22,18 @@ writeActHouse                   :-  write('What do you want to do?'), nl,
 
 goSleep                         :-  write('You went to sleep'), nl, nl,
                                     clockAfterSleep, day(After),
-                                    write('Day '), write(After), !.
+                                    write('Day '), write(After), 
+                                    (After mod 9 =:= 0, After mod 27 =\= 0 -> nl, nl, write('You saw Sleeping Fairy shadow last night');
+                                    After mod 27 =:= 0 -> nl, nl, write('You are lucky!'), nl, write('You meet Sleeping Fairy'), nl, nl,
+                                    write('Sleeping Fairy: Choose coordinate where you want to wake up!'), nl, read(X), read(Y), nl, nl,
+                                    (wall(X,Y) -> write('Sleeping Fairy: You must be kidding to wake up on the wall'),
+                                    nl, nl, write('You return to house');
+                                    (X > 16; Y > 16; X < 0; Y < 0) -> write('Sleeping Fairy: I do not understand what place you mean'),
+                                    nl, nl, write('You return to house');
+                                    water(X,Y) -> write('Sleeping Fairy: Wake up on water? You are strange'),
+                                    nl, nl, write('You return to house');
+                                    write('Sleeping Fairy: Request has been granted. Enjoy your day!'), exit,
+                                    retract(player(_,_)), asserta(player(X,Y))); !).
 
 writeInDiary                    :-  day(X), (\+ diary(X,_) -> write('Write your diary for Day '); write('Replace your diary for Day ')), 
                                     write(X), nl, nl, write('yes'), nl, write('| ?- '), read(Y),
