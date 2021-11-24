@@ -72,7 +72,8 @@ start                   :-  isStarted(_) -> write('You already start your journe
                             ((Choice = 1 -> initStatus(fisherman), write('You choose Fisherman, lets start fishing'));
                             (Choice = 2 -> initStatus(farmer), write('You choose Farmer, lets start farming'));
                             (Choice = 3 -> initStatus(rancher), write('You choose Rancher, lets start ranching'));
-                            ((Choice > 3; Choice < 1) -> retract(day(_)) ,retract(isStarted(_)), write('Game is not started'), nl, write('Input invalid')))).
+                            ((Choice > 3; Choice < 1) -> retract(day(_)) ,retract(isStarted(_)), retract(diaryList(_)), retract(clock(_)), retract(capacity(_)),
+                            write('Game is not started'), nl, write('Input invalid')))).
 
 
 /*** Player ***/
@@ -107,3 +108,10 @@ exit                    :-  retract(isHouse(_)).
 alchemist               :-  alchemistMenu, !.
 rich                    :-  richPotion, !.
 speed                   :-  speedPotion, !.
+secret                  :-  secretPotion, !.
+
+/*** Fail State ***/
+
+failState               :-  write('You have worked hard, but in the end result is all that matters.'), nl,
+                            write('May God bless you in the future with kind people!'),
+                            retract(day(_)) ,retract(isStarted(_)), retract(diaryList(_)), retract(clock(_)), retract(capacity(_)).
