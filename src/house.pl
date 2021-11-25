@@ -20,9 +20,7 @@ writeActHouse                   :-  write('What do you want to do?'), nl,
                                     write('- readDiary'), nl,
                                     write('- exit').
 
-goSleep                         :-  write('You went to sleep'), nl, nl,
-                                    clockAfterSleep, day(After),
-                                    write('Day '), write(After), 
+goSleep                         :-  write('You went to sleep'), nl, nl, clockAfterSleep, day(After),
                                     (After mod 9 =:= 0, After mod 27 =\= 0 -> nl, nl, write('You saw Sleeping Fairy shadow last night');
                                     After mod 27 =:= 0 -> nl, nl, write('You are lucky!'), nl, write('You meet Sleeping Fairy'), nl, nl,
                                     write('Sleeping Fairy: Choose coordinate where you want to wake up!'), 
