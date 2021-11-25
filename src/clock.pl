@@ -21,7 +21,15 @@ clockRules :-       clock(X), X > 1439,
                     (S = spring -> write('Spring');
                     S = summer -> write('Summer');
                     S = autumn -> write('Autumn');
-                    write('Winter')),
+                    write('Winter')), nl, retract(weather(_)),
+                    (season(spring), ((NewY mod 6 =:= 0; NewY mod 11 =:= 0) -> asserta(weather(rainy)); asserta(weather(sunny)));
+                    season(summer), ((NewY mod 11 =:= 0; NewY mod 23 =:= 0) -> asserta(weather(rainy)); asserta(weather(sunny)));
+                    season(autumn), ((NewY mod 7 =:= 0; NewY mod 13 =:= 0) -> asserta(weather(rainy)); asserta(weather(sunny)));
+                    (NewY mod 4 =:= 0; NewY mod 7 =:= 0; NewY mod 11 =:= 0) -> asserta(weather(snowy)); asserta(weather(sunny))),
+                    write('Weather: '), weather(W),
+                    (W = sunny -> write('Sunny');
+                    W = rainy -> write('Rainy');
+                    write('Snowy')),
                     ((NewY mod 17 =:= 0 -> nl, nl, asserta(alchemist(1,1)), write('Good news!'), nl, write('Alchemist is here'));
                     (alchemist(A,B), NewY mod 17 =\= 0 -> nl, nl, retract(alchemist(A,B)), write('Alchemist has gone')); !),
                     (richBoost(_) -> retract(player(C,D,E,F,G,H,I,J,K,Gold)), NewGold is Gold + 40, 
