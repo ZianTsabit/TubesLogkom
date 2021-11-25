@@ -16,6 +16,8 @@
 :- dynamic(isStarted/1).
 :- dynamic(isQuest/1).
 :- dynamic(day/1).
+:- dynamic(season/1).
+:- dynamic(weather/1).
 :- dynamic(isHouse/1).
 :- dynamic(diaryList/1).
 
@@ -65,7 +67,8 @@ help:-
 /*** Start ***/
 
 start                   :-  isStarted(_) -> write('You already start your journey!');
-                            (\+ isStarted(_), asserta(isStarted(true)), createMap, asserta(day(1)), asserta(diaryList([])), asserta(clock(360)), asserta(capacity(0)),
+                            (\+ isStarted(_), asserta(isStarted(true)), createMap, asserta(day(1)), asserta(diaryList([])), 
+                            asserta(clock(360)), asserta(capacity(0)), asserta(season(spring)), asserta(weather(sunny)),
                             write('Welcome to Harvest Star. Choose your job'), nl,
                             write('1. Fisherman'), nl,
                             write('2. Farmer'), nl,
@@ -74,7 +77,8 @@ start                   :-  isStarted(_) -> write('You already start your journe
                             ((Choice = 1 -> initStatus(fisherman), write('You choose Fisherman, lets start fishing'));
                             (Choice = 2 -> initStatus(farmer), write('You choose Farmer, lets start farming'));
                             (Choice = 3 -> initStatus(rancher), write('You choose Rancher, lets start ranching'));
-                            ((Choice > 3; Choice < 1) -> retract(day(_)) ,retract(isStarted(_)), retract(diaryList(_)), retract(clock(_)), retract(capacity(_)),
+                            ((Choice > 3; Choice < 1) -> retract(day(_)) ,retract(isStarted(_)), retract(diaryList(_)), 
+                            retract(clock(_)), retract(capacity(_)), retract(season(_)), retract(weather(_)),
                             write('Game is not started'), nl, write('Input invalid')))).
 
 
@@ -116,4 +120,5 @@ secret                  :-  secretPotion, !.
 
 failState               :-  write('You have worked hard, but in the end result is all that matters.'), nl,
                             write('May God bless you in the future with kind people!'),
-                            retract(day(_)) ,retract(isStarted(_)), retract(diaryList(_)), retract(clock(_)), retract(capacity(_)).
+                            retract(day(_)) ,retract(isStarted(_)), retract(diaryList(_)), 
+                            retract(clock(_)), retract(capacity(_)), retract(season(_)), retract(weather(_)).
