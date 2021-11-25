@@ -103,3 +103,5 @@ canDig(X,Y)             :- \+ wall(X,Y),\+ water(X,Y),\+ house(X,Y),\+ marketpla
 
 canFish(X,Y)            :- water(A,B),(((Y =:= B),((A =:= X-1);(A =:= X+1)));((X =:= A),((B =:= Y-1);(A =:= Y+1)))).
 
+canWater(X,Y)           :- \+ wall(X,Y),\+ water(X,Y),\+ house(X,Y),\+ marketplace(X,Y),\+ quest(X,Y),\+ ranch(X,Y).
+
