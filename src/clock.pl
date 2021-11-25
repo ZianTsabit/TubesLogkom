@@ -14,10 +14,10 @@ clockRules :-       clock(X), X > 1439,
                     retract(day(Y)),NewY is Y+1,asserta(day(NewY)),
                     write('Day '), write(NewY), nl,
                     retract(clock(X)),NewX is X-1440,asserta(clock(NewX)), 
-                    (NewY =:= 90 -> retract(season(_)), asserta(season(summer));
-                    NewY =:= 180 -> retract(season(_)), asserta(season(autumn));
-                    NewY =:= 270 -> retract(season(_)), asserta(season(winter));
-                    NewY =:= 360 -> fail; !), write('Season: '), season(S),
+                    (NewY =:= 91 -> retract(season(_)), asserta(season(summer));
+                    NewY =:= 181 -> retract(season(_)), asserta(season(autumn));
+                    NewY =:= 271 -> retract(season(_)), asserta(season(winter));
+                    !), write('Season: '), season(S),
                     (S = spring -> write('Spring');
                     S = summer -> write('Summer');
                     S = autumn -> write('Autumn');
