@@ -852,7 +852,7 @@ exitSell :- retract(isSell(_)),exitMarket,market,!.
 
 chili :- \+isStarted(_), write('You have to start your game first !'),!.
 chili :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-chili :- isStarted(_), isMarketplace(_), \+isSell(_),!.
+chili :- isStarted(_), isMarketplace(_), \+isSell(_),write('You have to chose sell option first!'),!.
 chili :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
@@ -877,7 +877,7 @@ chili :-
 
 paddy :- \+isStarted(_), write('You have to start your game first !'),!.
 paddy :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-paddy :- isStarted(_), isMarketplace(_), \+isSell(_),!.
+paddy :- isStarted(_), isMarketplace(_), \+isSell(_),write('You have to chose sell option first!'),!.
 paddy :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
@@ -902,7 +902,7 @@ paddy :-
 
 tomato :- \+isStarted(_), write('You have to start your game first !'),!.
 tomato :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-tomato :- isStarted(_), isMarketplace(_), \+isSell(_),!.
+tomato :- isStarted(_), isMarketplace(_), \+isSell(_),write('You have to chose sell option first!'),!.
 tomato :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
@@ -927,7 +927,7 @@ tomato :-
 
 pineapple :- \+isStarted(_), write('You have to start your game first !'),!.
 pineapple :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-pineapple :- isStarted(_), isMarketplace(_), \+isSell(_),!.
+pineapple :- isStarted(_), isMarketplace(_), \+isSell(_),write('You have to chose sell option first!'),!.
 pineapple :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
@@ -952,7 +952,7 @@ pineapple :-
 
 strawberry :- \+isStarted(_), write('You have to start your game first !'),!.
 strawberry :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-strawberry :- isStarted(_), isMarketplace(_), \+isSell(_),!.
+strawberry :- isStarted(_), isMarketplace(_), \+isSell(_),write('You have to chose sell option first!'),!.
 strawberry :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
@@ -977,7 +977,7 @@ strawberry :-
 
 eggs :- \+isStarted(_), write('You have to start your game first !'),!.
 eggs :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-eggs :- isStarted(_), isMarketplace(_), \+isSell(_),!.
+eggs :- isStarted(_), isMarketplace(_), \+isSell(_),write('You have to chose sell option first!'),!.
 eggs :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
@@ -1002,7 +1002,7 @@ eggs :-
 
 milk :- \+isStarted(_), write('You have to start your game first !'),!.
 milk :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-milk :- isStarted(_), isMarketplace(_), \+isSell(_),!.
+milk :- isStarted(_), isMarketplace(_), \+isSell(_),write('You have to chose sell option first!'),!.
 milk :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
@@ -1027,7 +1027,7 @@ milk :-
 
 horse_milk :- \+isStarted(_), write('You have to start your game first !'),!.
 horse_milk :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-horse_milk :- isStarted(_), isMarketplace(_), \+isSell(_),!.
+horse_milk :- isStarted(_), isMarketplace(_), \+isSell(_),write('You have to chose sell option first!'),!.
 horse_milk :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
@@ -1052,7 +1052,7 @@ horse_milk :-
 
 wool :- \+isStarted(_), write('You have to start your game first !'),!.
 wool :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-wool :- isStarted(_), isMarketplace(_), \+isSell(_),!.
+wool :- isStarted(_), isMarketplace(_), \+isSell(_),write('You have to chose sell option first!'),!.
 wool :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
@@ -1077,7 +1077,7 @@ wool :-
 
 tuna_fish :- \+isStarted(_), write('You have to start your game first !'),!.
 tuna_fish :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-tuna_fish :- isStarted(_), isMarketplace(_), \+isSell(_),!.
+tuna_fish :- isStarted(_), isMarketplace(_), \+isSell(_),write('You have to chose sell option first!'),!.
 tuna_fish :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
@@ -1102,7 +1102,7 @@ tuna_fish :-
 
 mackerel_fish :- \+isStarted(_), write('You have to start your game first !'),!.
 mackerel_fish :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-mackerel_fish :- isStarted(_), isMarketplace(_), \+isSell(_),!.
+mackerel_fish :- isStarted(_), isMarketplace(_), \+isSell(_),write('You have to chose sell option first!'),!.
 mackerel_fish :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
@@ -1127,7 +1127,7 @@ mackerel_fish :-
 
 sardines_fish :- \+isStarted(_), write('You have to start your game first !'),!.
 sardines_fish :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-sardines_fish :- isStarted(_), isMarketplace(_), \+isSell(_),!.
+sardines_fish :- isStarted(_), isMarketplace(_), \+isSell(_),write('You have to chose sell option first!'),!.
 sardines_fish :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
@@ -1152,7 +1152,7 @@ sardines_fish :-
 
 puffer_fish :- \+isStarted(_), write('You have to start your game first !'),!.
 puffer_fish :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-puffer_fish :- isStarted(_), isMarketplace(_), \+isSell(_),!.
+puffer_fish :- isStarted(_), isMarketplace(_), \+isSell(_),write('You have to chose sell option first!'),!.
 puffer_fish :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
