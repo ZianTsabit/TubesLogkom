@@ -21,8 +21,8 @@ writeActHouse                   :-  write('What do you want to do?'), nl,
                                     write('- exit').
 
 goSleep                         :-  write('You went to sleep'), nl, nl, clockAfterSleep, day(After),
-                                    (After mod 9 =:= 0, After mod 27 =\= 0 -> nl, nl, write('You saw Sleeping Fairy shadow last night');
-                                    After mod 27 =:= 0 -> nl, nl, write('You are lucky!'), nl, write('You meet Sleeping Fairy'), nl, nl,
+                                    (After mod 11 =:= 0, After mod 33 =\= 0 -> nl, nl, write('You saw Sleeping Fairy shadow last night');
+                                    After mod 33 =:= 0 -> nl, nl, write('You are lucky!'), nl, write('You meet Sleeping Fairy'), nl, nl,
                                     write('Sleeping Fairy: Choose coordinate where you want to wake up!'), 
                                     nl, write('X : '), read_integer(X), write('Y : '), read_integer(Y), nl,
                                     (wall(X,Y) -> write('Sleeping Fairy: You must be kidding to wake up on the wall'),

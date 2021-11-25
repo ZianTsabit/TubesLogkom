@@ -12,14 +12,18 @@ showClock :-        clock(X), Jam is X // 60, Menit is X mod 60,
 
 clockRules :-       clock(X), X > 1439, 
                     retract(day(Y)),NewY is Y+1,asserta(day(NewY)),
-                    write('Day '), write(NewY), 
+                    write('Day '), write(NewY), nl,
                     retract(clock(X)),NewX is X-1440,asserta(clock(NewX)), 
                     (NewY =:= 90 -> retract(season(_)), asserta(season(summer));
                     NewY =:= 180 -> retract(season(_)), asserta(season(autumn));
                     NewY =:= 270 -> retract(season(_)), asserta(season(winter));
-                    NewY =:= 360 -> fail; !),
-                    ((NewY mod 17 =:= 0 -> asserta(alchemist(1,1)), write('Good news!'), nl, write('Alchemist is here'), nl, nl);
-                    (alchemist(A,B), NewY mod 17 =\= 0 -> retract(alchemist(A,B)), write('Alchemist has gone'), nl, nl); !),
+                    NewY =:= 360 -> fail; !), write('Season: '), season(S),
+                    (S = spring -> write('Spring');
+                    S = summer -> write('Summer');
+                    S = autumn -> write('Autumn');
+                    write('Winter')),
+                    ((NewY mod 17 =:= 0 -> nl, nl, asserta(alchemist(1,1)), write('Good news!'), nl, write('Alchemist is here'));
+                    (alchemist(A,B), NewY mod 17 =\= 0 -> nl, nl, retract(alchemist(A,B)), write('Alchemist has gone')); !),
                     (richBoost(_) -> retract(player(C,D,E,F,G,H,I,J,K,Gold)), NewGold is Gold + 40, 
                     asserta(player(C,D,E,F,G,H,I,J,K,NewGold)); !).
 
