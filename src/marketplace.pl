@@ -41,22 +41,42 @@ buyOption :- write('What do you want to buy ?'),nl,
              write('17. Level 3 watering can (550 golds)'),nl,
              write('18. Level 2 fishing rod (500 golds)'),nl,
              write('19. Level 3 fishing rod (700 golds)'),nl,
-             write('20. Bait (15 golds)').
+             write('20. Bait (15 golds)'),nl,nl,
+             write('>'),read(Choice),
+             (
+                    ((Choice = chili_seed) -> buy_chili_seed);
+                    ((Choice = paddy_seed) -> buy_paddy_seed);
+                    ((Choice = tomato_seed) -> buy_tomato_seed);
+                    ((Choice = pineapple_seed) -> buy_pineapple_seed);
+                    ((Choice = strawberry_seed) -> buy_strawberry_seed);
+                    ((Choice = chicken) -> buy_chicken);
+                    ((Choice = sheep) -> buy_sheep);
+                    ((Choice = cow) -> buy_cow);
+                    ((Choice = horse) -> buy_horse);
+                    ((Choice = chicken_feed) -> buy_chicken_feed);
+                    ((Choice = sheep_feed) -> buy_sheep_feed);
+                    ((Choice = cow_feed) -> buy_cow_feed);
+                    ((Choice = horse_feed) -> buy_horse_feed);
+                    ((Choice = level_2_shovel) -> level_2_shovel);
+                    ((Choice = level_3_shovel) -> level_3_shovel);
+                    ((Choice = level_2_watering_can) -> level_2_watering_can);
+                    ((Choice = level_3_watering_can) -> level_3_watering_can);
+                    ((Choice = level_2_fishing_rod) -> level_2_fishing_rod);
+                    ((Choice = level_3_fishing_rod) -> level_3_fishing_rod);
+                    ((Choice = bait) -> buy_bait)
+             )
+             ,!.
 
-chili_seed :- \+isStarted(_), write('You have to start your game first !'),!.
-chili_seed :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-chili_seed :- isStarted(_), isMarketplace(_), 
-              ((isBuy(_), buy_chili_seed);(isSell(_), sell_chili_seed)
-              ),!.
 
 buy_chili_seed :- 
        write('How many do you want to buy? \n'),
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
        price(chili_seed,X),
+       ( (( Amount >= 0 ) ->
        NewPrice is Amount*X,
        (
-        (NewPrice > Gold -> 
+        ((NewPrice > Gold) -> 
         write('You dont have enough money !'),nl);
         (NewPrice =< Gold, 
         write('You have bought '), write(Amount), write(' chili seeds.'),nl,
@@ -65,7 +85,10 @@ buy_chili_seed :-
         addConsumable(6, Amount),
         retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
         asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold)))     
-       ),!.
+       ));
+        (( Amount < 0 ) -> write('Invalid input'))
+       )
+       ,!.
 
 sell_chili_seed :- 
        write('How many do you want to sell? \n'),
@@ -89,17 +112,13 @@ sell_chili_seed :-
        write('Invalid amount!\nPlease check again!\n')
        )),!.
 
-paddy_seed :- \+isStarted(_), write('You have to start your game first !'),!.
-paddy_seed :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-paddy_seed :- isStarted(_), isMarketplace(_), 
-              ((isBuy(_), buy_paddy_seed);(isSell(_), sell_paddy_seed)
-              ),!.
 
 buy_paddy_seed :- 
        write('How many do you want to buy? \n'),
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
        price(paddy_seed,X),
+       
        NewPrice is Amount*X,
        (
         (NewPrice > Gold -> 
@@ -135,12 +154,6 @@ sell_paddy_seed :-
        Jumlah < Amount,
        write('Invalid amount!\nPlease check again!\n')
        )),!.
-
-tomato_seed :- \+isStarted(_), write('You have to start your game first !'),!.
-tomato_seed :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-tomato_seed :- isStarted(_), isMarketplace(_), 
-              ((isBuy(_), buy_tomato_seed);(isSell(_), sell_tomato_seed)
-              ),!.
 
 buy_tomato_seed :- 
        write('How many do you want to buy? \n'),
@@ -183,12 +196,6 @@ sell_tomato_seed :-
        write('Invalid amount!\nPlease check again!\n')
        )),!.
 
-pineapple_seed :- \+isStarted(_), write('You have to start your game first !'),!.
-pineapple_seed :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-pineapple_seed :- isStarted(_), isMarketplace(_), 
-              ((isBuy(_), buy_pineapple_seed);(isSell(_), sell_pineapple_seed)
-              ),!.
-
 buy_pineapple_seed :- 
        write('How many do you want to buy? \n'),
        write('> '),read_integer(Amount),
@@ -229,13 +236,6 @@ sell_pineapple_seed :-
        Jumlah < Amount,
        write('Invalid amount!\nPlease check again!\n')
        )),!.
-
-
-strawberry_seed :- \+isStarted(_), write('You have to start your game first !'),!.
-strawberry_seed :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-strawberry_seed :- isStarted(_), isMarketplace(_), 
-              ((isBuy(_), buy_strawberry_seed);(isSell(_), sell_strawberry_seed)
-              ),!.
 
 buy_strawberry_seed :- 
        write('How many do you want to buy? \n'),
@@ -278,12 +278,6 @@ sell_strawberry_seed :-
        write('Invalid amount!\nPlease check again!\n')
        )),!.
 
-chicken :- \+isStarted(_), write('You have to start your game first !'),!.
-chicken :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-chicken :- isStarted(_), isMarketplace(_), 
-              ((isBuy(_), buy_chicken);(isSell(_), sell_chicken)
-              ),!.
-
 buy_chicken :- 
        write('How many do you want to buy? \n'),
        write('> '),read_integer(Amount),
@@ -324,13 +318,6 @@ sell_chicken :-
        Jumlah < Amount,
        write('Invalid amount!\nPlease check again!\n')
        )),!.
-
-
-sheep :- \+isStarted(_), write('You have to start your game first !'),!.
-sheep :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-sheep :- isStarted(_), isMarketplace(_), 
-              ((isBuy(_), buy_sheep);(isSell(_), sell_sheep)
-              ),!.
 
 buy_sheep :- 
        write('How many do you want to buy? \n'),
@@ -373,12 +360,6 @@ sell_sheep :-
        write('Invalid amount!\nPlease check again!\n')
        )),!.
 
-cow :- \+isStarted(_), write('You have to start your game first !'),!.
-cow :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-cow :- isStarted(_), isMarketplace(_), 
-              ((isBuy(_), buy_cow);(isSell(_), sell_cow)
-              ),!.
-
 buy_cow :- 
        write('How many do you want to buy? \n'),
        write('> '),read_integer(Amount),
@@ -420,11 +401,6 @@ sell_cow :-
        write('Invalid amount!\nPlease check again!\n')
        )),!.
 
-horse :- \+isStarted(_), write('You have to start your game first !'),!.
-horse :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-horse :- isStarted(_), isMarketplace(_), 
-              ((isBuy(_), buy_horse);(isSell(_), sell_horse)
-              ),!.
 buy_horse :- 
        write('How many do you want to buy? \n'),
        write('> '),read_integer(Amount),
@@ -465,13 +441,6 @@ sell_horse :-
        Jumlah < Amount,
        write('Invalid amount!\nPlease check again!\n')
        )),!.
-
-
-chicken_feed :- \+isStarted(_), write('You have to start your game first !'),!.
-chicken_feed :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-chicken_feed :- isStarted(_), isMarketplace(_), 
-              ((isBuy(_), buy_chicken_feed);(isSell(_), sell_horse)
-              ),!.
 
 buy_chicken_feed :- 
        write('How many do you want to buy? \n'),
@@ -514,12 +483,6 @@ sell_chicken_feed :-
        write('Invalid amount!\nPlease check again!\n')
        )),!.
 
-sheep_feed :- \+isStarted(_), write('You have to start your game first !'),!.
-sheep_feed :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-sheep_feed :- isStarted(_), isMarketplace(_), 
-              ((isBuy(_), buy_sheep_feed);(isSell(_), sell_sheep_feed)
-              ),!.
-
 buy_sheep_feed :- 
        write('How many do you want to buy? \n'),
        write('> '),read_integer(Amount),
@@ -560,12 +523,6 @@ sell_sheep_feed :-
        Jumlah < Amount,
        write('Invalid amount!\nPlease check again!\n')
        )),!.
-
-cow_feed :- \+isStarted(_), write('You have to start your game first !'),!.
-cow_feed :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-cow_feed :- isStarted(_), isMarketplace(_), 
-              ((isBuy(_), buy_cow_feed);(isSell(_), sell_cow_feed)
-              ),!.
 
 buy_cow_feed :- 
        write('How many do you want to buy? \n'),
@@ -608,12 +565,6 @@ sell_cow_feed :-
        write('Invalid amount!\nPlease check again!\n')
        )),!.
 
-horse_feed :- \+isStarted(_), write('You have to start your game first !'),!.
-horse_feed :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-horse_feed :- isStarted(_), isMarketplace(_), 
-              ((isBuy(_), buy_horse_feed);(isSell(_), sell_horse_feed)
-              ),!.
-
 buy_horse_feed :- 
        write('How many do you want to buy? \n'),
        write('> '),read_integer(Amount),
@@ -655,9 +606,6 @@ sell_horse_feed :-
        write('Invalid amount!\nPlease check again!\n')
        )),!.
 
-level_2_shovel :- \+isStarted(_), write('You have to start your game first !'),!.
-level_2_shovel :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-level_2_shovel :- isStarted(_), isMarketplace(_), \+isBuy(_), write('You have not selected the buy option !'),!.
 level_2_shovel :- 
        player(Role,_,_,_,_,_,_,_,_,Gold),
        price(level2_shovel,X),
@@ -677,9 +625,6 @@ level_2_shovel :-
        )
        ),!.
 
-level_3_shovel :- \+isStarted(_), write('You have to start your game first !'),!.
-level_3_shovel :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-level_3_shovel :- isStarted(_), isMarketplace(_), \+isBuy(_), write('You have not selected the buy option !'),!.
 level_3_shovel :- 
        player(Role,_,_,_,_,_,_,_,_,Gold),
        price(level3_shovel,X),
@@ -699,10 +644,6 @@ level_3_shovel :-
        )
        ),!.
        
-
-level_2_watering_can :- \+isStarted(_), write('You have to start your game first !'),!.
-level_2_watering_can :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-level_2_watering_can :- isStarted(_), isMarketplace(_), \+isBuy(_), write('You have not selected the buy option !'),!.
 level_2_watering_can :- 
        player(Role,_,_,_,_,_,_,_,_,Gold),
        price(level2_watering_can,X),
@@ -722,10 +663,6 @@ level_2_watering_can :-
        )
        ),!.
        
-
-level_3_watering_can :- \+isStarted(_), write('You have to start your game first !'),!.
-level_3_watering_can :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-level_3_watering_can :- isStarted(_), isMarketplace(_), \+isBuy(_), write('You have not selected the buy option !'),!.
 level_3_watering_can :- 
        player(Role,_,_,_,_,_,_,_,_,Gold),
        price(level3_watering_can,X),
@@ -744,10 +681,6 @@ level_3_watering_can :-
        ))
        )),!.
        
-
-level_2_fishing_rod :- \+isStarted(_), write('You have to start your game first !'),!.
-level_2_fishing_rod :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-level_2_fishing_rod :- isStarted(_), isMarketplace(_), \+isBuy(_), write('You have not selected the buy option !'),!.
 level_2_fishing_rod :-
        player(Role,_,_,_,_,_,_,_,_,Gold),
        price(level2_fishing_rod,X),
@@ -766,9 +699,6 @@ level_2_fishing_rod :-
        ))
        )),!.
        
-level_3_fishing_rod :- \+isStarted(_), write('You have to start your game first !'),!.
-level_3_fishing_rod :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-level_3_fishing_rod :- isStarted(_), isMarketplace(_), \+isBuy(_), write('You have not selected the buy option !'),!.
 level_3_fishing_rod :- 
        player(Role,_,_,_,_,_,_,_,_,Gold),
        price(level3_fishing_rod,X),
@@ -786,12 +716,6 @@ level_3_fishing_rod :-
        asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold))
        ))
        )),!.
-
-bait :- \+isStarted(_), write('You have to start your game first !'),!.
-bait :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-bait :- isStarted(_), isMarketplace(_), 
-              ((isBuy(_), buy_bait);(isSell(_), sell_bait)
-              ),!.
 
 buy_bait :- 
        write('How many do you want to buy? \n'),
@@ -846,14 +770,42 @@ sell :- isStarted(_), isMarketplace(_), (\+isSell(_), sellOption, asserta(isSell
 sellOption :- isStarted(_), isMarketplace(_),
             write('Here are the items in your inventory'),nl,
             listConsumable,
-            write('What do you want to sell ?'),!.
+            write('What do you want to sell ?'),nl,nl,
+            write('>'),read(Choice),
+            (
+                   ((Choice = chili_seed) -> sell_chili_seed);
+                   ((Choice = paddy_seed) -> sell_paddy_seed);
+                   ((Choice = tomato_seed) -> sell_tomato_seed);
+                   ((Choice = pineapple_seed) -> sell_pineapple_seed);
+                   ((Choice = strawberry_seed) -> sell_strawberry_seed);
+                   ((Choice = chicken) -> sell_chicken);
+                   ((Choice = sheep) -> sell_sheep);
+                   ((Choice = cow) -> sell_cow);
+                   ((Choice = horse) -> sell_horse);
+                   ((Choice = chicken_feed) -> sell_chicken_feed);
+                   ((Choice = sheep_feed) -> sell_sheep_feed);
+                   ((Choice = cow_feed) -> sell_cow_feed);
+                   ((Choice = horse_feed) -> sell_horse_feed);
+                   ((Choice = bait) -> sell_bait);
+                   ((Choice = chili) -> sell_chili);
+                   ((Choice = paddy) -> sell_paddy);
+                   ((Choice = tomato) -> sell_tomato);
+                   ((Choice = pineapple) -> sell_pineapple);
+                   ((Choice = strawberry) -> sell_strawberry);
+                   ((Choice = eggs) -> sell_eggs);
+                   ((Choice = milk) -> sell_milk);
+                   ((Choice = horse_milk) -> sell_horse_milk);
+                   ((Choice = wool) -> sell_wool);
+                   ((Choice = tuna) -> sell_tuna_fish);
+                   ((Choice = mackerel) -> sell_mackerel_fish);
+                   ((Choice = sardines) -> sell_sardines_fish);
+                   ((Choice = puffer) -> sell_puffer_fish)
+
+            ),!.
 
 exitSell :- retract(isSell(_)),exitMarket,market,!.
 
-chili :- \+isStarted(_), write('You have to start your game first !'),!.
-chili :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-chili :- isStarted(_), isMarketplace(_), \+isSell(_),write('You have to chose sell option first!'),!.
-chili :- 
+sell_chili :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
@@ -875,10 +827,8 @@ chili :-
        write('Invalid amount!\nPlease check again!\n')
        )),!.
 
-paddy :- \+isStarted(_), write('You have to start your game first !'),!.
-paddy :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-paddy :- isStarted(_), isMarketplace(_), \+isSell(_),write('You have to chose sell option first!'),!.
-paddy :- 
+
+sell_paddy :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
@@ -900,10 +850,7 @@ paddy :-
        write('Invalid amount!\nPlease check again!\n')
        )),!.
 
-tomato :- \+isStarted(_), write('You have to start your game first !'),!.
-tomato :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-tomato :- isStarted(_), isMarketplace(_), \+isSell(_),write('You have to chose sell option first!'),!.
-tomato :- 
+sell_tomato :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
@@ -925,10 +872,7 @@ tomato :-
        write('Invalid amount!\nPlease check again!\n')
        )),!.
 
-pineapple :- \+isStarted(_), write('You have to start your game first !'),!.
-pineapple :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-pineapple :- isStarted(_), isMarketplace(_), \+isSell(_),write('You have to chose sell option first!'),!.
-pineapple :- 
+sell_pineapple :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
@@ -950,10 +894,7 @@ pineapple :-
        write('Invalid amount!\nPlease check again!\n')
        )),!.
 
-strawberry :- \+isStarted(_), write('You have to start your game first !'),!.
-strawberry :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-strawberry :- isStarted(_), isMarketplace(_), \+isSell(_),write('You have to chose sell option first!'),!.
-strawberry :- 
+sell_strawberry :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
@@ -975,10 +916,7 @@ strawberry :-
        write('Invalid amount!\nPlease check again!\n')
        )),!.
 
-eggs :- \+isStarted(_), write('You have to start your game first !'),!.
-eggs :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-eggs :- isStarted(_), isMarketplace(_), \+isSell(_),write('You have to chose sell option first!'),!.
-eggs :- 
+sell_eggs :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
@@ -1000,10 +938,7 @@ eggs :-
        write('Invalid amount!\nPlease check again!\n')
        )),!.
 
-milk :- \+isStarted(_), write('You have to start your game first !'),!.
-milk :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-milk :- isStarted(_), isMarketplace(_), \+isSell(_),write('You have to chose sell option first!'),!.
-milk :- 
+sell_milk :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
@@ -1025,10 +960,7 @@ milk :-
        write('Invalid amount!\nPlease check again!\n')
        )),!.
 
-horse_milk :- \+isStarted(_), write('You have to start your game first !'),!.
-horse_milk :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-horse_milk :- isStarted(_), isMarketplace(_), \+isSell(_),write('You have to chose sell option first!'),!.
-horse_milk :- 
+sell_horse_milk :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
@@ -1050,10 +982,7 @@ horse_milk :-
        write('Invalid amount!\nPlease check again!\n')
        )),!.
 
-wool :- \+isStarted(_), write('You have to start your game first !'),!.
-wool :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-wool :- isStarted(_), isMarketplace(_), \+isSell(_),write('You have to chose sell option first!'),!.
-wool :- 
+sell_wool :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
@@ -1075,10 +1004,7 @@ wool :-
        write('Invalid amount!\nPlease check again!\n')
        )),!.
 
-tuna_fish :- \+isStarted(_), write('You have to start your game first !'),!.
-tuna_fish :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-tuna_fish :- isStarted(_), isMarketplace(_), \+isSell(_),write('You have to chose sell option first!'),!.
-tuna_fish :- 
+sell_tuna_fish :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
@@ -1100,10 +1026,7 @@ tuna_fish :-
        write('Invalid amount!\nPlease check again!\n')
        )),!.
 
-mackerel_fish :- \+isStarted(_), write('You have to start your game first !'),!.
-mackerel_fish :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-mackerel_fish :- isStarted(_), isMarketplace(_), \+isSell(_),write('You have to chose sell option first!'),!.
-mackerel_fish :- 
+sell_mackerel_fish :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
@@ -1125,10 +1048,7 @@ mackerel_fish :-
        write('Invalid amount!\nPlease check again!\n')
        )),!.
 
-sardines_fish :- \+isStarted(_), write('You have to start your game first !'),!.
-sardines_fish :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-sardines_fish :- isStarted(_), isMarketplace(_), \+isSell(_),write('You have to chose sell option first!'),!.
-sardines_fish :- 
+sell_sardines_fish :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
@@ -1150,10 +1070,7 @@ sardines_fish :-
        write('Invalid amount!\nPlease check again!\n')
        )),!.
 
-puffer_fish :- \+isStarted(_), write('You have to start your game first !'),!.
-puffer_fish :- isStarted(_), \+isMarketplace(_), write('You are not in the marketplace !'),!.
-puffer_fish :- isStarted(_), isMarketplace(_), \+isSell(_),write('You have to chose sell option first!'),!.
-puffer_fish :- 
+sell_puffer_fish :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
