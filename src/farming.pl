@@ -27,7 +27,7 @@ dig :- player(X,Y),canDig(X,Y),
 
 /*
 c = chili
-p = paddy
+v = paddy
 t = tomato
 n = pineapple
 s = strawberry
