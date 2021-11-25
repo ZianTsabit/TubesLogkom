@@ -82,6 +82,7 @@ timetoGrow(pineapple_seed, 10).
 timetoGrow(strawberry_seed, 8).
 
 
+
 /*    FAKTA DAN RULE PRICE TIAP ITEM DAN CONSUMABLES */
 
 /* ITEM */

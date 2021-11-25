@@ -2,7 +2,7 @@
 
 :- dynamic(isPlant/2).
 :- dynamic(dayPlant/2).
-:- dynamic(waterPlant/2).
+:- dynamic(waterLevel/2).
 
 dig :- \+isStarted(_), write('You have to start your game first!'),!.
 dig :- player(X,Y), \+canDig(X,Y),
@@ -67,6 +67,7 @@ plant_chili :- isStarted(_),isPlant(_),day(Z),
          asserta(chili(X,Y1)),
          asserta(isPlant(X,Y1)),
          asserta(dayPlant(chili,Z)),
+         asserta(waterLevel(chili,1)),
          deleteConsumable(6, 1),
          write('You planted a chili seeds.'))),
          retract(isPlant(_)),!.
@@ -80,6 +81,7 @@ plant_paddy :- isStarted(_),isPlant(_),day(Z),
          asserta(paddy(X,Y1)),
          asserta(isPlant(X,Y1)),
          asserta(dayPlant(paddy,Z)),
+         asserta(waterLevel(paddy,1)),
          deleteConsumable(7, 1),
          write('You planted a paddy seeds.'))),
          retract(isPlant(_)),!.
@@ -93,6 +95,7 @@ plant_tomato :- isStarted(_),isPlant(_),day(Z),
          asserta(tomato(X,Y1)),
          asserta(isPlant(X,Y1)),
          asserta(dayPlant(tomato,Z)),
+         asserta(waterLevel(tomato,1)),
          deleteConsumable(8, 1),
          write('You planted a tomato seeds.'))),
          retract(isPlant(_)),!.
@@ -106,6 +109,7 @@ plant_pineapple :- isStarted(_),isPlant(_),day(Z),
          asserta(pineapple(X,Y1)),
          asserta(isPlant(X,Y1)),
          asserta(dayPlant(pineapple,Z)),
+         asserta(waterLevel(pineapple,1)),
          deleteConsumable(9, 1),
          write('You planted a pineapple seeds.'))),
          retract(isPlant(_)),!.
@@ -119,6 +123,7 @@ plant_strawberry :- isStarted(_),isPlant(_),day(Z),
          asserta(strawberry(X,Y1)),
          asserta(isPlant(X,Y1)),
          asserta(dayPlant(strawberry,Z)),
+         asserta(waterLevel(strawberry,1)),
          deleteConsumable(10, 1),
          write('You planted a strawberry seeds.'))),
          retract(isPlant(_)),!.    
@@ -147,14 +152,21 @@ harvest_chili :- player(X,Y),
                  dayPlant(chili, Z),
                  day(W),
                  Total is W - Z,
-                 (( (Total < V) -> 
+                 waterLevel(chili, A),
+                 ( 
+                 ((Total < V) -> 
                  write('You can not harvest chili now!'));
+                 ( 
                  ((Total >= V) -> 
-                 addConsumable(23, 1),
-                 write('You harvested chili.'),
-                 retract(chili(X,Y1)),
-                 retract(isPlant(X,Y1)))
-                 ),!.
+                        ( (( A < Total ) -> write('Your crops is broken'),nl,write('Please give your crops water regularly!'),retract(chili(X,Y1)),
+                                            retract(isPlant(X,Y1)));
+                          (( A >= Total) -> 
+                                            addConsumable(23, 1),
+                                            write('You harvested chili.'),
+                                            retract(chili(X,Y1)),
+                                            retract(isPlant(X,Y1)))
+                        )
+                 ))),!.
 
 harvest_paddy :- player(X,Y), 
                  Y1 is Y-1,
@@ -162,14 +174,21 @@ harvest_paddy :- player(X,Y),
                  dayPlant(paddy, Z),
                  day(W),
                  Total is W - Z,
-                 (( (Total < V) -> 
+                 waterLevel(paddy, A),
+                 ( 
+                 ((Total < V) -> 
                  write('You can not harvest paddy now!'));
+                 ( 
                  ((Total >= V) -> 
-                 addConsumable(24, 1),
-                 write('You harvested paddy.'),
-                 retract(paddy(X,Y1)),
-                 retract(isPlant(X,Y1)))
-                 ),!.
+                        ( (( A < Total ) -> write('Your crops is broken'),nl,write('Please give your crops water regularly!'),retract(paddy(X,Y1)),
+                                            retract(isPlant(X,Y1)));
+                          (( A >= Total) -> 
+                                            addConsumable(24, 1),
+                                            write('You harvested paddy.'),
+                                            retract(paddy(X,Y1)),
+                                            retract(isPlant(X,Y1)))
+                        )
+                 ))),!.
 
 harvest_tomato :- player(X,Y), 
                   Y1 is Y-1,
@@ -177,14 +196,21 @@ harvest_tomato :- player(X,Y),
                   dayPlant(tomato, Z),
                   day(W),
                   Total is W - Z,
-                  (( (Total < V) -> 
-                  write('You can not harvest tomato now!'));
-                  ((Total >= V) -> 
-                  addConsumable(25, 1),
-                  write('You harvested tomato.'),
-                  retract(tomato(X,Y1)),
-                  retract(isPlant(X,Y1)))
-                 ),!.
+                  waterLevel(tomato, A),
+                 ( 
+                 ((Total < V) -> 
+                 write('You can not harvest tomato now!'));
+                 ( 
+                 ((Total >= V) -> 
+                        ( (( A < Total ) -> write('Your crops is broken'),nl,write('Please give your crops water regularly!'),retract(tomato(X,Y1)),
+                                            retract(isPlant(X,Y1)));
+                          (( A >= Total) -> 
+                                            addConsumable(25, 1),
+                                            write('You harvested tomato.'),
+                                            retract(tomato(X,Y1)),
+                                            retract(isPlant(X,Y1)))
+                        )
+                 ))),!.
 
 harvest_pineapple :- player(X,Y), 
                      Y1 is Y-1,
@@ -192,14 +218,21 @@ harvest_pineapple :- player(X,Y),
                      dayPlant(pineapple, Z),
                      day(W),
                      Total is W - Z,
-                     (( (Total < V) -> 
+                     waterLevel(pineapple, A),
+                     ( 
+                     ((Total < V) -> 
                      write('You can not harvest pineapple now!'));
+                     ( 
                      ((Total >= V) -> 
-                     addConsumable(26, 1),
-                     write('You harvested pineapple.'),
-                     retract(pineapple(X,Y1)),
-                     retract(isPlant(X,Y1)))
-                     ),!.
+                        ( (( A < Total ) -> write('Your crops is broken'),nl,write('Please give your crops water regularly!'),retract(pineapple(X,Y1)),
+                                            retract(isPlant(X,Y1)));
+                          (( A >= Total) -> 
+                                            addConsumable(26, 1),
+                                            write('You harvested pineapple.'),
+                                            retract(pineapple(X,Y1)),
+                                            retract(isPlant(X,Y1)))
+                        )
+                     ))),!.
 
 harvest_strawberry :- player(X,Y), 
                       Y1 is Y-1,
@@ -207,19 +240,33 @@ harvest_strawberry :- player(X,Y),
                       dayPlant(strawberry, Z),
                       day(W),
                       Total is W - Z,
-                      (( (Total < V) -> 
+                      waterLevel(strawberry, A),
+                      ( 
+                      ((Total < V) -> 
                       write('You can not harvest strawberry now!'));
+                      ( 
                       ((Total >= V) -> 
-                      addConsumable(27, 1),
-                      write('You harvested strawberry.'),
-                      retract(strawberry(X,Y1)),
-                      retract(isPlant(X,Y1)))
-                      ),!.
+                        ( (( A < Total ) -> write('Your crops is broken'),nl,write('Please give your crops water regularly!'),strawberry(chili(X,Y1)),
+                                            retract(isPlant(X,Y1)));
+                          (( A >= Total) -> 
+                                            addConsumable(23, 1),
+                                            write('You harvested strawberry.'),
+                                            retract(strawberry(X,Y1)),
+                                            retract(isPlant(X,Y1)))
+                        )
+                      ))),!.
 
 watering :- \+isStarted(_), write('You have to start your game first!'),!.
 watering :- isStarted(_), player(X,Y) ,\+canWater(X,Y), write('You can not watering right here!'),!.
 watering :- isStarted(_), player(X,Y), Y1 is Y - 1,
-            canWater(X,Y1),write('You watering bla bla'),!.
+            canWater(X,Y1),
+            (
+            ((chili(X,Y1)) -> waterLevel(chili,Z),Z1 is Z + 1, asserta(waterLevel(chili,Z1)), write('You are watering chili.'));
+            ((paddy(X,Y1)) -> waterLevel(paddy,Z),Z1 is Z + 1, asserta(waterLevel(paddy,Z1)), write('You are watering paddy.'));
+            ((tomato(X,Y1)) -> waterLevel(tomato,Z),Z1 is Z + 1, asserta(waterLevel(tomato,Z1)), write('You are watering tomato.'));
+            ((pineapple(X,Y1)) -> waterLevel(pineapple,Z),Z1 is Z + 1, asserta(waterLevel(pineapple,Z1)), write('You are watering pineapple.'));
+            ((strawberry(X,Y1)) -> waterLevel(strawberry,Z),Z1 is Z + 1, asserta(waterLevel(strawberry,Z1)), write('You are watering strawberry.'))
+            ),!.
          
 
 
