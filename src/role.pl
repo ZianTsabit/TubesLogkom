@@ -81,21 +81,6 @@ timetoGrow(tomato_seed, 7).
 timetoGrow(pineapple_seed, 10).
 timetoGrow(strawberry_seed, 8).
 
-/* readytoHarvest(dayPlant, dayHarvest)*/
-
-readytoHarvest(Seed , X, Y) :- Total is Y - X,
-                               timetoGrow(Seed, Day),
-                               Total < Day,
-                               write('Your plant is not ready to harvest !'),!. 
-
-readytoHarvest(Seed , X, Y) :- Total is Y - X,
-                               timetoGrow(Seed, Day),
-                               Total >= Day,
-                               write('You harvested '),!.
-
-
-
-
 
 /*    FAKTA DAN RULE PRICE TIAP ITEM DAN CONSUMABLES */
 
