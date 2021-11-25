@@ -54,7 +54,6 @@ consumable(7, paddy_seed).
 consumable(8, tomato_seed).
 consumable(9, pineapple_seed).
 consumable(10, strawberry_seed).
-
 consumable(23, chili).
 consumable(24, paddy).
 consumable(25, tomato).
@@ -74,6 +73,28 @@ consumable(19, eggs).
 consumable(20, milk).
 consumable(21, horse_milk).
 consumable(22, wool).
+
+/* timetoGrow(seeds, day)*/
+timetoGrow(chili_seed, 5).
+timetoGrow(paddy_seed, 4).
+timetoGrow(tomato_seed, 7).
+timetoGrow(pineapple_seed, 10).
+timetoGrow(strawberry_seed, 8).
+
+/* readytoHarvest(dayPlant, dayHarvest)*/
+
+readytoHarvest(Seed , X, Y) :- Total is Y - X,
+                               timetoGrow(Seed, Day),
+                               Total < Day,
+                               write('Your plant is not ready to harvest !'),!. 
+
+readytoHarvest(Seed , X, Y) :- Total is Y - X,
+                               timetoGrow(Seed, Day),
+                               Total >= Day,
+                               write('You harvested '),!.
+
+
+
 
 
 /*    FAKTA DAN RULE PRICE TIAP ITEM DAN CONSUMABLES */
