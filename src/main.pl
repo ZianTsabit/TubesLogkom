@@ -11,6 +11,7 @@
 :- include('clock.pl').
 :- include('alchemist.pl').
 :- include('farming.pl').
+:- include('ranching.pl').
 
 
 :- dynamic(isStarted/1).
