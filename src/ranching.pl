@@ -5,6 +5,13 @@
 :- dynamic(cow/4).
 :- dynamic(horse/4).
 :- dynamic(hasil/4).
+/* silo(ID,Jumlah) */
+:- dynamic(silo/2).
+
+silo(1,0).
+silo(2,0).
+silo(3,0).
+silo(4,0).
 
 ranch          :- \+ (isRanch(_)), player(X,Y), X =:= 2, Y =:= 9, asserta(isRanch(true)), write('You entered your ranch.').
 
@@ -156,20 +163,47 @@ checkProductionChicken(ID) :-   chicken(ID,Nama,IsFed,Time), IsFed == true -> re
 
 checkProductionChicken(ID) :-   \+ chicken(ID,_,_,_), true.
 
-checkProductionSheep(ID) :-   sheep(ID,Nama,IsFed,Time), IsFed == false -> retract(sheep(ID,Nama,IsFed,Time)), NewTime is Time, assertz(sheep(ID,Nama,false,NewTime)), NewID is ID-1, checkProductionSheep(NewID).
+checkProductionSheep(ID) :-     sheep(ID,Nama,IsFed,Time), IsFed == false -> retract(sheep(ID,Nama,IsFed,Time)), NewTime is Time, assertz(sheep(ID,Nama,false,NewTime)), NewID is ID-1, checkProductionSheep(NewID).
 
-checkProductionSheep(ID) :-   sheep(ID,Nama,IsFed,Time), IsFed == true -> retract(sheep(ID,Nama,IsFed,Time)), NewTime is Time-1, assertz(sheep(ID,Nama,false,NewTime)), NewID is ID-1, checkProductionSheep(NewID).
+checkProductionSheep(ID) :-     sheep(ID,Nama,IsFed,Time), IsFed == true -> retract(sheep(ID,Nama,IsFed,Time)), NewTime is Time-1, assertz(sheep(ID,Nama,false,NewTime)), NewID is ID-1, checkProductionSheep(NewID).
 
-checkProductionSheep(ID) :-   \+ sheep(ID,_,_,_), true.
+checkProductionSheep(ID) :-     \+ sheep(ID,_,_,_), true.
 
-checkProductionCow(ID) :-   cow(ID,Nama,IsFed,Time), IsFed == false -> retract(cow(ID,Nama,IsFed,Time)), NewTime is Time, assertz(cow(ID,Nama,false,NewTime)), NewID is ID-1, checkProductionCow(NewID).
+checkProductionCow(ID) :-       cow(ID,Nama,IsFed,Time), IsFed == false -> retract(cow(ID,Nama,IsFed,Time)), NewTime is Time, assertz(cow(ID,Nama,false,NewTime)), NewID is ID-1, checkProductionCow(NewID).
 
-checkProductionCow(ID) :-   cow(ID,Nama,IsFed,Time), IsFed == true -> retract(cow(ID,Nama,IsFed,Time)), NewTime is Time-1, assertz(cow(ID,Nama,false,NewTime)), NewID is ID-1, checkProductionCow(NewID).
+checkProductionCow(ID) :-       cow(ID,Nama,IsFed,Time), IsFed == true -> retract(cow(ID,Nama,IsFed,Time)), NewTime is Time-1, assertz(cow(ID,Nama,false,NewTime)), NewID is ID-1, checkProductionCow(NewID).
 
-checkProductionCow(ID) :-   \+ cow(ID,_,_,_), true.
+checkProductionCow(ID) :-       \+ cow(ID,_,_,_), true.
 
-checkProductionHorse(ID) :-   horse(ID,Nama,IsFed,Time), IsFed == false -> retract(horse(ID,Nama,IsFed,Time)), NewTime is Time, assertz(horse(ID,Nama,false,NewTime)), NewID is ID-1, checkProductionHorse(NewID).
+checkProductionHorse(ID) :-     horse(ID,Nama,IsFed,Time), IsFed == false -> retract(horse(ID,Nama,IsFed,Time)), NewTime is Time, assertz(horse(ID,Nama,false,NewTime)), NewID is ID-1, checkProductionHorse(NewID).
 
-checkProductionHorse(ID) :-   horse(ID,Nama,IsFed,Time), IsFed == true -> retract(horse(ID,Nama,IsFed,Time)), NewTime is Time-1, assertz(horse(ID,Nama,false,NewTime)), NewID is ID-1, checkProductionHorse(NewID).
+checkProductionHorse(ID) :-     horse(ID,Nama,IsFed,Time), IsFed == true -> retract(horse(ID,Nama,IsFed,Time)), NewTime is Time-1, assertz(horse(ID,Nama,false,NewTime)), NewID is ID-1, checkProductionHorse(NewID).
 
-checkProductionHorse(ID) :-   \+ horse(ID,_,_,_), true.
+checkProductionHorse(ID) :-     \+ horse(ID,_,_,_), true.
+
+/* isi silo */
+
+fill_silo :-                    isRanch(_),
+                                write('Choose one of the option: '),nl,
+                                write('1. Fill chicken food'),nl,
+                                write('2. Fill sheep food'),nl,
+                                write('3, Fill cow food'),nl,
+                                write('4. Fill horse food'),nl,
+                                write('Input choice : '), read_integer(X),nl,
+                                (X =:= 1 -> ItemID is 11, fill_food(X, ItemID);
+                                 X =:= 2 -> ItemID is 12, fill_food(X, ItemID);
+                                 X =:= 3 -> ItemID is 13, fill_food(X, ItemID);
+                                 X =:= 4 -> ItemID is 14, fill_food(X, ItemID);
+                                 write('Invalid choice!'), !, fail), !.
+
+fill_silo :-                    \+ isRanch(_),
+                                write('you are not in ranch.'), !.
+                                
+fill_food(X, ItemID) :-         write('How many food do you want to fill?'),nl,
+                                write('Input amount : '), read_integer(Y),nl,
+                                inventoryI(ItemID,_,_,_,_,Jumlah) ->
+                                (Jumlah >= Y -> deleteConsumable(ItemID,Y), retract(silo(X,JumlahAwal)), NewJumlah is JumlahAwal+Y, asserta(silo(X,NewJumlah)), write('Congrats! You have filled the silo!');
+                                write('invalid amount!')), !;
+                                write('you dont have that kind of food!'), !.
+          
+
