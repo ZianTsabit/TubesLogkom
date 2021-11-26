@@ -1,28 +1,44 @@
 :- dynamic(runQuest/2).
 :- dynamic(finalQuest/2).
 
-canCreateQuest(X, Y)    :-  X > 0, X < 16,
-                            Y > 0, Y < 16,
-                            \+ wall(X, Y),
-                            \+ player(X, Y),
-                            \+ house(X, Y),
-                            \+ ranch(X, Y),
-                            \+ quest(X, Y),
-                            \+ marketplace(X, Y),
-                            \+ digged(X, Y),
-                            \+ water(X, Y).
+% canCreateQuest(X, Y)    :-  X > 0, X < 16,
+%                             Y > 0, Y < 16,
+%                             \+ wall(X, Y),
+%                             \+ player(X, Y),
+%                             \+ house(X, Y),
+%                             \+ ranch(X, Y),
+%                             \+ quest(X, Y),
+%                             \+ marketplace(X, Y),
+%                             \+ digged(X, Y),
+%                             \+ water(X, Y).
 
-% Niatnya mau bikin RNG untuk nentuin lokasi                     
-genQuest(X, Y)  :-  random(1, 16, Rx),
-                    random(1, 16, Ry),
-                    canCreateQuest(Rx, Ry),
-                    X is Rx, Y is Ry.
+% Generate Quest di sekitar pojok kiri atas
+genQuest1(X, Y) :-  random(0, 11, Dx),
+                    random(0, 6, Dy),
+                    X is 1 + Dx, Y is 15 - Dy.
+
+% Generate Quest di sekitar tengah kanan
+genQuest2(X, Y) :-  random(0, 10, Dx),
+                    random(0, 6, Dy),
+                    X is 15 - Dx, Y is 11 - Dy.
+
+% Generate Quest di sekitar kiri bawah
+genQuest3(X, Y) :-  random(0, 9, Dx),
+                    random(0, 3, Dy),
+                    X is 1 + Dx, Y is 1 + Dy.
 
 refreshQuest    :-  \+ quest(_, _),
-                    genQuest(Rx, Ry),
-                    quest(Rx, Ry).
+                    \+ isQuest(_),
+                    % Tidak ada quest di map dan tidak ada quest dilakukan
+                    random(1, 4, X),
+                    (
+                        X =:= 1 ->  genQuest1(Qx, Qy);
+                        X =:= 2 ->  genQuest2(Qx, Qy);
+                                    genQuest3(Qx, Qy)
+                    ),
+                    asserta(quest(Qx, Qy)).
 
-getQuest                :-  random(3, 10, RHarvest), random(3, 10, RFish), random(3, 10, RRanch),
+getQuest                :-  random(3, 11, RHarvest), random(3, 11, RFish), random(3, 11, RRanch),
                             asserta(finalQuest(harvest,RHarvest)), asserta(finalQuest(fish,RFish)), asserta(finalQuest(ranch,RRanch)),
                             asserta(runQuest(harvest,0)), asserta(runQuest(fish,0)), asserta(runQuest(ranch,0)),
                             write('You got a new quest!'), nl, nl, 
@@ -31,24 +47,23 @@ getQuest                :-  random(3, 10, RHarvest), random(3, 10, RFish), rando
                             format('- ~w fish', [RFish]), nl, 
                             format('- ~w ranch item', [RRanch]), nl.
 
-
-questAddFish    :-  isQuest(_)  ->  retract(runQuest(fish, FishNum)),
+questAddFish    :-  isQuest(_)  ->  runQuest(fish, FishNum),
                                     NFishNum is FishNum + 1,
-                                    asserta(runQuest(fish, NFishNum)),
-                                    % Cek apakah quest complete
-                                    completeQuest.
+                                    finalQuest(fish, TFish),
+                                    (NFishNum =< TFish  -> retract(runQuest(fish, FishNum)), asserta(runQuest(fish, NFishNum)); true),
+                                    completeQuest; true.
 
-questAddHarvest :-  isQuest(_)  ->  retract(runQuest(harvest, HarvestNum)),
+questAddHarvest :-  isQuest(_)  ->  runQuest(harvest, HarvestNum),
                                     NHarvestNum is HarvestNum + 1,
-                                    asserta(runQuest(harvest, NHarvestNum)),
-                                    % Cek apakah quest complete
-                                    completeQuest.
+                                    finalQuest(harvest, THarvest),
+                                    (NHarvestNum =< THarvest  -> retract(runQuest(harvest, HarvestNum)), asserta(runQuest(harvest, NHarvestNum)); true),
+                                    completeQuest; true.
 
-questAddRanch   :-  isQuest(_)  ->  retract(runQuest(ranch, RanchNum)),
+questAddRanch   :-  isQuest(_)  ->  runQuest(ranch, RanchNum),
                                     NRanchNum is RanchNum + 1,
-                                    asserta(runQuest(ranch, NRanchNum)),
-                                    % Cek apakah quest complete
-                                    completeQuest.
+                                    finalQuest(ranch, TRanch),
+                                    (NRanchNum =< TRanch  -> retract(runQuest(ranch, RanchNum)), asserta(runQuest(ranch, NRanchNum)); true),
+                                    completeQuest; true.
 
 completeQuest   :-  finalQuest(harvest, HTarget), finalQuest(fish, FTarget), finalQuest(ranch, RTarget),
                     runQuest(harvest, HCurr), runQuest(fish, FCurr), runQuest(ranch, RCurr),
@@ -74,7 +89,8 @@ completeQuest   :-  finalQuest(harvest, HTarget), finalQuest(fish, FTarget), fin
                     write('Quest Completed!'), nl, nl,
                     write('You Got:'), nl,
                     format('> ~w Gold', [TotalBonus]), nl,
-                    format('> ~w Exp', [ExpBonus]), nl).
+                    format('> ~w Exp', [ExpBonus]), nl,
+                    refreshQuest); true.
                     % format('~nQuest Completed!~n~nYou Got:~n> ~w Gold~n> ~w Exp~n', [NewGold, ExpBonus])).
                     % write('Quest Completed!, You got'), nl).
 

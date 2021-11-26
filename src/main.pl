@@ -12,6 +12,7 @@
 :- include('alchemist.pl').
 :- include('farming.pl').
 :- include('ranching.pl').
+:- include('fishing.pl').
 
 
 :- dynamic(isStarted/1).
@@ -90,17 +91,17 @@ status                  :-  playerStatus.
 
 /*** Quest ***/
 
-quest                   :-  isStarted(_), isQuest(_) -> write('You have an on-going quest!').
+quest                   :-  isStarted(_), isQuest(_) -> write('You have an on-going quest!'), !.
 quest                   :-  isStarted(_), \+ isQuest(_),
                             player(Px, Py), quest(Qx, Qy),
                             Px =:= Qx, Py =:= Qy ->
                                 asserta(isQuest(true)),
                                 getQuest,
-                                retract(quest(Qx, Qy)).
+                                retract(quest(Qx, Qy)), !.
 quest                   :-  isStarted(_), \+ isQuest(_),
                             player(Px, Py), quest(Qx, Qy),
                             \+ (Px =:= Qx, Py =:= Qy) -> 
-                                write('Not in Quest Tile!'), nl.
+                                write('Not in Quest Tile!'), nl, !.
 /*** House ***/
 
 house                   :-  player(X,Y), X =:= 4, Y =:= 10, (\+ isHouse(_), writeActHouse, asserta(isHouse(true)), !;
