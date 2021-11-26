@@ -205,7 +205,7 @@ buy_pineapple_seed :-
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
        price(pineapple_seed,X),
-       ( (( Amount > = 0) -> 
+       ( (( Amount >= 0) -> 
        NewPrice is Amount*X,
        (
         ((NewPrice > Gold) -> 
