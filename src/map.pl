@@ -40,7 +40,7 @@ createRiver :-          asserta(water(15,5)),
 /* tampilin map */
 
 map :-                  isStarted(_) -> 
-                        (map(0, 16), nl, showClock, write(' Day '), day(X), write(X), nl); 
+                        (map(0, 16), nl, showClock, write(' Day '), day(X), write(X), nl,nl,season(Y), write(Y),write(', '), weather(Z), write(Z)); 
                         (write('You have not start your game!'), nl, write('Use start command to play!'),nl).
 
 map(X, Y) :-            (wall(X, Y) -> write('#');
