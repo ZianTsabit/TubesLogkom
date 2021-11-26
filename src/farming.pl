@@ -25,7 +25,7 @@ dig :- player(X,Y),canDig(X,Y),
                 ))
         ),
        write('You digged the tile.'),
-       w,!.        
+       (clockAfterFarming;w),!.        
 
 
 /*
@@ -56,7 +56,8 @@ plant :- player(X,Y),
          (Choice =  tomato -> plant_tomato);
          (Choice = pineapple -> plant_pineapple);
          (Choice = strawberry -> plant_strawberry)
-         ),!.
+         ),
+         clockAfterFarming,!.
 
 plant_chili :- isStarted(_),isPlant(_),day(Z),
          ((\+cekConsumableExist(6, chili_seed),
@@ -143,7 +144,8 @@ harvest :- player(X,Y),
             (tomato(X,Y1) -> harvest_tomato);
             (pineapple(X,Y1) -> harvest_pineapple);
             (strawberry(X,Y1) -> harvest_strawberry)
-           ),!.
+           ),
+           clockAfterFarming,!.
 
 
 harvest_chili :- player(X,Y), 
@@ -266,7 +268,8 @@ watering :- isStarted(_), player(X,Y), Y1 is Y - 1,
             ((tomato(X,Y1)) -> waterLevel(tomato,Z),Z1 is Z + 1, asserta(waterLevel(tomato,Z1)), write('You are watering tomato.'));
             ((pineapple(X,Y1)) -> waterLevel(pineapple,Z),Z1 is Z + 1, asserta(waterLevel(pineapple,Z1)), write('You are watering pineapple.'));
             ((strawberry(X,Y1)) -> waterLevel(strawberry,Z),Z1 is Z + 1, asserta(waterLevel(strawberry,Z1)), write('You are watering strawberry.'))
-            ),!.
+            ),
+            clockAfterFarming,!.
          
 
 
