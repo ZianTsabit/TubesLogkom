@@ -141,6 +141,8 @@ buy_chili_seed :-
 sell_chili_seed :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
+       ( ((Amount < 0) -> write('Invalid input'));
+         ((Amount >= 0) -> 
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(chili_seed,X),
        inventoryI(6, chili_seed,_,_,_, Jumlah),
@@ -158,7 +160,9 @@ sell_chili_seed :-
        );
        Jumlah < Amount,
        write('Invalid amount!\nPlease check again!\n')
-       )),!.
+       ))
+       ))
+       ,!.
 
 buy_paddy_seed :- 
        season(spring),
@@ -186,6 +190,8 @@ buy_paddy_seed :-
 sell_paddy_seed :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
+       ( ((Amount < 0) -> write('Invalid input'));
+         ((Amount >= 0) ->
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(paddy_seed,X),
        inventoryI(7, paddy_seed,_,_,_, Jumlah),
@@ -203,7 +209,9 @@ sell_paddy_seed :-
        );
        Jumlah < Amount,
        write('Invalid amount!\nPlease check again!\n')
-       )),!.
+       ))
+       ))
+       ,!.
 
 buy_tomato_seed :- 
        season(summer),
@@ -230,6 +238,8 @@ buy_tomato_seed :-
 sell_tomato_seed :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
+       ( ((Amount < 0) -> write('Invalid input'));
+         ((Amount >= 0) -> 
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(tomato_seed,X),
        inventoryI(8, tomato_seed,_,_,_, Jumlah),
@@ -247,7 +257,9 @@ sell_tomato_seed :-
        );
        Jumlah < Amount,
        write('Invalid amount!\nPlease check again!\n')
-       )),!.
+       ))
+       ))
+       ,!.
 
 buy_pineapple_seed :- 
        season(autumn),
@@ -274,6 +286,8 @@ buy_pineapple_seed :-
 sell_pineapple_seed :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
+       ( ((Amount < 0) -> write('Invalid input'));
+         ((Amount >= 0) -> 
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(pineapple_seed,X),
        inventoryI(9, pineapple_seed,_,_,_, Jumlah),
@@ -291,7 +305,9 @@ sell_pineapple_seed :-
        );
        Jumlah < Amount,
        write('Invalid amount!\nPlease check again!\n')
-       )),!.
+       ))
+       ))
+       ,!.
 
 buy_strawberry_seed :- 
        season(summer),
@@ -318,6 +334,8 @@ buy_strawberry_seed :-
 sell_strawberry_seed :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
+       ( ((Amount < 0) -> write('Invalid input'));
+         ((Amount >= 0) -> 
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(strawberry_seed,X),
        inventoryI(10, strawberry_seed,_,_,_, Jumlah),
@@ -335,6 +353,7 @@ sell_strawberry_seed :-
        );
        Jumlah < Amount,
        write('Invalid amount!\nPlease check again!\n')
+       ))
        )),!.
 
 buy_chicken :- 
@@ -361,6 +380,8 @@ buy_chicken :-
 sell_chicken :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
+       ( ((Amount < 0) -> write('Invalid input'));
+         ((Amount >= 0) -> 
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(chicken,X),
        inventoryI(15, chicken,_,_,_, Jumlah),
@@ -378,7 +399,9 @@ sell_chicken :-
        );
        Jumlah < Amount,
        write('Invalid amount!\nPlease check again!\n')
-       )),!.
+       ))
+       ))
+       ,!.
 
 buy_sheep :- 
        write('How many do you want to buy? \n'),
@@ -404,6 +427,8 @@ buy_sheep :-
 sell_sheep :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
+       ( ((Amount < 0) -> write('Invalid input'));
+         ((Amount >= 0) ->
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(sheep,X),
        inventoryI(16, sheep,_,_,_, Jumlah),
@@ -421,6 +446,7 @@ sell_sheep :-
        );
        Jumlah < Amount,
        write('Invalid amount!\nPlease check again!\n')
+       ))
        )),!.
 
 buy_cow :- 
@@ -447,6 +473,8 @@ buy_cow :-
 sell_cow :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
+       ( ((Amount < 0) -> write('Invalid input'));
+         ((Amount >= 0) -> 
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(cow,X),
        inventoryI(17, cow,_,_,_, Jumlah),
@@ -464,6 +492,7 @@ sell_cow :-
        );
        Jumlah < Amount,
        write('Invalid amount!\nPlease check again!\n')
+       ))
        )),!.
 
 buy_horse :- 
@@ -490,6 +519,8 @@ buy_horse :-
 sell_horse :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
+       ( ((Amount < 0) -> write('Invalid input'));
+         ((Amount >= 0) -> 
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(horse,X),
        inventoryI(18, horse,_,_,_, Jumlah),
@@ -507,6 +538,7 @@ sell_horse :-
        );
        Jumlah < Amount,
        write('Invalid amount!\nPlease check again!\n')
+       ))
        )),!.
 
 buy_chicken_feed :- 
@@ -533,6 +565,8 @@ buy_chicken_feed :-
 sell_chicken_feed :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
+       ( ((Amount < 0) -> write('Invalid input'));
+         ((Amount >= 0) -> 
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(chicken_feed,X),
        inventoryI(11, chicken_feed,_,_,_, Jumlah),
@@ -550,6 +584,7 @@ sell_chicken_feed :-
        );
        Jumlah < Amount,
        write('Invalid amount!\nPlease check again!\n')
+       ))
        )),!.
 
 buy_sheep_feed :- 
@@ -576,6 +611,8 @@ buy_sheep_feed :-
 sell_sheep_feed :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
+       ( ((Amount < 0) -> write('Invalid input'));
+         ((Amount >= 0) -> 
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(sheep_feed,X),
        inventoryI(12, sheep_feed,_,_,_, Jumlah),
@@ -593,6 +630,7 @@ sell_sheep_feed :-
        );
        Jumlah < Amount,
        write('Invalid amount!\nPlease check again!\n')
+       ))
        )),!.
 
 buy_cow_feed :- 
@@ -619,6 +657,8 @@ buy_cow_feed :-
 sell_cow_feed :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
+       ( ((Amount < 0) -> write('Invalid input'));
+         ((Amount >= 0) -> 
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(cow_feed,X),
        inventoryI(13, cow_feed,_,_,_, Jumlah),
@@ -636,6 +676,7 @@ sell_cow_feed :-
        );
        Jumlah < Amount,
        write('Invalid amount!\nPlease check again!\n')
+       ))
        )),!.
 
 buy_horse_feed :- 
@@ -662,6 +703,8 @@ buy_horse_feed :-
 sell_horse_feed :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
+       ( ((Amount < 0) -> write('Invalid input'));
+         ((Amount >= 0) -> 
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(horse_feed,X),
        inventoryI(14, horse_feed,_,_,_, Jumlah),
@@ -679,6 +722,7 @@ sell_horse_feed :-
        );
        Jumlah < Amount,
        write('Invalid amount!\nPlease check again!\n')
+       ))
        )),!.
 
 level_2_shovel :- 
@@ -816,6 +860,8 @@ buy_bait :-
 sell_bait :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
+       ( ((Amount < 0) -> write('Invalid input'));
+         ((Amount >= 0) -> 
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(bait,X),
        inventoryI(5, bait,_,_,_, Jumlah),
@@ -833,7 +879,7 @@ sell_bait :-
        );
        Jumlah < Amount,
        write('Invalid amount!\nPlease check again!\n')
-       )),!.
+       )))),!.
 
 
 exitBuy :- retract(isBuy(_)),exitMarket,market,!.
@@ -885,6 +931,8 @@ exitSell :- retract(isSell(_)),exitMarket,market,!.
 sell_chili :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
+       ( ((Amount < 0) -> write('Invalid input'));
+         ((Amount >= 0) -> 
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(chili,X),
        inventoryI(23, chili,_,_,_, Jumlah),
@@ -902,12 +950,15 @@ sell_chili :-
        );
        Jumlah < Amount,
        write('Invalid amount!\nPlease check again!\n')
+       ))
        )),!.
 
 
 sell_paddy :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
+       ( ((Amount < 0) -> write('Invalid input'));
+         ((Amount >= 0) -> 
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(paddy,X),
        inventoryI(24, paddy,_,_,_, Jumlah),
@@ -925,11 +976,14 @@ sell_paddy :-
        );
        Jumlah < Amount,
        write('Invalid amount!\nPlease check again!\n')
+       ))
        )),!.
 
 sell_tomato :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
+       ( ((Amount < 0) -> write('Invalid input'));
+         ((Amount >= 0) -> 
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(tomato,X),
        inventoryI(25, tomato,_,_,_, Jumlah),
@@ -947,11 +1001,14 @@ sell_tomato :-
        );
        Jumlah < Amount,
        write('Invalid amount!\nPlease check again!\n')
+       ))
        )),!.
 
 sell_pineapple :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
+       ( ((Amount < 0) -> write('Invalid input'));
+         ((Amount >= 0) -> 
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(pineapple,X),
        inventoryI(26, pineapple,_,_,_, Jumlah),
@@ -969,11 +1026,14 @@ sell_pineapple :-
        );
        Jumlah < Amount,
        write('Invalid amount!\nPlease check again!\n')
+       ))
        )),!.
 
 sell_strawberry :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
+       ( ((Amount < 0) -> write('Invalid input'));
+         ((Amount >= 0) -> 
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(strawberry,X),
        inventoryI(27, strawberry,_,_,_, Jumlah),
@@ -991,11 +1051,14 @@ sell_strawberry :-
        );
        Jumlah < Amount,
        write('Invalid amount!\nPlease check again!\n')
+       ))
        )),!.
 
 sell_eggs :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
+       ( ((Amount < 0) -> write('Invalid input'));
+         ((Amount >= 0) -> 
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(eggs,X),
        inventoryI(19, eggs,_,_,_, Jumlah),
@@ -1013,11 +1076,14 @@ sell_eggs :-
        );
        Jumlah < Amount,
        write('Invalid amount!\nPlease check again!\n')
+       ))
        )),!.
 
 sell_milk :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
+       ( ((Amount < 0) -> write('Invalid input'));
+         ((Amount >= 0) ->
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(milk,X),
        inventoryI(20, milk,_,_,_, Jumlah),
@@ -1035,11 +1101,14 @@ sell_milk :-
        );
        Jumlah < Amount,
        write('Invalid amount!\nPlease check again!\n')
+       ))
        )),!.
 
 sell_horse_milk :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
+       ( ((Amount < 0) -> write('Invalid input'));
+         ((Amount >= 0) ->
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(horse_milk,X),
        inventoryI(21, horse_milk,_,_,_, Jumlah),
@@ -1057,11 +1126,14 @@ sell_horse_milk :-
        );
        Jumlah < Amount,
        write('Invalid amount!\nPlease check again!\n')
+       ))
        )),!.
 
 sell_wool :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
+       ( ((Amount < 0) -> write('Invalid input'));
+         ((Amount >= 0) ->
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(wool,X),
        inventoryI(22, wool,_,_,_, Jumlah),
@@ -1079,11 +1151,14 @@ sell_wool :-
        );
        Jumlah < Amount,
        write('Invalid amount!\nPlease check again!\n')
+       ))
        )),!.
 
 sell_tuna_fish :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
+       ( ((Amount < 0) -> write('Invalid input'));
+         ((Amount >= 0) ->
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(tuna_fish,X),
        inventoryI(1, tuna_fish,_,_,_, Jumlah),
@@ -1101,11 +1176,14 @@ sell_tuna_fish :-
        );
        Jumlah < Amount,
        write('Invalid amount!\nPlease check again!\n')
+       ))
        )),!.
 
 sell_mackerel_fish :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
+       ( ((Amount < 0) -> write('Invalid input'));
+         ((Amount >= 0) ->
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(mackerel_fish,X),
        inventoryI(2, mackerel_fish,_,_,_, Jumlah),
@@ -1123,11 +1201,13 @@ sell_mackerel_fish :-
        );
        Jumlah < Amount,
        write('Invalid amount!\nPlease check again!\n')
-       )),!.
+       )))),!.
 
 sell_sardines_fish :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
+       ( ((Amount < 0) -> write('Invalid input'));
+         ((Amount >= 0) ->
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(sardines_fish,X),
        inventoryI(3, sardines_fish,_,_,_, Jumlah),
@@ -1145,11 +1225,13 @@ sell_sardines_fish :-
        );
        Jumlah < Amount,
        write('Invalid amount!\nPlease check again!\n')
-       )),!.
+       )))),!.
 
 sell_puffer_fish :- 
        write('How many do you want to sell? \n'),
        write('> '),read_integer(Amount),
+       ( ((Amount < 0) -> write('Invalid input'));
+         ((Amount >= 0) ->
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(puffer_fish,X),
        inventoryI(4, puffer_fish,_,_,_, Jumlah),
@@ -1167,7 +1249,7 @@ sell_puffer_fish :-
        );
        Jumlah < Amount,
        write('Invalid amount!\nPlease check again!\n')
-       )),!.
+       )))),!.
 
 exitMarket :- write('Thanks for coming !!!'),nl,
             retract(isMarketplace(_)),!.
