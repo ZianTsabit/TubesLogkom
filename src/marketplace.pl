@@ -91,7 +91,7 @@ buyOption :- write('What do you want to buy ?'),nl,
              write('13. Level 2 fishing rod (500 golds)'),nl,
              write('14. Level 3 fishing rod (700 golds)'),nl,
              write('15. Bait (15 golds)')),
-             nl,nl,write('>'),read(Choice),
+             nl,nl,write('> '),read(Choice),
              (
                     ((Choice = chili_seed) -> buy_chili_seed);
                     ((Choice = paddy_seed) -> buy_paddy_seed);
