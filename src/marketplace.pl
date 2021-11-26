@@ -118,10 +118,10 @@ buy_paddy_seed :-
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
        price(paddy_seed,X),
-       
+       ( (( Amount >= 0 ) ->
        NewPrice is Amount*X,
        (
-        (NewPrice > Gold -> 
+        ((NewPrice > Gold) -> 
         write('You dont have enough money !'),nl);
         (NewPrice =< Gold, 
         write('You have bought '), write(Amount), write(' paddy seeds.'),nl,
@@ -130,8 +130,10 @@ buy_paddy_seed :-
         addConsumable(7, Amount),
         retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
         asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold))
-       )     
-       ),!.
+        )));
+        (( Amount < 0) -> write('Invalid input'))     
+       )
+       ,!.
 
 sell_paddy_seed :- 
        write('How many do you want to sell? \n'),
@@ -160,9 +162,10 @@ buy_tomato_seed :-
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
        price(tomato_seed,X),
+       ( ((Amount >= 0) -> 
        NewPrice is Amount*X,
        (
-        (NewPrice > Gold -> 
+        ((NewPrice > Gold) -> 
         write('You dont have enough money !'),nl);
         (NewPrice =< Gold, 
         write('You have bought '), write(Amount), write(' tomato seeds.'),nl,
@@ -171,7 +174,8 @@ buy_tomato_seed :-
         addConsumable(8, Amount),
         retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
         asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold))
-        )     
+        )));
+        (( Amount < 0) -> write('Invalid input'))     
        ),!.
 
 sell_tomato_seed :- 
@@ -201,9 +205,10 @@ buy_pineapple_seed :-
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
        price(pineapple_seed,X),
+       ( (( Amount > = 0) -> 
        NewPrice is Amount*X,
        (
-        (NewPrice > Gold -> 
+        ((NewPrice > Gold) -> 
         write('You dont have enough money !'),nl);
         (NewPrice =< Gold, 
         write('You have bought '), write(Amount), write(' pineapple seeds.'),nl,
@@ -212,7 +217,8 @@ buy_pineapple_seed :-
         addConsumable(9, Amount),
         retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
         asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold))
-        )     
+        )));
+        (( Amount < 0) -> write('Invalid input'))     
        ),!.
 
 sell_pineapple_seed :- 
@@ -242,9 +248,10 @@ buy_strawberry_seed :-
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
        price(strawberry_seed,X),
+       ( ((Amount >= 0) ->
        NewPrice is Amount*X,
        (
-        (NewPrice > Gold -> 
+        ((NewPrice > Gold) -> 
         write('You dont have enough money !'),nl);
         (NewPrice =< Gold, 
         write('You have bought '), write(Amount), write(' strawberry seeds.'),nl,
@@ -253,7 +260,8 @@ buy_strawberry_seed :-
         addConsumable(10, Amount),
         retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
         asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold))
-        )     
+        )));
+        (( Amount < 0) -> write('Invalid input'))     
        ),!.
 
 sell_strawberry_seed :- 
@@ -283,9 +291,10 @@ buy_chicken :-
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
        price(chicken,X),
+       ( ((Amount >= 0) -> 
        NewPrice is Amount*X,
        (
-        (NewPrice > Gold -> 
+        ((NewPrice > Gold) -> 
         write('You dont have enough money !'),nl);
         (NewPrice =< Gold, 
         write('You have bought '), write(Amount), write(' chicken.'),nl,
@@ -294,7 +303,8 @@ buy_chicken :-
         addConsumable(15, Amount),
         retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
         asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold))
-        )     
+        )));
+        ((Amount < 0) -> write('Invalid input'))     
        ),!.
 
 sell_chicken :- 
@@ -324,9 +334,10 @@ buy_sheep :-
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
        price(sheep,X),
+       ( ((Amount >= 0) -> 
        NewPrice is Amount*X,
        (
-        (NewPrice > Gold -> 
+        ((NewPrice > Gold) -> 
         write('You dont have enough money !'),nl);
         (NewPrice =< Gold, 
         write('You have bought '), write(Amount), write(' sheep.'),nl,
@@ -335,7 +346,8 @@ buy_sheep :-
         addConsumable(16, Amount),
         retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
         asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold))
-        )     
+        )));
+        ((Amount < 0) -> write('Invalid input'))     
        ),!.
 
 sell_sheep :- 
@@ -365,9 +377,10 @@ buy_cow :-
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
        price(cow,X),
+       ( ((Amount >= 0) -> 
        NewPrice is Amount*X,
        (
-        (NewPrice > Gold -> 
+        ((NewPrice > Gold) -> 
         write('You dont have enough money !'),nl);
         (NewPrice =< Gold, 
         write('You have bought '), write(Amount), write(' cow.'),nl,
@@ -376,7 +389,8 @@ buy_cow :-
         addConsumable(17, Amount),
         retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
         asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold))
-        )     
+        )));
+        ((Amount < 0) -> write('Invalid input'))     
        ),!.
 
 sell_cow :- 
@@ -406,9 +420,10 @@ buy_horse :-
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
        price(horse,X),
+       ( ((Amount >= 0) ->
        NewPrice is Amount*X,
        (
-        (NewPrice > Gold -> 
+        ((NewPrice > Gold) -> 
         write('You dont have enough money !'),nl);
         (NewPrice =< Gold, 
         write('You have bought '), write(Amount), write(' horse.'),nl,
@@ -417,7 +432,8 @@ buy_horse :-
         addConsumable(18, Amount),
         retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
         asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold))
-        )     
+        )));
+        ((Amount < 0) -> write('Invalid input'))     
        ),!.
 
 sell_horse :- 
@@ -447,9 +463,10 @@ buy_chicken_feed :-
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
        price(chicken_feed,X),
+       ( ((Amount >= 0) -> 
        NewPrice is Amount*X,
        (
-        (NewPrice > Gold -> 
+        ((NewPrice > Gold) -> 
         write('You dont have enough money !'),nl);
         (NewPrice =< Gold, 
         write('You have bought '), write(Amount), write(' chicken feed.'),nl,
@@ -458,7 +475,8 @@ buy_chicken_feed :-
         addConsumable(11, Amount),
         retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
         asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold))
-        )     
+        )));
+        ((Amount < 0) -> write('Invalid input'))     
        ),!.
 
 sell_chicken_feed :- 
@@ -488,9 +506,10 @@ buy_sheep_feed :-
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
        price(sheep_feed,X),
+       ( ((Amount >= 0) -> 
        NewPrice is Amount*X,
        (
-        (NewPrice > Gold -> 
+        ((NewPrice > Gold) -> 
         write('You dont have enough money !'),nl);
         (NewPrice =< Gold, 
         write('You have bought '), write(Amount), write(' sheep feed.'),nl,
@@ -499,7 +518,8 @@ buy_sheep_feed :-
         addConsumable(12, Amount),
         retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
         asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold))
-        )     
+        )));
+        ((Amount < 0) -> write('Invalid input'))     
        ),!.
 
 sell_sheep_feed :- 
@@ -529,9 +549,10 @@ buy_cow_feed :-
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
        price(cow_feed,X),
+       ( ((Amount >= 0) -> 
        NewPrice is Amount*X,
        (
-        (NewPrice > Gold -> 
+        ((NewPrice > Gold) -> 
         write('You dont have enough money !'),nl);
         (NewPrice =< Gold, 
         write('You have bought '), write(Amount), write(' cow feed.'),nl,
@@ -540,7 +561,8 @@ buy_cow_feed :-
         addConsumable(13, Amount),
         retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
         asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold))
-        )     
+        )));
+        ((Amount < 0) -> write('Invalid input'))     
        ),!.
 
 sell_cow_feed :- 
@@ -570,9 +592,10 @@ buy_horse_feed :-
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
        price(horse_feed,X),
+       ( ((Amount >= 0) -> 
        NewPrice is Amount*X,
        (
-        (NewPrice > Gold -> 
+        ((NewPrice > Gold) -> 
         write('You dont have enough money !'),nl);
         (NewPrice =< Gold, 
         write('You have bought '), write(Amount), write(' horse feed.'),nl,
@@ -581,7 +604,8 @@ buy_horse_feed :-
         addConsumable(14, Amount),
         retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
         asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold))
-        )     
+        )));
+        ((Amount < 0) -> write('Invalid input'))     
        ),!.
 
 sell_horse_feed :- 
@@ -722,9 +746,10 @@ buy_bait :-
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
        price(bait,X),
+       ( ((Amount >= 0) -> 
        NewPrice is Amount*X,
        (
-        (NewPrice > Gold -> 
+        ((NewPrice > Gold) -> 
         write('You dont have enough money !'),nl);
         (NewPrice =< Gold, 
         write('You have bought '), write(Amount), write(' bait.'),nl,
@@ -733,7 +758,8 @@ buy_bait :-
         addConsumable(5, Amount),
         retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
         asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold))
-        )     
+        )));
+        ((Amount < 0) -> write('Invalid input'))     
        ),!.
 
 sell_bait :- 
