@@ -22,27 +22,76 @@ buy :- isStarted(_), isMarketplace(_),(\+isBuy(_), buyOption, asserta(isBuy(true
        write('You are already chose buy option !')),!.
 
 buyOption :- write('What do you want to buy ?'),nl,
+             (season(spring),
              write('1. Chili seed (100 golds)'),nl,
              write('2. Paddy seed (50 golds)'),nl,
-             write('3. Tomato seed (100 golds)'),nl,
-             write('4. Pineapple seed (200 golds)'),nl,
-             write('5. Strawberry seed (150 golds)'),nl,
-             write('6. Chicken (250 golds)'),nl,
-             write('7. Sheep (350 golds)'),nl,
-             write('8. Horse (1000 golds)'),nl,
-             write('9. Cow (750 golds)'),nl,
-             write('10. Chicken feed (150 golds)'),nl,
-             write('11. Sheep feed (175 golds)'),nl,
-             write('12. Cow feed (200 golds)'),nl,
-             write('13. Horse feed (225 golds)'),nl,
-             write('14. Level 2 shovel (500 golds)'),nl,
-             write('15. Level 3 shovel (750 golds)'),nl,
-             write('16. Level 2 watering can (300 golds)'),nl,
-             write('17. Level 3 watering can (550 golds)'),nl,
-             write('18. Level 2 fishing rod (500 golds)'),nl,
-             write('19. Level 3 fishing rod (700 golds)'),nl,
-             write('20. Bait (15 golds)'),nl,nl,
-             write('>'),read(Choice),
+             write('3. Chicken (250 golds)'),nl,
+             write('4. Sheep (350 golds)'),nl,
+             write('5. Horse (1000 golds)'),nl,
+             write('6. Cow (750 golds)'),nl,
+             write('7. Chicken feed (150 golds)'),nl,
+             write('8. Sheep feed (175 golds)'),nl,
+             write('9. Cow feed (200 golds)'),nl,
+             write('10. Horse feed (225 golds)'),nl,
+             write('11. Level 2 shovel (500 golds)'),nl,
+             write('12. Level 3 shovel (750 golds)'),nl,
+             write('13. Level 2 watering can (300 golds)'),nl,
+             write('14. Level 3 watering can (550 golds)'),nl,
+             write('15. Level 2 fishing rod (500 golds)'),nl,
+             write('16. Level 3 fishing rod (700 golds)'),nl,
+             write('17. Bait (15 golds)');
+             season(summer),
+             write('1. Tomato seed (100 golds)'),nl,
+             write('2. Strawberry seed (150 golds)'),nl,
+             write('3. Chicken (250 golds)'),nl,
+             write('4. Sheep (350 golds)'),nl,
+             write('5. Horse (1000 golds)'),nl,
+             write('6. Cow (750 golds)'),nl,
+             write('7. Chicken feed (150 golds)'),nl,
+             write('8. Sheep feed (175 golds)'),nl,
+             write('9. Cow feed (200 golds)'),nl,
+             write('10. Horse feed (225 golds)'),nl,
+             write('11. Level 2 shovel (500 golds)'),nl,
+             write('12. Level 3 shovel (750 golds)'),nl,
+             write('13. Level 2 watering can (300 golds)'),nl,
+             write('14. Level 3 watering can (550 golds)'),nl,
+             write('15. Level 2 fishing rod (500 golds)'),nl,
+             write('16. Level 3 fishing rod (700 golds)'),nl,
+             write('17. Bait (15 golds)');
+             season(autumn),
+             write('1. Pineapple seed (200 golds)'),nl,
+             write('2. Chicken (250 golds)'),nl,
+             write('3. Sheep (350 golds)'),nl,
+             write('4. Horse (1000 golds)'),nl,
+             write('5. Cow (750 golds)'),nl,
+             write('6. Chicken feed (150 golds)'),nl,
+             write('7. Sheep feed (175 golds)'),nl,
+             write('8. Cow feed (200 golds)'),nl,
+             write('9. Horse feed (225 golds)'),nl,
+             write('10. Level 2 shovel (500 golds)'),nl,
+             write('11. Level 3 shovel (750 golds)'),nl,
+             write('12. Level 2 watering can (300 golds)'),nl,
+             write('13. Level 3 watering can (550 golds)'),nl,
+             write('14. Level 2 fishing rod (500 golds)'),nl,
+             write('15. Level 3 fishing rod (700 golds)'),nl,
+             write('16. Bait (15 golds)');
+             season(winter),
+             write('1. Chicken (250 golds)'),nl,
+             write('2. Sheep (350 golds)'),nl,
+             write('3. Horse (1000 golds)'),nl,
+             write('4. Cow (750 golds)'),nl,
+             write('5. Chicken feed (150 golds)'),nl,
+             write('6. Sheep feed (175 golds)'),nl,
+             write('7. Cow feed (200 golds)'),nl,
+             write('8. Horse feed (225 golds)'),nl,
+             write('9. Level 2 shovel (500 golds)'),nl,
+             write('10. Level 3 shovel (750 golds)'),nl,
+             write('11. Level 2 watering can (300 golds)'),nl,
+             write('12. Level 3 watering can (550 golds)'),nl,
+             write('13. Level 2 fishing rod (500 golds)'),nl,
+             write('14. Level 3 fishing rod (700 golds)'),nl,
+             write('15. Bait (15 golds)')),
+             nl,nl,write('>'),read(Choice),
              (
                     ((Choice = chili_seed) -> buy_chili_seed);
                     ((Choice = paddy_seed) -> buy_paddy_seed);
@@ -64,11 +113,10 @@ buyOption :- write('What do you want to buy ?'),nl,
                     ((Choice = level_2_fishing_rod) -> level_2_fishing_rod);
                     ((Choice = level_3_fishing_rod) -> level_3_fishing_rod);
                     ((Choice = bait) -> buy_bait)
-             )
-             ,!.
-
+             ) ,!.
 
 buy_chili_seed :- 
+       season(spring),
        write('How many do you want to buy? \n'),
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
@@ -112,8 +160,8 @@ sell_chili_seed :-
        write('Invalid amount!\nPlease check again!\n')
        )),!.
 
-
 buy_paddy_seed :- 
+       season(spring),
        write('How many do you want to buy? \n'),
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
@@ -158,6 +206,7 @@ sell_paddy_seed :-
        )),!.
 
 buy_tomato_seed :- 
+       season(summer),
        write('How many do you want to buy? \n'),
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
@@ -201,6 +250,7 @@ sell_tomato_seed :-
        )),!.
 
 buy_pineapple_seed :- 
+       season(autumn),
        write('How many do you want to buy? \n'),
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
@@ -244,6 +294,7 @@ sell_pineapple_seed :-
        )),!.
 
 buy_strawberry_seed :- 
+       season(summer),
        write('How many do you want to buy? \n'),
        write('> '),read_integer(Amount),
        player(_,_,_,_,_,_,_,_,_,Gold),
