@@ -13,6 +13,7 @@
 :- include('farming.pl').
 :- include('ranching.pl').
 :- include('fishing.pl').
+:- include('cheat.pl').
 
 
 :- dynamic(isStarted/1).

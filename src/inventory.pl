@@ -26,7 +26,7 @@ listConsumable :-       findall(Jumlah,inventoryI(_,_,consumable,_,_,Jumlah), Li
 showItem([],[],[]).
 
 showItem([Jumlah|TX],[Level|TY],[Nama|TZ]) :-
-                        (Jumlah > 0 -> write(Jumlah),write(' Level '),write(Level),write(' '),write(Nama),((Jumlah > 1) -> write('s')),nl),
+                        (Jumlah > 0 -> write(Jumlah),write(' Level '),write(Level),write(' '),write(Nama),nl),
                         showItem(TX,TY,TZ).
 
 showConsumable([],[],[]).
@@ -67,7 +67,7 @@ addItem(ID,JobItem,Jumlah) :-   item(ID,Nama,JobItem),capacity(X),
 
 addItem(ID,JobItem,Jumlah) :-   item(ID,_,JobItem),capacity(X),
                                 NewX is X + Jumlah, NewX > 100,
-                                write('Not enough capacity!').
+                                write('Not enough capacity!'), fail, !.
                                
 
 
@@ -85,7 +85,7 @@ addConsumable(ID, Jumlah) :-    consumable(ID,Nama),capacity(X),
 
 addConsumable(ID,Jumlah) :-     consumable(ID,_),capacity(X),
                                 NewX is X + Jumlah, NewX > 100,
-                                write('Not enough capacity!').
+                                write('Not enough capacity!'), fail, !.
 
 /* Logic delete item to inventory */
 

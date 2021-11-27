@@ -74,25 +74,25 @@ move(BeforeX, BeforeY, AfterX, AfterY) :-   wall(AfterX, AfterY) -> write('Oops!
                                             digged(AfterX,AfterY) -> write('You are standing on digged tile!');
                                             alchemist(AfterX,AfterY) -> write('You are in alchemist house!')).
                                             
-w :-                    \+ (isMarketplace(_)), \+ (isHouse(_)), \+ (isAlchemist(_)) ->
+w :-                    \+ (isMarketplace(_)), \+ (isHouse(_)), \+ (isAlchemist(_)), \+ (isRanch(_)) ->
                         retract(player(BeforeX, BeforeY)),
                         AfterY is BeforeY + 1, 
                         asserta(player(BeforeX, AfterY)),
                         move(BeforeX,BeforeY,BeforeX, AfterY),!.
 
-a :-                    \+ (isMarketplace(_)), \+ (isHouse(_)), \+ (isAlchemist(_)) ->
+a :-                    \+ (isMarketplace(_)), \+ (isHouse(_)), \+ (isAlchemist(_)), \+ (isRanch(_)) ->
                         retract(player(BeforeX, BeforeY)),
                         AfterX is BeforeX - 1, 
                         asserta(player(AfterX, BeforeY)),
                         move(BeforeX,BeforeY,AfterX, BeforeY),!.
 
-s :-                    \+ (isMarketplace(_)), \+ (isHouse(_)), \+ (isAlchemist(_)) ->
+s :-                    \+ (isMarketplace(_)), \+ (isHouse(_)), \+ (isAlchemist(_)), \+ (isRanch(_)) ->
                         retract(player(BeforeX, BeforeY)),
                         AfterY is BeforeY - 1, 
                         asserta(player(BeforeX, AfterY)),
                         move(BeforeX,BeforeY,BeforeX, AfterY),!.
 
-d :-                    \+ (isMarketplace(_)), \+ (isHouse(_)), \+ (isAlchemist(_)) ->
+d :-                    \+ (isMarketplace(_)), \+ (isHouse(_)), \+ (isAlchemist(_)), \+ (isRanch(_)) ->
                         retract(player(BeforeX, BeforeY)),
                         AfterX is BeforeX + 1, 
                         asserta(player(AfterX, BeforeY)),
