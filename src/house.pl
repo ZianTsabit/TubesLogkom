@@ -32,7 +32,7 @@ goSleep                         :-  write('You went to sleep'), nl, nl, clockAft
                                     water(X,Y) -> write('Sleeping Fairy: Wake up on water? You are strange'),
                                     nl, nl, write('You return to house');
                                     write('Sleeping Fairy: Your request has been granted. Enjoy your day!'), exit,
-                                    retract(player(_,_)), asserta(player(X,Y))); !).
+                                    retract(player(_,_)), asserta(player(X,Y)));true, !) .
 
 writeInDiary                    :-  day(X), (\+ diary(X,_) -> write('Write your diary for Day '); write('Replace your diary for Day ')), 
                                     write(X), nl, nl, write('yes'), nl, write('| ?- '), read(Y),

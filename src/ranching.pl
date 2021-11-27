@@ -15,7 +15,7 @@ hasil(0,0,0,0).
 
 enterRanch          :- \+ (isRanch(_)), player(X,Y), X =:= 2, Y =:= 9, asserta(isRanch(true)), write('You entered your ranch.').
 
-help_ranching          :- write('======================== Ranching Guide ====================='),
+help_ranching          :- write('======================== Ranching Guide ====================='),nl,
                        write('Steps:'),nl,
                        write('1. Buy any animals and animals food at marketplace'),nl,
                        write('2. Fill the silo with animals food'),nl,
@@ -184,7 +184,7 @@ delete_horse :-       show_horse,write('insert ID: '), read_integer(ID),
 
 /* aturan ganti hari */
 
-chickenRules :-                 silo(1,X),X > 0,chicken(ID1,_,_,_) -> checkProductionChicken(ID1), !;
+chickenRules :-                 silo(1,X),X > 0,chicken(ID1,_,_,_) ->hasil(Telur,_,_,_), checkProductionChicken(ID1),hasil(Telur2,_,_,_), (Telur2 > Telur -> questAddRanch;true), !;
                                 true, !.
 
 sheepRules :-                   silo(2,X),X > 0,sheep(ID1,_,_,_) -> checkProductionSheep(ID1), !;
@@ -200,7 +200,7 @@ decreaseSilo(X) :-              retract(silo(X,J)), NewJ is J-1, asserta(silo(X,
 
 checkProductionChicken(ID) :-   chicken(ID,Nama,_,Time), Time > 1, silo(1,Isi), Isi > 0 -> decreaseSilo(1),retract(chicken(ID,Nama,_,Time)), NewTime is Time-1, assertz(chicken(ID,Nama,false,NewTime)), NewID is ID-1, checkProductionChicken(NewID).
 
-checkProductionChicken(ID) :-   chicken(ID,Nama,_,Time), Time =:= 1, silo(1,Isi), Isi > 0 -> decreaseSilo(1),retract(chicken(ID,Nama,_,Time)), NewTime is 3, assertz(chicken(ID,Nama,false,NewTime)), retract(hasil(A,B,C,D)), NewA is A+1, asserta(hasil(NewA,B,C,D)), NewID is ID-1, checkProductionChicken(NewID).
+checkProductionChicken(ID) :-   chicken(ID,Nama,_,Time), Time =:= 1, silo(1,Isi), Isi > 0 -> (player(X,_,_,_,_,_,_,_,_,_), X == rancher -> expAfter(ranch,10); expAfter(ranch,5)),decreaseSilo(1),retract(chicken(ID,Nama,_,Time)), NewTime is 3, assertz(chicken(ID,Nama,false,NewTime)), retract(hasil(A,B,C,D)), NewA is A+1, asserta(hasil(NewA,B,C,D)), NewID is ID-1, checkProductionChicken(NewID).
 
 checkProductionChicken(ID) :-   chicken(ID,Nama,_,Time), silo(1,Isi), Isi =< 0 -> retract(chicken(ID,Nama,_,Time)), NewTime is Time, assertz(chicken(ID,Nama,false,NewTime)), NewID is ID-1, checkProductionChicken(NewID).
 
@@ -263,11 +263,12 @@ collectRanch :-                 isRanch(_),
                                 write('2. Sheep wool'),nl,
                                 write('3. horse milk'),nl,
                                 write('Input choice: '), read_integer(X),
-                                (X =:= 1 -> collect_milk, !;
-                                 X =:= 2 -> collect_wool, !;
-                                 X =:= 3 -> collect_horsemilk, !;
+                                (X =:= 1 -> hasil(_,_,Milk,_),collect_milk, hasil(_,_,Milk2,_),Milk2 > Milk -> questAddRanch, !;
+                                 X =:= 2 -> hasil(_,Wool,_,_),collect_wool, hasil(_,Wool2,_,_),Wool2 > Wool -> questAddRanch,!;
+                                 X =:= 3 -> hasil(_,_,HMilk),collect_horsemilk, hasil(_,_,_,HMilk2),HMilk2 > HMilk -> questAddRanch,!;
                                  write('invalid input!')
                                 ).
+                                
 
 collectRanch :-                 \+ (isRanch(_)),
                                 write('you are not in ranch.'), !.
@@ -275,12 +276,12 @@ collectRanch :-                 \+ (isRanch(_)),
                                 
 collect_milk :-                 inventoryI(4,_,item,_,_,_) ->
                                 (cow(ID,_,_,Time) -> 
-                                ( Time =:= 0 ->retract(hasil(A,B,C,D)), NewC is C+1,asserta(hasil(A,B,NewC,D)), retract(cow(ID,Nama,Makan,Time)), NewTime is 5,assertz(cow(ID,Nama,Makan,NewTime)), NewID is ID-1, collect_milk(NewID);
+                                ( Time =:= 0 ->(player(X,_,_,_,_,_,_,_,_,_), X == rancher -> expAfter(ranch,20); expAfter(ranch,10)),retract(hasil(A,B,C,D)), NewC is C+1,asserta(hasil(A,B,NewC,D)), retract(cow(ID,Nama,Makan,Time)), NewTime is 5,assertz(cow(ID,Nama,Makan,NewTime)), NewID is ID-1, collect_milk(NewID);
                                   retract(cow(ID,Nama,Makan,Time)), NewTime is Time,assertz(cow(ID,Nama,Makan,NewTime)), NewID is ID-1, collect_milk(NewID));
                                 write('You do not have a cow.'));
                                 write('You do not have a milking equipment!').
 
-collect_milk(ID) :-             cow(ID,Nama,Makan,Time), Time =:= 0 ->  retract(hasil(A,B,C,D)), NewC is C+1,asserta(hasil(A,B,NewC,D)), retract(cow(ID,Nama,Makan,Time)), NewTime is 5,assertz(cow(ID,Nama,Makan,NewTime)), NewID is ID-1, collect_milk(NewID);
+collect_milk(ID) :-             cow(ID,Nama,Makan,Time), Time =:= 0 ->  (player(X,_,_,_,_,_,_,_,_,_), X == rancher -> expAfter(ranch,20); expAfter(ranch,10)),retract(hasil(A,B,C,D)), NewC is C+1,asserta(hasil(A,B,NewC,D)), retract(cow(ID,Nama,Makan,Time)), NewTime is 5,assertz(cow(ID,Nama,Makan,NewTime)), NewID is ID-1, collect_milk(NewID);
                                 check_cow(ID).
 
 check_cow(ID) :-                \+ (cow(ID,_,_,_)) -> !;
@@ -288,12 +289,12 @@ check_cow(ID) :-                \+ (cow(ID,_,_,_)) -> !;
 
 collect_wool :-                 inventoryI(5,_,item,_,_,_) ->
                                 (sheep(ID,_,_,Time) -> 
-                                ( Time =:= 0 ->retract(hasil(A,B,C,D)), NewB is B+1,asserta(hasil(A,NewB,C,D)), retract(sheep(ID,Nama,Makan,Time)), NewTime is 4,assertz(sheep(ID,Nama,Makan,NewTime)), NewID is ID-1, collect_wool(NewID);
+                                ( Time =:= 0 ->(player(X,_,_,_,_,_,_,_,_,_), X == rancher -> expAfter(ranch,15); expAfter(ranch,8)),retract(hasil(A,B,C,D)), NewB is B+1,asserta(hasil(A,NewB,C,D)), retract(sheep(ID,Nama,Makan,Time)), NewTime is 4,assertz(sheep(ID,Nama,Makan,NewTime)), NewID is ID-1, collect_wool(NewID);
                                   retract(sheep(ID,Nama,Makan,Time)), NewTime is Time,assertz(sheep(ID,Nama,Makan,NewTime)), NewID is ID-1, collect_wool(NewID));
                                 write('You do not have a sheep.'));
                                 write('You do not have a scissor!').
 
-collect_wool(ID) :-             sheep(ID,Nama,Makan,Time), Time =:= 0 ->  retract(hasil(A,B,C,D)), NewC is C+1,asserta(hasil(A,B,NewC,D)), retract(sheep(ID,Nama,Makan,Time)), NewTime is 5,assertz(sheep(ID,Nama,Makan,NewTime)), NewID is ID-1, collect_wool(NewID);
+collect_wool(ID) :-             sheep(ID,Nama,Makan,Time), Time =:= 0 -> (player(X,_,_,_,_,_,_,_,_,_), X == rancher -> expAfter(ranch,15); expAfter(ranch,8)), retract(hasil(A,B,C,D)), NewC is C+1,asserta(hasil(A,B,NewC,D)), retract(sheep(ID,Nama,Makan,Time)), NewTime is 5,assertz(sheep(ID,Nama,Makan,NewTime)), NewID is ID-1, collect_wool(NewID);
                                 check_sheep(ID).
 
 check_sheep(ID) :-              \+ (sheep(ID,_,_,_)) -> !;
@@ -301,12 +302,12 @@ check_sheep(ID) :-              \+ (sheep(ID,_,_,_)) -> !;
 
 collect_horsemilk :-            inventoryI(4,_,item,_,_,_) ->
                                 (horse(ID,_,_,Time) -> 
-                                ( Time =:= 0 ->retract(hasil(A,B,C,D)), NewD is D+1,asserta(hasil(A,B,C,NewD)), retract(horse(ID,Nama,Makan,Time)), NewTime is 4,assertz(horse(ID,Nama,Makan,NewTime)), NewID is ID-1, collect_horsemilk(NewID);
+                                ( Time =:= 0 ->(player(X,_,_,_,_,_,_,_,_,_), X == rancher -> expAfter(ranch,25); expAfter(ranch,12)),retract(hasil(A,B,C,D)), NewD is D+1,asserta(hasil(A,B,C,NewD)), retract(horse(ID,Nama,Makan,Time)), NewTime is 4,assertz(horse(ID,Nama,Makan,NewTime)), NewID is ID-1, collect_horsemilk(NewID);
                                   retract(horse(ID,Nama,Makan,Time)), NewTime is Time,assertz(horse(ID,Nama,Makan,NewTime)), NewID is ID-1, collect_horsemilk(NewID));
                                 write('You do not have a horse.'));
                                 write('You do not have a milking equipment!').
 
-collect_horsemilk(ID) :-        horse(ID,Nama,Makan,Time), Time =:= 0 ->  retract(hasil(A,B,C,D)), NewC is C+1,asserta(hasil(A,B,NewC,D)), retract(horse(ID,Nama,Makan,Time)), NewTime is 5,assertz(horse(ID,Nama,Makan,NewTime)), NewID is ID-1, collect_horsemilk(NewID);
+collect_horsemilk(ID) :-        horse(ID,Nama,Makan,Time), Time =:= 0 -> (player(X,_,_,_,_,_,_,_,_,_), X == rancher -> expAfter(ranch,25); expAfter(ranch,12)), retract(hasil(A,B,C,D)), NewC is C+1,asserta(hasil(A,B,NewC,D)), retract(horse(ID,Nama,Makan,Time)), NewTime is 5,assertz(horse(ID,Nama,Makan,NewTime)), NewID is ID-1, collect_horsemilk(NewID);
                                 check_horse(ID).
 
 check_horse(ID) :-              \+ (horse(ID,_,_,_)) -> !;

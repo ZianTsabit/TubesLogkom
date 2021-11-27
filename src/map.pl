@@ -40,7 +40,24 @@ createRiver :-          asserta(water(15,5)),
 /* tampilin map */
 
 map :-                  isStarted(_) -> 
-                        (map(0, 16), nl, showClock, write(' Day '), day(X), write(X), nl,nl,season(Y), write(Y),write(', '), weather(Z), write(Z)); 
+                        (map(0, 16), nl, showClock, write(' Day '), day(X), write(X), nl,nl,season(Y), write(Y),write(', '), weather(Z), write(Z),
+                        (
+                            write('Map Legends: '),nl,
+                            write('P : Player position'),nl,
+                            write('H : House position'),nl,
+                            write('M : Marketplace position'),nl,
+                            write('R : Ranch position'),nl,
+                            write('Q : Quest position'),nl,
+                            write('= : Digged tile'),nl,
+                            write('o : Water tile'),nl,
+                            write('- : Diggable tile'),nl,
+                            alchemist(_,_) -> write('A : Alchemist position'),nl ; true,
+                            chili(_,_) -> write('c : chili plant position'),nl ; true,
+                            paddy(_,_) -> write('v : paddy plant position'),nl ; true,
+                            tomato(_,_) -> write('v : tomato plant position'),nl ; true,
+                            pineapple(_,_) -> write('n : pineapple plant position'),nl ; true,
+                            strawberry(_,_) ->write('s : strawberry plant position'),nl ; true
+                        )); 
                         (write('You have not start your game!'), nl, write('Use start command to play!'),nl).
 
 map(X, Y) :-            (wall(X, Y) -> write('#');
@@ -72,7 +89,8 @@ move(BeforeX, BeforeY, AfterX, AfterY) :-   wall(AfterX, AfterY) -> write('Oops!
                                             ranch(AfterX,AfterY) -> write('You are in your ranch!');
                                             marketplace(AfterX,AfterY) -> write('You are in marketplace!');
                                             digged(AfterX,AfterY) -> write('You are standing on digged tile!');
-                                            alchemist(AfterX,AfterY) -> write('You are in alchemist house!')).
+                                            alchemist(AfterX,AfterY) -> write('You are in alchemist house!'));
+                                            true.
                                             
 w :-                    \+ (isMarketplace(_)), \+ (isHouse(_)), \+ (isAlchemist(_)), \+ (isRanch(_)) ->
                         retract(player(BeforeX, BeforeY)),
