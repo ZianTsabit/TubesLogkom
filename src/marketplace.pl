@@ -668,7 +668,7 @@ level_2_watering_can :-
        player(Role,_,_,_,_,_,_,_,_,Gold),
        price(level2_watering_can,X),
        (
-       (Role \= farmer,
+       (Role farmer,
        write('You are not farmer !, you can not buy this item !'));
        (Role = farmer,
        ((Gold < X,
@@ -687,7 +687,7 @@ level_3_watering_can :-
        player(Role,_,_,_,_,_,_,_,_,Gold),
        price(level3_watering_can,X),
        (
-       (Role \= farmer,
+       (Role farmer,
        write('You are not farmer !, you can not buy this item !'));
        (Role = farmer,
        ((Gold < X,
