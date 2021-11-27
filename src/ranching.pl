@@ -26,7 +26,7 @@ help_ranching          :- write('======================== Ranching Guide =======
                        write('6. to withdraw the product, check the ranch storage.'),nl,
                        write('7. you gain exp whenever you collect product from your animals'),nl,
                        write('8. last but not least, Happy Ranching!!!'),nl,nl,
-                       write('======================== List of Command ===================='),nl
+                       write('======================== List of Command ===================='),nl,
                        write('ranch : enter your ranch, you need to stand on your ranch.'),nl,
                        write('chicken_info : to show your chicken and chicken food.'),nl,
                        write('sheep_info : to show your sheep and sheep food.'),nl,
