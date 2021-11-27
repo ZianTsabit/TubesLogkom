@@ -30,8 +30,12 @@ item(5, scissors, rancher).
 /* ITEM UPGRADE*/
 item(6, level2_shovel, farmer).
 item(7, level3_shovel, farmer).
+
+/*
 item(8, level2_watering_can, farmer).
 item(9, level3_watering_can, farmer).
+*/
+
 item(10, level2_fishing_rod, fisherman).
 item(11, level3_fishing_rod, fisherman).
 
@@ -104,8 +108,10 @@ price(cow, 750).
 price(horse, 1000).
 price(level2_shovel, 500).
 price(level3_shovel, 750).
+/*
 price(level2_watering_can, 300).
 price(level3_watering_can, 550).
+*/
 price(level2_fishing_rod, 500).
 price(level3_fishing_rod, 700).
 

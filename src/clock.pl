@@ -56,11 +56,11 @@ clockAfterMove :-   retract(clock(X)), (\+ speedBoost(_) -> NewX is X+5; NewX is
 clockAfterFishing :-retract(clock(X)), NewX is X+5,
                     asserta(clock(NewX)), clockRules, punishTired.
 
-clockAfterFarming :-retract(clock(X)), NewX is X+20,
+clockAfterFarming :-retract(clock(X)), NewX is X+25,
                     asserta(clock(NewX)), clockRules, punishTired.
 
 clockAfterRanching :-retract(clock(X)), NewX is X+60,
                     asserta(clock(NewX)), clockRules, punishTired.
 
-clockAfterMarket :- retract(clock(X)), NewX is X+5,
+clockAfterMarket :- retract(clock(X)), NewX is X+15,
                     asserta(clock(NewX)), clockRules, punishTired.
