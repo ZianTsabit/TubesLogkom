@@ -2,7 +2,12 @@
 
 /* Code utama player */
 
-initStatus(X)               :-  asserta(player(X,1,1,0,1,0,1,0,0,1000)),addItem(1,fisherman,1).
+initStatus(X)               :-  asserta(player(X,1,1,0,1,0,1,0,0,1000)),
+                                addItem(1,fisherman,1),
+                                addItem(2,farmer,1),
+                                addItem(3,farmer,1),
+                                addItem(4,rancher,1),
+                                addItem(5,rancher,1).
 
 playerStatus                :-  player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,Gold),
                                     write('Your status:'), nl,
