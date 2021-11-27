@@ -15,6 +15,8 @@ hasil(0,0,0,0).
 
 ranch          :- \+ (isRanch(_)), player(X,Y), X =:= 2, Y =:= 9, asserta(isRanch(true)), write('You entered your ranch.').
 
+help_ranching :-
+
 sumAnimal([], J) :-      J is 0, !.
 sumAnimal([_ | T], L) :- sumAnimal(T, L1), L is 1 + L1.
 
