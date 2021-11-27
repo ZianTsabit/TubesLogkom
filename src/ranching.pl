@@ -13,8 +13,6 @@ silo(3,0).
 silo(4,0).
 hasil(0,0,0,0).
 
-inventoryI(4,milking_equipment,item,rancher,1,1).
-
 ranch          :- \+ (isRanch(_)), player(X,Y), X =:= 2, Y =:= 9, asserta(isRanch(true)), write('You entered your ranch.').
 
 sumAnimal([], J) :-      J is 0, !.
