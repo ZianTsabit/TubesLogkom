@@ -119,6 +119,17 @@ rich                    :-  richPotion, !.
 speed                   :-  speedPotion, !.
 secret                  :-  secretPotion, !.
 
+/*** Ranch ***/
+
+ranch                   :- enterRanch, !.
+chicken_info            :- show_chicken, !.
+sheep_info              :- show_sheep, !.
+cow_info                :- show_cow, !.
+horse_info              :- show_horse, !.
+fill                    :- fill_silo, !.
+storage                 :- storageRanch, !.
+collect                 :- collectRanch, !.
+
 /*** Fail State ***/
 
 failState               :-  write('You have worked hard, but in the end result is all that matters.'), nl,

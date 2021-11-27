@@ -13,9 +13,28 @@ silo(3,0).
 silo(4,0).
 hasil(0,0,0,0).
 
-ranch          :- \+ (isRanch(_)), player(X,Y), X =:= 2, Y =:= 9, asserta(isRanch(true)), write('You entered your ranch.').
+enterRanch          :- \+ (isRanch(_)), player(X,Y), X =:= 2, Y =:= 9, asserta(isRanch(true)), write('You entered your ranch.').
 
-help_ranching :-
+help_ranching          :- write('======================== Ranching Guide ====================='),
+                       write('Steps:'),nl,
+                       write('1. Buy any animals and animals food at marketplace'),nl,
+                       write('2. Fill the silo with animals food'),nl,
+                       write('3. Wait until the next day, your animals will eat the food and start producing'),nl,
+                       write('4. Do not forget to fill the silo, your animals cannot produce anything if they hungry!'),nl,
+                       write('5. For chicken, eggs will be stored in the morning'),nl,
+                       write('6. For other animals, you need to collect it first with a specified equipment.'),nl,
+                       write('6. to withdraw the product, check the ranch storage.'),nl,
+                       write('7. you gain exp whenever you collect product from your animals'),nl,
+                       write('8. last but not least, Happy Ranching!!!'),nl,nl,
+                       write('======================== List of Command ===================='),nl
+                       write('ranch : enter your ranch, you need to stand on your ranch.'),nl,
+                       write('chicken_info : to show your chicken and chicken food.'),nl,
+                       write('sheep_info : to show your sheep and sheep food.'),nl,
+                       write('cow_info : to show your cow and cow food.'),nl,
+                       write('horse_info : to show your horse and horse food.'),nl,
+                       write('collect : to collect product from cow, sheep, and horse.'),nl,
+                       write('storage : to show and withdraw animals product.'),!.
+
 
 sumAnimal([], J) :-      J is 0, !.
 sumAnimal([_ | T], L) :- sumAnimal(T, L1), L is 1 + L1.
@@ -238,7 +257,7 @@ fill_food(X, ItemID) :-         write('How many food do you want to fill?'),nl,
                                 write('you dont have that kind of food!'), !.
 
 /* collect to storage */
-collect :-                      isRanch(_),
+collectRanch :-                 isRanch(_),
                                 write('Which one you want to collect?'),nl,
                                 write('1. Cow milk'),nl,
                                 write('2. Sheep wool'),nl,
@@ -250,7 +269,7 @@ collect :-                      isRanch(_),
                                  write('invalid input!')
                                 ).
 
-collect :-                      \+ (isRanch(_)),
+collectRanch :-                 \+ (isRanch(_)),
                                 write('you are not in ranch.'), !.
 
                                 
@@ -295,7 +314,7 @@ check_horse(ID) :-              \+ (horse(ID,_,_,_)) -> !;
 
 /* storage to inventory */
 
-storage :-                      isRanch(_),
+storageRanch :-                 isRanch(_),
                                 hasil(W,X,Y,Z),
                                 write('storage: '),nl,
                                 write('egg: '), write(W),nl,
@@ -308,7 +327,7 @@ storage :-                      isRanch(_),
                                  Input == no -> !;
                                  write('invalid input!'), !).
 
-storage :-                      \+ (isRanch(_)),
+storageRanch :-                 \+ (isRanch(_)),
                                 write('you are no in ranch!').
 
 withdrawStorage :-              write('which one do you want to withdraw?'),nl,
