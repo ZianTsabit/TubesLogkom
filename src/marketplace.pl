@@ -136,11 +136,11 @@ sell_chili_seed :-
          ((Amount >= 0) -> 
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(chili_seed,X),
-       inventoryI(6, chili_seed,_,_,_, Jumlah),
        ((\+cekConsumableExist(6, chili_seed),
        write('There is no such item in your inventory!\nPlease check again!\n'));
        (cekConsumableExist(6, chili_seed),
-       (Jumlah >= Amount,
+       inventoryI(6, chili_seed,_,_,_, Jumlah),
+       ((Jumlah >= Amount,
        NewPrice is Amount*X,
        NewGold is Gold+NewPrice,
        retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
@@ -149,8 +149,8 @@ sell_chili_seed :-
        write('You sold '),write(Amount), write(' chili seeds'),nl,
        write('You received '), write(NewPrice), write(' golds')
        );
-       Jumlah < Amount,
-       write('Invalid amount!\nPlease check again!\n')
+       (Jumlah < Amount,
+       write('Invalid amount!\nPlease check again!\n')))
        ))
        ))
        ,!.
@@ -184,21 +184,21 @@ sell_paddy_seed :-
          ((Amount >= 0) ->
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(paddy_seed,X),
-       inventoryI(7, paddy_seed,_,_,_, Jumlah),
        ((\+cekConsumableExist(7, paddy_seed),
        write('There is no such item in your inventory!\nPlease check again!\n'));
        (cekConsumableExist(7, paddy_seed),
-       (Jumlah >= Amount,
+       inventoryI(7, paddy_seed,_,_,_, Jumlah),
+       ((Jumlah >= Amount,
        NewPrice is Amount*X,
        NewGold is Gold+NewPrice,
        retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
        asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold)),
-       deleteConsumable(6, Amount),
+       deleteConsumable(7, Amount),
        write('You sold '),write(Amount), write(' paddy seeds'),nl,
        write('You received '), write(NewPrice), write(' golds')
        );
-       Jumlah < Amount,
-       write('Invalid amount!\nPlease check again!\n')
+       (Jumlah < Amount,
+       write('Invalid amount!\nPlease check again!\n')))
        ))
        ))
        ,!.
@@ -232,21 +232,21 @@ sell_tomato_seed :-
          ((Amount >= 0) -> 
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(tomato_seed,X),
-       inventoryI(8, tomato_seed,_,_,_, Jumlah),
        ((\+cekConsumableExist(8, tomato_seed),
        write('There is no such item in your inventory!\nPlease check again!\n'));
        (cekConsumableExist(8, tomato_seed),
-       (Jumlah >= Amount,
+       inventoryI(8, tomato_seed,_,_,_, Jumlah),
+       ((Jumlah >= Amount,
        NewPrice is Amount*X,
        NewGold is Gold+NewPrice,
        retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
        asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold)),
-       deleteConsumable(6, Amount),
+       deleteConsumable(8, Amount),
        write('You sold '),write(Amount), write(' tomato seeds'),nl,
        write('You received '), write(NewPrice), write(' golds')
        );
-       Jumlah < Amount,
-       write('Invalid amount!\nPlease check again!\n')
+       (Jumlah < Amount,
+       write('Invalid amount!\nPlease check again!\n')))
        ))
        ))
        ,!.
@@ -280,21 +280,21 @@ sell_pineapple_seed :-
          ((Amount >= 0) -> 
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(pineapple_seed,X),
-       inventoryI(9, pineapple_seed,_,_,_, Jumlah),
        ((\+cekConsumableExist(9, pineapple_seed),
        write('There is no such item in your inventory!\nPlease check again!\n'));
        (cekConsumableExist(9, pineapple_seed),
-       (Jumlah >= Amount,
+       inventoryI(9, pineapple_seed,_,_,_, Jumlah),
+       ((Jumlah >= Amount,
        NewPrice is Amount*X,
        NewGold is Gold+NewPrice,
        retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
        asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold)),
-       deleteConsumable(6, Amount),
+       deleteConsumable(9, Amount),
        write('You sold '),write(Amount), write(' pineapple seeds'),nl,
        write('You received '), write(NewPrice), write(' golds')
        );
-       Jumlah < Amount,
-       write('Invalid amount!\nPlease check again!\n')
+       (Jumlah < Amount,
+       write('Invalid amount!\nPlease check again!\n')))
        ))
        ))
        ,!.
@@ -328,21 +328,21 @@ sell_strawberry_seed :-
          ((Amount >= 0) -> 
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(strawberry_seed,X),
-       inventoryI(10, strawberry_seed,_,_,_, Jumlah),
        ((\+cekConsumableExist(10, strawberry_seed),
        write('There is no such item in your inventory!\nPlease check again!\n'));
        (cekConsumableExist(10, strawberry_seed),
-       (Jumlah >= Amount,
+       inventoryI(10, strawberry_seed,_,_,_, Jumlah),
+       ((Jumlah >= Amount,
        NewPrice is Amount*X,
        NewGold is Gold+NewPrice,
        retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
        asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold)),
-       deleteConsumable(6, Amount),
+       deleteConsumable(10, Amount),
        write('You sold '),write(Amount), write(' strawberry seeds'),nl,
        write('You received '), write(NewPrice), write(' golds')
        );
-       Jumlah < Amount,
-       write('Invalid amount!\nPlease check again!\n')
+       (Jumlah < Amount,
+       write('Invalid amount!\nPlease check again!\n')))
        ))
        )),!.
 
@@ -470,21 +470,21 @@ sell_chicken_feed :-
          ((Amount >= 0) -> 
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(chicken_feed,X),
-       inventoryI(11, chicken_feed,_,_,_, Jumlah),
        ((\+cekConsumableExist(11, chicken_feed),
        write('There is no such item in your inventory!\nPlease check again!\n'));
        (cekConsumableExist(11, chicken_feed),
-       (Jumlah >= Amount,
+       inventoryI(11, chicken_feed,_,_,_, Jumlah),
+       ((Jumlah >= Amount,
        NewPrice is Amount*X,
        NewGold is Gold+NewPrice,
        retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
        asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold)),
-       deleteConsumable(11, chicken_feed),
+       deleteConsumable(11, Amount),
        write('You sold '),write(Amount), write(' chicken feed'),nl,
        write('You received '), write(NewPrice), write(' golds')
        );
-       Jumlah < Amount,
-       write('Invalid amount!\nPlease check again!\n')
+       (Jumlah < Amount,
+       write('Invalid amount!\nPlease check again!\n')))
        ))
        )),!.
 
@@ -516,21 +516,21 @@ sell_sheep_feed :-
          ((Amount >= 0) -> 
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(sheep_feed,X),
-       inventoryI(12, sheep_feed,_,_,_, Jumlah),
        ((\+cekConsumableExist(12, sheep_feed),
        write('There is no such item in your inventory!\nPlease check again!\n'));
        (cekConsumableExist(12, sheep_feed),
-       (Jumlah >= Amount,
+       inventoryI(12, sheep_feed,_,_,_, Jumlah),
+       ((Jumlah >= Amount,
        NewPrice is Amount*X,
        NewGold is Gold+NewPrice,
        retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
        asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold)),
-       deleteConsumable(12, sheep_feed),
+       deleteConsumable(12, Amount),
        write('You sold '),write(Amount), write(' sheep feed'),nl,
        write('You received '), write(NewPrice), write(' golds')
        );
-       Jumlah < Amount,
-       write('Invalid amount!\nPlease check again!\n')
+       (Jumlah < Amount,
+       write('Invalid amount!\nPlease check again!\n')))
        ))
        )),!.
 
@@ -562,21 +562,21 @@ sell_cow_feed :-
          ((Amount >= 0) -> 
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(cow_feed,X),
-       inventoryI(13, cow_feed,_,_,_, Jumlah),
        ((\+cekConsumableExist(13, cow_feed),
        write('There is no such item in your inventory!\nPlease check again!\n'));
        (cekConsumableExist(13, cow_feed),
-       (Jumlah >= Amount,
+       inventoryI(13, cow_feed,_,_,_, Jumlah),
+       ((Jumlah >= Amount,
        NewPrice is Amount*X,
        NewGold is Gold+NewPrice,
        retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
        asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold)),
-       deleteConsumable(13, cow_feed),
+       deleteConsumable(13, Amount),
        write('You sold '),write(Amount), write(' cow feed'),nl,
        write('You received '), write(NewPrice), write(' golds')
        );
-       Jumlah < Amount,
-       write('Invalid amount!\nPlease check again!\n')
+       (Jumlah < Amount,
+       write('Invalid amount!\nPlease check again!\n')))
        ))
        )),!.
 
@@ -608,21 +608,21 @@ sell_horse_feed :-
          ((Amount >= 0) -> 
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(horse_feed,X),
-       inventoryI(14, horse_feed,_,_,_, Jumlah),
        ((\+cekConsumableExist(14, horse_feed),
        write('There is no such item in your inventory!\nPlease check again!\n'));
        (cekConsumableExist(14, horse_feed),
-       (Jumlah >= Amount,
+       inventoryI(14, horse_feed,_,_,_, Jumlah),
+       ((Jumlah >= Amount,
        NewPrice is Amount*X,
        NewGold is Gold+NewPrice,
        retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
        asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold)),
-       deleteConsumable(14, horse_feed),
+       deleteConsumable(14, Amount),
        write('You sold '),write(Amount), write(' horse feed'),nl,
        write('You received '), write(NewPrice), write(' golds')
        );
-       Jumlah < Amount,
-       write('Invalid amount!\nPlease check again!\n')
+       (Jumlah < Amount,
+       write('Invalid amount!\nPlease check again!\n')))
        ))
        )),!.
 
@@ -766,22 +766,24 @@ sell_bait :-
          ((Amount >= 0) -> 
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(bait,X),
-       inventoryI(5, bait,_,_,_, Jumlah),
        ((\+cekConsumableExist(5, bait),
        write('There is no such item in your inventory!\nPlease check again!\n'));
        (cekConsumableExist(5, bait),
-       (Jumlah >= Amount,
+       inventoryI(5, bait,_,_,_, Jumlah),
+       ((Jumlah >= Amount,
        NewPrice is Amount*X,
        NewGold is Gold+NewPrice,
        retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
        asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold)),
-       deleteConsumable(5, bait),
+       deleteConsumable(5, Amount),
        write('You sold '),write(Amount), write(' bait'),nl,
        write('You received '), write(NewPrice), write(' golds')
        );
-       Jumlah < Amount,
-       write('Invalid amount!\nPlease check again!\n')
-       )))),!.
+       (Jumlah < Amount,
+       write('Invalid amount!\nPlease check again!\n')))
+       ))
+       ))
+       ,!.
 
 
 exitBuy :- retract(isBuy(_)),(exitMarket;market),!.
@@ -825,7 +827,6 @@ sellOption :- isStarted(_), isMarketplace(_),
                    ((Choice = mackerel) -> sell_mackerel_fish);
                    ((Choice = sardines) -> sell_sardines_fish);
                    ((Choice = puffer) -> sell_puffer_fish)
-
             ),retract(isSell(_)),!.
 
 exitSell :- retract(isSell(_)),(exitMarket;market),!.
@@ -837,11 +838,11 @@ sell_chili :-
          ((Amount >= 0) -> 
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(chili,X),
-       inventoryI(23, chili,_,_,_, Jumlah),
        ((\+cekConsumableExist(23, chili),
        write('There is no such item in your inventory!\nPlease check again!\n'));
        (cekConsumableExist(23, chili),
-       (Jumlah >= Amount,
+       inventoryI(23, chili,_,_,_, Jumlah),
+       ((Jumlah >= Amount,
        NewPrice is Amount*X,
        NewGold is Gold+NewPrice,
        retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
@@ -850,8 +851,8 @@ sell_chili :-
        write('You sold '),write(Amount), write(' chili'),nl,
        write('You received '), write(NewPrice), write(' golds')
        );
-       Jumlah < Amount,
-       write('Invalid amount!\nPlease check again!\n')
+       (Jumlah < Amount,
+       write('Invalid amount!\nPlease check again!\n')))
        ))
        )),!.
 
@@ -863,21 +864,21 @@ sell_paddy :-
          ((Amount >= 0) -> 
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(paddy,X),
-       inventoryI(24, paddy,_,_,_, Jumlah),
        ((\+cekConsumableExist(24, paddy),
        write('There is no such item in your inventory!\nPlease check again!\n'));
        (cekConsumableExist(24, paddy),
-       (Jumlah >= Amount,
+       inventoryI(24, paddy,_,_,_, Jumlah),
+       ((Jumlah >= Amount,
        NewPrice is Amount*X,
        NewGold is Gold+NewPrice,
        retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
        asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold)),
-       deleteConsumable(24, paddy),
+       deleteConsumable(24, Amount),
        write('You sold '),write(Amount), write(' paddy'),nl,
        write('You received '), write(NewPrice), write(' golds')
        );
-       Jumlah < Amount,
-       write('Invalid amount!\nPlease check again!\n')
+       (Jumlah < Amount,
+       write('Invalid amount!\nPlease check again!\n')))
        ))
        )),!.
 
@@ -888,21 +889,21 @@ sell_tomato :-
          ((Amount >= 0) -> 
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(tomato,X),
-       inventoryI(25, tomato,_,_,_, Jumlah),
        ((\+cekConsumableExist(25, tomato),
        write('There is no such item in your inventory!\nPlease check again!\n'));
        (cekConsumableExist(25, tomato),
-       (Jumlah >= Amount,
+       inventoryI(25, tomato,_,_,_, Jumlah),
+       ((Jumlah >= Amount,
        NewPrice is Amount*X,
        NewGold is Gold+NewPrice,
        retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
        asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold)),
-       deleteConsumable(25, tomato),
+       deleteConsumable(25, Amount),
        write('You sold '),write(Amount), write(' tomato'),nl,
        write('You received '), write(NewPrice), write(' golds')
        );
-       Jumlah < Amount,
-       write('Invalid amount!\nPlease check again!\n')
+       (Jumlah < Amount,
+       write('Invalid amount!\nPlease check again!\n')))
        ))
        )),!.
 
@@ -913,11 +914,11 @@ sell_pineapple :-
          ((Amount >= 0) -> 
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(pineapple,X),
-       inventoryI(26, pineapple,_,_,_, Jumlah),
        ((\+cekConsumableExist(26, pineapple),
        write('There is no such item in your inventory!\nPlease check again!\n'));
        (cekConsumableExist(26, pineapple),
-       (Jumlah >= Amount,
+       inventoryI(26, pineapple,_,_,_, Jumlah),
+       ((Jumlah >= Amount,
        NewPrice is Amount*X,
        NewGold is Gold+NewPrice,
        retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
@@ -926,8 +927,8 @@ sell_pineapple :-
        write('You sold '),write(Amount), write(' pineapple'),nl,
        write('You received '), write(NewPrice), write(' golds')
        );
-       Jumlah < Amount,
-       write('Invalid amount!\nPlease check again!\n')
+       (Jumlah < Amount,
+       write('Invalid amount!\nPlease check again!\n')))
        ))
        )),!.
 
@@ -938,21 +939,21 @@ sell_strawberry :-
          ((Amount >= 0) -> 
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(strawberry,X),
-       inventoryI(27, strawberry,_,_,_, Jumlah),
        ((\+cekConsumableExist(27, strawberry),
        write('There is no such item in your inventory!\nPlease check again!\n'));
        (cekConsumableExist(27, strawberry),
-       (Jumlah >= Amount,
+       inventoryI(27, strawberry,_,_,_, Jumlah),
+       ((Jumlah >= Amount,
        NewPrice is Amount*X,
        NewGold is Gold+NewPrice,
        retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
        asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold)),
-       deleteConsumable(27, strawberry),
+       deleteConsumable(27, Amount),
        write('You sold '),write(Amount), write(' strawberry'),nl,
        write('You received '), write(NewPrice), write(' golds')
        );
-       Jumlah < Amount,
-       write('Invalid amount!\nPlease check again!\n')
+       (Jumlah < Amount,
+       write('Invalid amount!\nPlease check again!\n')))
        ))
        )),!.
 
@@ -963,21 +964,21 @@ sell_eggs :-
          ((Amount >= 0) -> 
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(eggs,X),
-       inventoryI(19, eggs,_,_,_, Jumlah),
        ((\+cekConsumableExist(19, eggs),
        write('There is no such item in your inventory!\nPlease check again!\n'));
        (cekConsumableExist(19, eggs),
-       (Jumlah >= Amount,
+       inventoryI(19, eggs,_,_,_, Jumlah),
+       ((Jumlah >= Amount,
        NewPrice is Amount*X,
        NewGold is Gold+NewPrice,
        retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
        asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold)),
-       deleteConsumable(19, eggs),
+       deleteConsumable(19, Amount),
        write('You sold '),write(Amount), write(' eggs'),nl,
        write('You received '), write(NewPrice), write(' golds')
        );
-       Jumlah < Amount,
-       write('Invalid amount!\nPlease check again!\n')
+       (Jumlah < Amount,
+       write('Invalid amount!\nPlease check again!\n')))
        ))
        )),!.
 
@@ -988,21 +989,21 @@ sell_milk :-
          ((Amount >= 0) ->
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(milk,X),
-       inventoryI(20, milk,_,_,_, Jumlah),
        ((\+cekConsumableExist(20, milk),
        write('There is no such item in your inventory!\nPlease check again!\n'));
        (cekConsumableExist(20, milk),
-       (Jumlah >= Amount,
+       inventoryI(20, milk,_,_,_, Jumlah),
+       ((Jumlah >= Amount,
        NewPrice is Amount*X,
        NewGold is Gold+NewPrice,
        retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
        asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold)),
-       deleteConsumable(20, milk),
+       deleteConsumable(20, Amount),
        write('You sold '),write(Amount), write(' milk'),nl,
        write('You received '), write(NewPrice), write(' golds')
        );
-       Jumlah < Amount,
-       write('Invalid amount!\nPlease check again!\n')
+       (Jumlah < Amount,
+       write('Invalid amount!\nPlease check again!\n')))
        ))
        )),!.
 
@@ -1013,21 +1014,21 @@ sell_horse_milk :-
          ((Amount >= 0) ->
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(horse_milk,X),
-       inventoryI(21, horse_milk,_,_,_, Jumlah),
        ((\+cekConsumableExist(21, horse_milk),
        write('There is no such item in your inventory!\nPlease check again!\n'));
        (cekConsumableExist(21, horse_milk),
-       (Jumlah >= Amount,
+       inventoryI(21, horse_milk,_,_,_, Jumlah),
+       ((Jumlah >= Amount,
        NewPrice is Amount*X,
        NewGold is Gold+NewPrice,
        retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
        asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold)),
-       deleteConsumable(21, horse_milk),
+       deleteConsumable(21, Amount),
        write('You sold '),write(Amount), write(' horse milk'),nl,
        write('You received '), write(NewPrice), write(' golds')
        );
-       Jumlah < Amount,
-       write('Invalid amount!\nPlease check again!\n')
+       (Jumlah < Amount,
+       write('Invalid amount!\nPlease check again!\n')))
        ))
        )),!.
 
@@ -1038,21 +1039,21 @@ sell_wool :-
          ((Amount >= 0) ->
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(wool,X),
-       inventoryI(22, wool,_,_,_, Jumlah),
        ((\+cekConsumableExist(22, wool),
        write('There is no such item in your inventory!\nPlease check again!\n'));
        (cekConsumableExist(22, wool),
-       (Jumlah >= Amount,
+       inventoryI(22, wool,_,_,_, Jumlah),
+       ((Jumlah >= Amount,
        NewPrice is Amount*X,
        NewGold is Gold+NewPrice,
        retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
        asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold)),
-       deleteConsumable(22, wool),
+       deleteConsumable(22, Amount),
        write('You sold '),write(Amount), write(' wool'),nl,
        write('You received '), write(NewPrice), write(' golds')
        );
-       Jumlah < Amount,
-       write('Invalid amount!\nPlease check again!\n')
+       (Jumlah < Amount,
+       write('Invalid amount!\nPlease check again!\n')))
        ))
        )),!.
 
@@ -1063,21 +1064,21 @@ sell_tuna_fish :-
          ((Amount >= 0) ->
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(tuna_fish,X),
-       inventoryI(1, tuna_fish,_,_,_, Jumlah),
        ((\+cekConsumableExist(1, tuna_fish),
        write('There is no such item in your inventory!\nPlease check again!\n'));
        (cekConsumableExist(1, tuna_fish),
-       (Jumlah >= Amount,
+       inventoryI(1, tuna_fish,_,_,_, Jumlah),
+       ((Jumlah >= Amount,
        NewPrice is Amount*X,
        NewGold is Gold+NewPrice,
        retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
        asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold)),
-       deleteConsumable(1, tuna_fish),
+       deleteConsumable(1, Amount),
        write('You sold '),write(Amount), write(' tuna'),nl,
        write('You received '), write(NewPrice), write(' golds')
        );
-       Jumlah < Amount,
-       write('Invalid amount!\nPlease check again!\n')
+       (Jumlah < Amount,
+       write('Invalid amount!\nPlease check again!\n')))
        ))
        )),!.
 
@@ -1088,21 +1089,21 @@ sell_mackerel_fish :-
          ((Amount >= 0) ->
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(mackerel_fish,X),
-       inventoryI(2, mackerel_fish,_,_,_, Jumlah),
        ((\+cekConsumableExist(2, mackerel_fish),
        write('There is no such item in your inventory!\nPlease check again!\n'));
        (cekConsumableExist(2, mackerel_fish),
-       (Jumlah >= Amount,
+       inventoryI(2, mackerel_fish,_,_,_, Jumlah),
+       ((Jumlah >= Amount,
        NewPrice is Amount*X,
        NewGold is Gold+NewPrice,
        retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
        asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold)),
-       deleteConsumable(2, mackerel_fish),
+       deleteConsumable(2, Amount),
        write('You sold '),write(Amount), write(' mackerel'),nl,
        write('You received '), write(NewPrice), write(' golds')
        );
-       Jumlah < Amount,
-       write('Invalid amount!\nPlease check again!\n')
+       (Jumlah < Amount,
+       write('Invalid amount!\nPlease check again!\n')))
        )))),!.
 
 sell_sardines_fish :- 
@@ -1112,21 +1113,21 @@ sell_sardines_fish :-
          ((Amount >= 0) ->
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(sardines_fish,X),
-       inventoryI(3, sardines_fish,_,_,_, Jumlah),
        ((\+cekConsumableExist(3, sardines_fish),
        write('There is no such item in your inventory!\nPlease check again!\n'));
        (cekConsumableExist(3, sardines_fish),
-       (Jumlah >= Amount,
+       inventoryI(3, sardines_fish,_,_,_, Jumlah),
+       ((Jumlah >= Amount,
        NewPrice is Amount*X,
        NewGold is Gold+NewPrice,
        retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
        asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold)),
-       deleteConsumable(3, sardines_fish),
+       deleteConsumable(3, Amount),
        write('You sold '),write(Amount), write(' sardine'),nl,
        write('You received '), write(NewPrice), write(' golds')
        );
-       Jumlah < Amount,
-       write('Invalid amount!\nPlease check again!\n')
+       (Jumlah < Amount,
+       write('Invalid amount!\nPlease check again!\n')))
        )))),!.
 
 sell_puffer_fish :- 
@@ -1136,21 +1137,21 @@ sell_puffer_fish :-
          ((Amount >= 0) ->
        player(_,_,_,_,_,_,_,_,_,Gold),
        sellprice(puffer_fish,X),
-       inventoryI(4, puffer_fish,_,_,_, Jumlah),
        ((\+cekConsumableExist(4, puffer_fish),
        write('There is no such item in your inventory!\nPlease check again!\n'));
        (cekConsumableExist(4, puffer_fish),
-       (Jumlah >= Amount,
+       inventoryI(4, puffer_fish,_,_,_, Jumlah),
+       ((Jumlah >= Amount,
        NewPrice is Amount*X,
        NewGold is Gold+NewPrice,
        retract(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,_)),
        asserta(player(Job,Level,Level_farm,Exp_farm,Level_fish,Exp_fish,Level_ranch,Exp_ranch,Exp,NewGold)),
-       deleteConsumable(4, puffer_fish),
+       deleteConsumable(4, Amount),
        write('You sold '),write(Amount), write(' puffer fish'),nl,
        write('You received '), write(NewPrice), write(' golds')
        );
-       Jumlah < Amount,
-       write('Invalid amount!\nPlease check again!\n')
+       (Jumlah < Amount,
+       write('Invalid amount!\nPlease check again!\n')))
        )))),!.
 
 exitMarket :- write('Thanks for coming !!!'),nl,

@@ -136,6 +136,10 @@ sellprice(chicken, 100).
 sellprice(sheep, 200).
 sellprice(cow, 500).
 sellprice(horse, 800).
+sellprice(chicken_feed, 5).
+sellprice(sheep_feed, 15).
+sellprice(cow_feed, 20).
+sellprice(horse_feed, 50).
 sellprice(tuna_fish, 200).
 sellprice(mackerel_fish, 150).
 sellprice(sardines_fish, 100).
