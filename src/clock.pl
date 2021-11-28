@@ -53,7 +53,7 @@ clockAfterMove :-   retract(clock(X)), (\+ speedBoost(_) -> NewX is X+5; NewX is
 
 /* belum ditentuin waktunya mau berapa lama */
 
-clockAfterFishing :-retract(clock(X)), NewX is X+5,
+clockAfterFishing :-retract(clock(X)), NewX is X+30,
                     asserta(clock(NewX)), clockRules, punishTired.
 
 clockAfterFarming :-retract(clock(X)), NewX is X+25,

@@ -63,49 +63,34 @@ showAnimals([ID|TX],[Nama|TY],[Time|TZ]) :-
                         showAnimals(TX,TY,TZ).
 
 
-show_chicken :-         isRanch(_),
-                        silo(1,Y), write('Chicken Food: '), write(Y),nl,
+show_chicken :-         silo(1,Y), write('Chicken Food: '), write(Y),nl,
                         count_chicken(X), write('Total chicken: '), write(X),nl,
                         findall(ID,chicken(ID,_,_,_),ListID),
                         findall(Time, chicken(_,_,_,Time), ListTime),
                         findall(Nama, chicken(_,Nama,_,_), ListNama),
                         showAnimals(ListID,ListNama,ListTime), !.
 
-show_chicken :-         \+ isRanch(_),
-                        write('You are not in ranch').
-
-show_sheep :-           isRanch(_),
-                        silo(2,Y), write('Sheep Food: '), write(Y),nl,
+show_sheep :-           silo(2,Y), write('Sheep Food: '), write(Y),nl,
                         count_sheep(X), write('Total sheep: '), write(X),nl,
                         findall(ID,sheep(ID,_,_,_),ListID),
                         findall(Time, sheep(_,_,_,Time), ListTime),
                         findall(Nama, sheep(_,Nama,_,_), ListNama),
                         showAnimals(ListID,ListNama,ListTime), !.
 
-show_sheep :-           \+ isRanch(_),
-                        write('You are not in ranch').
-
-show_cow :-             isRanch(_),
-                        silo(3,Y), write('Cow Food: '), write(Y),nl,
+show_cow :-             silo(3,Y), write('Cow Food: '), write(Y),nl,
                         count_cow(X), write('Total cow: '), write(X),nl,
                         findall(ID,cow(ID,_,_,_),ListID),
                         findall(Time, cow(_,_,_,Time), ListTime),
                         findall(Nama, cow(_,Nama,_,_), ListNama),
                         showAnimals(ListID,ListNama,ListTime), !.
 
-show_cow :-             \+ isRanch(_),
-                        write('You are not in ranch').
-
-show_horse :-           isRanch(_),
-                        silo(4,Y), write('Horse Food: '), write(Y),nl,
+show_horse :-           silo(4,Y), write('Horse Food: '), write(Y),nl,
                         count_horse(X), write('Total horse: '), write(X),nl,
                         findall(ID,horse(ID,_,_,_),ListID),
                         findall(Time, horse(_,_,_,Time), ListTime),
                         findall(Nama,horse(_,Nama,_,_), ListNama),
                         showAnimals(ListID,ListNama,ListTime),!.
 
-show_horse :-           \+ isRanch(_),
-                        write('You are not in ranch').
 
 add_chicken :-          chicken(X,_,_,_),
                         write('insert chicken name (no space or special character allowed): '), read(Y),
@@ -265,7 +250,7 @@ collectRanch :-                 isRanch(_),
                                 write('Input choice: '), read_integer(X),
                                 (X =:= 1 -> hasil(_,_,Milk,_),collect_milk, hasil(_,_,Milk2,_),Milk2 > Milk -> questAddRanch, !;
                                  X =:= 2 -> hasil(_,Wool,_,_),collect_wool, hasil(_,Wool2,_,_),Wool2 > Wool -> questAddRanch,!;
-                                 X =:= 3 -> hasil(_,_,HMilk),collect_horsemilk, hasil(_,_,_,HMilk2),HMilk2 > HMilk -> questAddRanch,!;
+                                 X =:= 3 -> hasil(_,_,_,HMilk),collect_horsemilk, hasil(_,_,_,HMilk2),HMilk2 > HMilk -> questAddRanch,!;
                                  write('invalid input!')
                                 ).
                                 

@@ -129,7 +129,7 @@ horse_info              :- show_horse, !.
 fill                    :- fill_silo, !.
 storage                 :- storageRanch, !.
 collect                 :- collectRanch, !.
-exitRanch               :- retract(isRanch(_)),!.
+exitRanch               :- retract(isRanch(_)), clockAfterRanching, !.
 
 /*** Fail State ***/
 

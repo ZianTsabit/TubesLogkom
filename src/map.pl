@@ -42,7 +42,7 @@ createRiver :-          asserta(water(15,5)),
 map :-                  isStarted(_) -> 
                         (map(0, 16), nl, showClock, write(' Day '), day(X), write(X), nl,nl,season(Y), write(Y),write(', '), weather(Z), write(Z),
                         (
-                            write('Map Legends: '),nl,
+                            nl,write('Map Legends: '),nl,
                             write('P : Player position'),nl,
                             write('H : House position'),nl,
                             write('M : Marketplace position'),nl,
