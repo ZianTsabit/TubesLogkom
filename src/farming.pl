@@ -1,7 +1,7 @@
 
 
 :- dynamic(isPlant/2).
-:- dynamic(dayPlant/2).
+:- dynamic(dayPlant/3).
 :- dynamic(waterLevel/3).
 
 dig :- \+isStarted(_), write('You have to start your game first!'),!.
@@ -61,7 +61,7 @@ plant :- player(X,Y),
          ),
          clockAfterFarming,!.
 
-plant_chili :- isStarted(_),isPlant(_),day(Z),
+plant_chili :- isStarted(_),day(Z),
          ((\+cekConsumableExist(6, chili_seed),
          write('You do not have chili seeds'));
          (cekConsumableExist(6, chili_seed),player(X,Y),
@@ -69,13 +69,13 @@ plant_chili :- isStarted(_),isPlant(_),day(Z),
          retract(digged(X,Y1)),
          asserta(chili(X,Y1)),
          asserta(isPlant(X,Y1)),
-         asserta(dayPlant(chili,Z)),
+         asserta(dayPlant(X,Y1,Z)),
          asserta(waterLevel(X,Y1,1)),
          deleteConsumable(6, 1),
-         write('You planted a chili seeds.'),
-         retract(isPlant(_)))),expAfter(farm,5),!.
+         write('You planted a chili seeds.')
+         )),expAfter(farm,5),!.
 
-plant_paddy :- isStarted(_),isPlant(_),day(Z),
+plant_paddy :- isStarted(_),day(Z),
          ((\+cekConsumableExist(7, paddy_seed),
          write('You do not have paddy seeds'));
          (cekConsumableExist(7, paddy_seed),player(X,Y),
@@ -83,13 +83,13 @@ plant_paddy :- isStarted(_),isPlant(_),day(Z),
          retract(digged(X,Y1)),
          asserta(paddy(X,Y1)),
          asserta(isPlant(X,Y1)),
-         asserta(dayPlant(paddy,Z)),
+         asserta(dayPlant(X,Y1,Z)),
          asserta(waterLevel(X,Y1,1)),
          deleteConsumable(7, 1),
-         write('You planted a paddy seeds.'),
-         retract(isPlant(_)))),expAfter(farm,5),!.
+         write('You planted a paddy seeds.')
+         )),expAfter(farm,5),!.
 
-plant_tomato :- isStarted(_),isPlant(_),day(Z),
+plant_tomato :- isStarted(_),day(Z),
          ((\+cekConsumableExist(8, tomato_seed),
          write('You do not have tomato seeds'));
          (cekConsumableExist(8, tomato_seed),player(X,Y),
@@ -97,13 +97,13 @@ plant_tomato :- isStarted(_),isPlant(_),day(Z),
          retract(digged(X,Y1)),
          asserta(tomato(X,Y1)),
          asserta(isPlant(X,Y1)),
-         asserta(dayPlant(tomato,Z)),
+         asserta(dayPlant(X,Y1,Z)),
          asserta(waterLevel(X,Y1,1)),
          deleteConsumable(8, 1),
-         write('You planted a tomato seeds.'),
-         retract(isPlant(_)))),expAfter(farm,5),!.
+         write('You planted a tomato seeds.')
+         )),expAfter(farm,5),!.
 
-plant_pineapple :- isStarted(_),isPlant(_),day(Z),
+plant_pineapple :- isStarted(_),day(Z),
          ((\+cekConsumableExist(9, pineapple_seed),
          write('You do not have pineapple seeds'));
          (cekConsumableExist(9, pineapple_seed),player(X,Y),
@@ -111,13 +111,13 @@ plant_pineapple :- isStarted(_),isPlant(_),day(Z),
          retract(digged(X,Y1)),
          asserta(pineapple(X,Y1)),
          asserta(isPlant(X,Y1)),
-         asserta(dayPlant(pineapple,Z)),
+         asserta(dayPlant(X,Y1,Z)),
          asserta(waterLevel(X,Y1,1)),
          deleteConsumable(9, 1),
-         write('You planted a pineapple seeds.'),
-         retract(isPlant(_)))),expAfter(farm,5),!.
+         write('You planted a pineapple seeds.')
+         )),expAfter(farm,5),!.
 
-plant_strawberry :- isStarted(_),isPlant(_),day(Z),
+plant_strawberry :- isStarted(_),day(Z),
          ((\+cekConsumableExist(10, strawberry_seed),
          write('You do not have strawberry seeds'));
          (cekConsumableExist(10, strawberry_seed),player(X,Y),
@@ -125,11 +125,11 @@ plant_strawberry :- isStarted(_),isPlant(_),day(Z),
          retract(digged(X,Y1)),
          asserta(strawberry(X,Y1)),
          asserta(isPlant(X,Y1)),
-         asserta(dayPlant(strawberry,Z)),
+         asserta(dayPlant(X,Y1,Z)),
          asserta(waterLevel(X,Y1,1)),
          deleteConsumable(10, 1),
-         write('You planted a strawberry seeds.'),
-         retract(isPlant(_)))),expAfter(farm,5),!.
+         write('You planted a strawberry seeds.')
+         )),expAfter(farm,5),!.
 
 
 harvest :- \+isStarted(_), write('You have to start your game first!'),!.
@@ -144,172 +144,158 @@ harvest :- player(X,Y),
             (paddy(X,Y1) -> harvest_paddy);
             (tomato(X,Y1) -> harvest_tomato);
             (pineapple(X,Y1) -> harvest_pineapple);
-            (strawberry(X,Y1) -> harvest_strawberry);
-            ((\+chili(X,Y1),\+paddy(X,Y1),\+tomato(X,Y1),\+pineapple(X,Y1),\+strawberry(X,Y1)) -> write('Invalid input'))
+            (strawberry(X,Y1) -> harvest_strawberry)
            ),
            clockAfterFarming,!.
 
-
-harvest_chili :- player(X,Y), 
-                 Y1 is Y-1,
-                 timetoGrow(chili_seed, V),
-                 dayPlant(chili, Z),
-                 day(W),
-                 Total is W - Z,
-                 waterLevel(X,Y1, A),
+harvest_chili :- player(X,Y),
+                 Down is Y-1,
+                 timetoGrow(chili_seed, Daygrow),
+                 dayPlant(X,Down,Z),
+                 day(Current),
+                 Ageplant is Current-Z,
+                 waterLevel(X,Down,A),
                  ( 
-                 ((Total < V) -> 
+                 ((Ageplant < Daygrow) -> 
                  write('You can not harvest chili now!'));
                  ( 
-                 ((Total >= V) -> 
-                        ( (( A < Total ) -> write('Your crops is broken'),nl,write('Please give your crops water regularly!'),
-                                            retract(chili(X,Y1)),
-                                            retract(isPlant(X,Y1)));
-                          (( A >= Total) -> (capacity(X1),
-                                            Sum is X1 + 1,
-                                            (((Sum =< 100) -> 
-                                            (addConsumable(23, 1),
+                 ((Ageplant >= Daygrow) -> 
+                        ( ( A < Ageplant  -> write('Your crops is broken'),nl,write('Please give your crops water regularly!'),
+                                            retract(chili(X,Down)),
+                                            retract(isPlant(X,Down)));
+                          ( A >= Ageplant -> (addConsumable(23, 1) -> 
                                             write('You harvested chili.'),
-                                            retract(chili(X,Y1)),
-                                            retract(isPlant(X,Y1)),
+                                            retract(chili(X,Down)),
+                                            retract(isPlant(X,Down)),
                                             expAfter(farm,10),
-                                            retract(waterLevel(X,Y1,Z)),
-                                            questAddHarvest));
-                                            ((Sum > 100) -> write('Can not harvest this crops !!'),nl,write( 'Your inventory is full!'))))
+                                            retract(waterLevel(X,Down,A)),
+                                            retract(dayPlant(X,Down,Z)),
+                                            questAddHarvest)
                                           )
                         )
                  ))),!.
 
-harvest_paddy :- player(X,Y), 
-                 Y1 is Y-1,
-                 timetoGrow(paddy_seed, V),
-                 dayPlant(paddy, Z),
-                 day(W),
-                 Total is W - Z,
-                 waterLevel(X,Y1, A),
+harvest_paddy :- player(X,Y),
+                 Down is Y-1,
+                 timetoGrow(paddy_seed, Daygrow),
+                 dayPlant(X,Down,Z),
+                 day(Current),
+                 Ageplant is Current-Z,
+                 waterLevel(X,Down,A),
                  ( 
-                 ((Total < V) -> 
+                 ((Ageplant < Daygrow) -> 
                  write('You can not harvest paddy now!'));
                  ( 
-                 ((Total >= V) -> 
-                        ( (( A < Total ) -> write('Your crops is broken'),nl,write('Please give your crops water regularly!'),
-                                            retract(paddy(X,Y1)),
-                                            retract(isPlant(X,Y1)));
-                          (( A >= Total) -> (capacity(X1),
-                                            Sum is X1 + 1,
-                                            (((Sum =< 100) -> 
-                                            (addConsumable(24, 1),
+                 ((Ageplant >= Daygrow) -> 
+                        ( ( A < Ageplant  -> write('Your crops is broken'),nl,write('Please give your crops water regularly!'),
+                                            retract(paddy(X,Down)),
+                                            retract(isPlant(X,Down)));
+                          ( A >= Ageplant -> (addConsumable(24, 1) -> 
                                             write('You harvested paddy.'),
-                                            retract(paddy(X,Y1)),
-                                            retract(isPlant(X,Y1)),
+                                            retract(paddy(X,Down)),
+                                            retract(isPlant(X,Down)),
                                             expAfter(farm,10),
-                                            retract(waterLevel(X,Y1,Z)),
-                                            questAddHarvest));
-                                            ((Sum > 100) -> write('Can not harvest this crops !!'),nl,write( 'Your inventory is full!'))))
+                                            retract(waterLevel(X,Down,A)),
+                                            retract(dayPlant(X,Down,Z)),
+                                            questAddHarvest)
                                           )
                         )
                  ))),!.
 
-harvest_tomato :- player(X,Y), 
-                  Y1 is Y-1,
-                  timetoGrow(tomato_seed, V),
-                  dayPlant(tomato, Z),
-                  day(W),
-                  Total is W - Z,
-                  waterLevel(X,Y1, A),
+harvest_tomato :- player(X,Y),
+                 Down is Y-1,
+                 timetoGrow(tomato_seed, Daygrow),
+                 dayPlant(X,Down,Z),
+                 day(Current),
+                 Ageplant is Current-Z,
+                 waterLevel(X,Down,A),
                  ( 
-                 ((Total < V) -> 
+                 ((Ageplant < Daygrow) -> 
                  write('You can not harvest tomato now!'));
                  ( 
-                 ((Total >= V) -> 
-                        ( (( A < Total ) -> write('Your crops is broken'),nl,write('Please give your crops water regularly!'),
-                                            retract(tomato(X,Y1)),
-                                            retract(isPlant(X,Y1)));
-                          (( A >= Total) -> (capacity(X1),
-                                            Sum is X1 + 1,
-                                            (((Sum =< 100) -> 
-                                            (addConsumable(25, 1),
+                 ((Ageplant >= Daygrow) -> 
+                        ( ( A < Ageplant  -> write('Your crops is broken'),nl,write('Please give your crops water regularly!'),
+                                            retract(tomato(X,Down)),
+                                            retract(isPlant(X,Down)));
+                          ( A >= Ageplant -> (addConsumable(25, 1) -> 
                                             write('You harvested tomato.'),
-                                            retract(tomato(X,Y1)),
-                                            retract(isPlant(X,Y1)),
+                                            retract(tomato(X,Down)),
+                                            retract(isPlant(X,Down)),
                                             expAfter(farm,10),
-                                            retract(waterLevel(X,Y1,Z)),
-                                            questAddHarvest));
-                                            ((Sum > 100) -> write('Can not harvest this crops !!'),nl,write( 'Your inventory is full!'))))
+                                            retract(waterLevel(X,Down,A)),
+                                            retract(dayPlant(X,Down,Z)),
+                                            questAddHarvest)
                                           )
                         )
                  ))),!.
 
-harvest_pineapple :- player(X,Y), 
-                     Y1 is Y-1,
-                     timetoGrow(pineapple_seed, V),
-                     dayPlant(pineapple, Z),
-                     day(W),
-                     Total is W - Z,
-                     waterLevel(X,Y1, A),
-                     ( 
-                     ((Total < V) -> 
-                     write('You can not harvest pineapple now!'));
-                     ( 
-                     ((Total >= V) -> 
-                        ( (( A < Total ) -> write('Your crops is broken'),nl,write('Please give your crops water regularly!'),
-                                            retract(pineapple(X,Y1)),
-                                            retract(isPlant(X,Y1)));
-                          (( A >= Total) -> (capacity(X1),
-                                            Sum is X1 + 1,
-                                            (((Sum =< 100) -> 
-                                            (addConsumable(26, 1),
+harvest_pineapple :- player(X,Y),
+                 Down is Y-1,
+                 timetoGrow(pineapple_seed, Daygrow),
+                 dayPlant(X,Down,Z),
+                 day(Current),
+                 Ageplant is Current-Z,
+                 waterLevel(X,Down,A),
+                 ( 
+                 ((Ageplant < Daygrow) -> 
+                 write('You can not harvest pineapple now!'));
+                 ( 
+                 ((Ageplant >= Daygrow) -> 
+                        ( ( A < Ageplant  -> write('Your crops is broken'),nl,write('Please give your crops water regularly!'),
+                                            retract(pineapple(X,Down)),
+                                            retract(isPlant(X,Down)));
+                          ( A >= Ageplant -> (addConsumable(26, 1) -> 
                                             write('You harvested pineapple.'),
-                                            retract(pineapple(X,Y1)),
-                                            retract(isPlant(X,Y1)),
+                                            retract(pineapple(X,Down)),
+                                            retract(isPlant(X,Down)),
                                             expAfter(farm,10),
-                                            retract(waterLevel(X,Y1,Z)),
-                                            questAddHarvest));
-                                            ((Sum > 100) -> write('Can not harvest this crops !!'),nl,write( 'Your inventory is full!'))))
+                                            retract(waterLevel(X,Down,A)),
+                                            retract(dayPlant(X,Down,Z)),
+                                            questAddHarvest)
                                           )
                         )
-                     ))),!.
+                 ))),!.
 
-harvest_strawberry :- player(X,Y), 
-                      Y1 is Y-1,
-                      timetoGrow(strawberry_seed, V),
-                      dayPlant(strawberry, Z),
-                      day(W),
-                      Total is W - Z,
-                      waterLevel(X,Y1, A),
-                      ( 
-                      ((Total < V) -> 
-                      write('You can not harvest strawberry now!'));
-                      ( 
-                      ((Total >= V) -> 
-                        ( (( A < Total ) -> write('Your crops is broken'),nl,write('Please give your crops water regularly!'),
-                                            retract(strawberry(X,Y1)),
-                                            retract(isPlant(X,Y1)));
-                          (( A >= Total) -> (capacity(X1),
-                                            Sum is X1 + 1,
-                                            (((Sum =< 100) -> 
-                                            (addConsumable(23, 1),
+harvest_strawberry :- player(X,Y),
+                 Down is Y-1,
+                 timetoGrow(strawberry_seed, Daygrow),
+                 dayPlant(X,Down,Z),
+                 day(Current),
+                 Ageplant is Current-Z,
+                 waterLevel(X,Down,A),
+                 ( 
+                 ((Ageplant < Daygrow) -> 
+                 write('You can not harvest strawberry now!'));
+                 ( 
+                 ((Ageplant >= Daygrow) -> 
+                        ( ( A < Ageplant  -> write('Your crops is broken'),nl,write('Please give your crops water regularly!'),
+                                            retract(strawberry(X,Down)),
+                                            retract(isPlant(X,Down)));
+                          ( A >= Ageplant -> (addConsumable(27, 1) -> 
                                             write('You harvested strawberry.'),
-                                            retract(strawberry(X,Y1)),
-                                            retract(isPlant(X,Y1)),
+                                            retract(strawberry(X,Down)),
+                                            retract(isPlant(X,Down)),
                                             expAfter(farm,10),
-                                            retract(waterLevel(X,Y1,Z)),
-                                            questAddHarvest));
-                                            ((Sum > 100) -> write('Can not harvest this crops !!'),nl,write( 'Your inventory is full!'))))
+                                            retract(waterLevel(X,Down,A)),
+                                            retract(dayPlant(X,Down,Z)),
+                                            questAddHarvest)
                                           )
                         )
-                      ))),!.
+                 ))),!.
 
 watering :- \+isStarted(_), write('You have to start your game first!'),!.
 watering :- isStarted(_), player(X,Y) ,\+canWater(X,Y), write('You can not watering right here!'),!.
-watering :- isStarted(_), player(X,Y), Y1 is Y - 1,
+watering :- isStarted(_), 
+            player(X,Y), Y1 is Y - 1,
             canWater(X,Y1),
-            waterLevel(X,Y1,Z),
-            Z1 is Z + 1,
-            retract(waterLevel(X,Y1,Z)),
-            asserta(waterLevel(X,Y1,Z1)),
-            write('You are watering plant!'),
-            expAfter(farm,5),clockAfterFarming,!.
+            ( (isPlant(X,Y1) -> waterLevel(X,Y1,Z),
+                              Z1 is Z + 1,
+                              retract(waterLevel(X,Y1,_)),
+                              asserta(waterLevel(X,Y1,Z1)),
+                              write('You are watering'),
+                              expAfter(farm,2));
+              (\+isPlant(X,Y1) -> write('Do not waste water!')))
+            ,clockAfterFarming,!.
          
 
 
