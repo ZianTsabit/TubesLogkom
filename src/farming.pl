@@ -25,7 +25,7 @@ dig :- player(X,Y),canDig(X,Y),
                 ))
         ),
        write('You digged the tile.'),
-       expAfter(farm,10),
+       expAfter(farm,5),
        (clockAfterFarming;w),!.        
 
 
@@ -296,7 +296,23 @@ watering :- isStarted(_),
                               expAfter(farm,2));
               (\+isPlant(X,Y1) -> write('Do not waste water!')))
             ,clockAfterFarming,!.
-         
+
+help_farming        :- write('======================== Farming Guide ====================='),nl,
+                       write('Steps: '),nl,
+                       write('1. Dig a tile.'),nl,
+                       write('2. Plant any seeds that you have.'),nl,
+                       write('3. Give your plant water until plant ready to harvest.'),nl,
+                       write('Growth Time: '),nl,
+                       write('1. Chili seeds     : 5  days'),nl,
+                       write('2. Paddy seed      : 4  days'),nl,
+                       write('3. Tomato seed     : 7  days'),nl,
+                       write('4. Pineapple seed  : 10 days'),nl,
+                       write('5. Strawberry seed : 8  days'),nl,
+                       write('Command:\n(Run this command when the plant position in the south of your position)'),nl,
+                       write('1. dig.'),nl,
+                       write('2. plant.'),nl,
+                       write('3. harvest.'),nl,
+                       write('4. watering.'),!.  
 
 
 
