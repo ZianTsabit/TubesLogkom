@@ -45,22 +45,22 @@ punishTired :-     clock(Y), Y < 360,
 
 clockAfterSleep :-  retract(clock(X)),
                     X =< 1320 -> asserta(clock(1800)), clockRules;
-                    asserta(clock(1920)), clockRules.
+                    asserta(clock(1920)), checkGoalState, clockRules.
 
 clockAfterMove :-   retract(clock(X)), (\+ speedBoost(_) -> NewX is X+5; NewX is X+2),
-                    asserta(clock(NewX)), clockRules, punishTired.
+                    asserta(clock(NewX)), checkGoalState, clockRules, punishTired.
 
 
 /* belum ditentuin waktunya mau berapa lama */
 
 clockAfterFishing :-retract(clock(X)), NewX is X+30,
-                    asserta(clock(NewX)), clockRules, punishTired.
+                    asserta(clock(NewX)), checkGoalState, clockRules, punishTired.
 
 clockAfterFarming :-retract(clock(X)), NewX is X+25,
-                    asserta(clock(NewX)), clockRules, punishTired.
+                    asserta(clock(NewX)), checkGoalState, clockRules, punishTired.
 
 clockAfterRanching :-retract(clock(X)), NewX is X+60,
-                    asserta(clock(NewX)), clockRules, punishTired.
+                    asserta(clock(NewX)), checkGoalState, clockRules, punishTired.
 
 clockAfterMarket :- retract(clock(X)), NewX is X+15,
-                    asserta(clock(NewX)), clockRules, punishTired.
+                    asserta(clock(NewX)), checkGoalState, clockRules, punishTired.

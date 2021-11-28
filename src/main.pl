@@ -137,3 +137,12 @@ failState               :-  write('You have worked hard, but in the end result i
                             write('May God bless you in the future with kind people!'),
                             retract(day(_)) ,retract(isStarted(_)), retract(diaryList(_)), 
                             retract(clock(_)), retract(capacity(_)), retract(season(_)), retract(weather(_)).
+
+/*** Goal State ***/    
+
+goalState               :-  write('Congratulations! You have finally collected 20000 Golds!'), nl,
+                            retract(day(_)) ,retract(isStarted(_)), retract(diaryList(_)), 
+                            retract(clock(_)), retract(capacity(_)), retract(season(_)), retract(weather(_)).
+
+checkGoalState          :-  player(_,_,_,_,_,_,_,_,_,Gold),
+                            Gold >= 20000 -> goalState; true.

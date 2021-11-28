@@ -77,18 +77,25 @@ completeQuest   :-  finalQuest(harvest, HTarget), finalQuest(fish, FTarget), fin
                      (A = rancher   -> RanchBonus   is 2 ; RanchBonus is 1),
                      (A = farmer    -> HarvestBonus is 2 ; HarvestBonus is 1),
                     /* Ngehitung bonus Gold */
-                    BonusH  is HTarget * 250 * HarvestBonus,
-                    BonusF  is FTarget * 250 * FishBonus,
-                    BonusR  is RTarget * 250 * RanchBonus,
-                    TotalBonus is BonusH + BonusR + BonusF,
-                    NewGold is OldGold + TotalBonus,
-                    % Penambahan EXP belum ditambahkan
-                    ExpBonus is 10,
+                    BonusGH  is HTarget * 50 * HarvestBonus,
+                    BonusGF  is FTarget * 50 * FishBonus,
+                    BonusGR  is RTarget * 50 * RanchBonus,
+                    TotalBonusG is BonusGH + BonusGR + BonusGF,
+                    NewGold is OldGold + TotalBonusG,
+                    /* Ngehitung bonus Exp */
+                    BonusEH  is HTarget * HarvestBonus,
+                    BonusEF  is FTarget * FishBonus,
+                    BonusER  is RTarget * RanchBonus,
+                    ExpBonus is BonusEH + BonusER + BonusEF,
+                    /* Nambahin Exp */
+                    expAfter(harvest, BonusEH),
+                    expAfter(fish, BonusEF),
+                    expAfter(ranch, BonusER),
                     asserta(player(A, B, C, D, E, F, G, H, I, NewGold)),
                     retract(isQuest(_)), nl,
                     write('Quest Completed!'), nl, nl,
                     write('You Got:'), nl,
-                    format('> ~w Gold', [TotalBonus]), nl,
+                    format('> ~w Gold', [TotalBonusG]), nl,
                     format('> ~w Exp', [ExpBonus]), nl,
                     refreshQuest); true.
                     % format('~nQuest Completed!~n~nYou Got:~n> ~w Gold~n> ~w Exp~n', [NewGold, ExpBonus])).
