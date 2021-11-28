@@ -73,7 +73,7 @@ plant_chili :- isStarted(_),isPlant(_),day(Z),
          asserta(waterLevel(chili,1)),
          deleteConsumable(6, 1),
          write('You planted a chili seeds.'),
-         retract(isPlant(_)))),expAfter(farm,15),!.
+         retract(isPlant(_)))),expAfter(farm,5),!.
 
 plant_paddy :- isStarted(_),isPlant(_),day(Z),
          ((\+cekConsumableExist(7, paddy_seed),
@@ -87,7 +87,7 @@ plant_paddy :- isStarted(_),isPlant(_),day(Z),
          asserta(waterLevel(paddy,1)),
          deleteConsumable(7, 1),
          write('You planted a paddy seeds.'),
-         retract(isPlant(_)))),expAfter(farm,15),!.
+         retract(isPlant(_)))),expAfter(farm,5),!.
 
 plant_tomato :- isStarted(_),isPlant(_),day(Z),
          ((\+cekConsumableExist(8, tomato_seed),
@@ -101,7 +101,7 @@ plant_tomato :- isStarted(_),isPlant(_),day(Z),
          asserta(waterLevel(tomato,1)),
          deleteConsumable(8, 1),
          write('You planted a tomato seeds.'),
-         retract(isPlant(_)))),expAfter(farm,15),!.
+         retract(isPlant(_)))),expAfter(farm,5),!.
 
 plant_pineapple :- isStarted(_),isPlant(_),day(Z),
          ((\+cekConsumableExist(9, pineapple_seed),
@@ -115,7 +115,7 @@ plant_pineapple :- isStarted(_),isPlant(_),day(Z),
          asserta(waterLevel(pineapple,1)),
          deleteConsumable(9, 1),
          write('You planted a pineapple seeds.'),
-         retract(isPlant(_)))),expAfter(farm,15),!.
+         retract(isPlant(_)))),expAfter(farm,5),!.
 
 plant_strawberry :- isStarted(_),isPlant(_),day(Z),
          ((\+cekConsumableExist(10, strawberry_seed),
@@ -129,7 +129,7 @@ plant_strawberry :- isStarted(_),isPlant(_),day(Z),
          asserta(waterLevel(strawberry,1)),
          deleteConsumable(10, 1),
          write('You planted a strawberry seeds.'),
-         retract(isPlant(_)))),expAfter(farm,15),!.
+         retract(isPlant(_)))),expAfter(farm,5),!.
 
 
 harvest :- \+isStarted(_), write('You have to start your game first!'),!.
@@ -172,6 +172,7 @@ harvest_chili :- player(X,Y),
                                             retract(chili(X,Y1)),
                                             retract(isPlant(X,Y1)),
                                             expAfter(farm,15),
+                                            retract(waterLevel(chili,Z)),
                                             questAddHarvest));
                                             ((Sum > 100) -> write('Can not harvest this crops !!'),nl,write( 'Your inventory is full!'))))
                                           )
@@ -200,6 +201,7 @@ harvest_paddy :- player(X,Y),
                                             retract(paddy(X,Y1)),
                                             retract(isPlant(X,Y1)),
                                             expAfter(farm,15),
+                                            retract(waterLevel(paddy,Z)),
                                             questAddHarvest));
                                             ((Sum > 100) -> write('Can not harvest this crops !!'),nl,write( 'Your inventory is full!'))))
                                           )
@@ -228,6 +230,7 @@ harvest_tomato :- player(X,Y),
                                             retract(tomato(X,Y1)),
                                             retract(isPlant(X,Y1)),
                                             expAfter(farm,15),
+                                            retract(waterLevel(tomato,Z)),
                                             questAddHarvest));
                                             ((Sum > 100) -> write('Can not harvest this crops !!'),nl,write( 'Your inventory is full!'))))
                                           )
@@ -256,6 +259,7 @@ harvest_pineapple :- player(X,Y),
                                             retract(pineapple(X,Y1)),
                                             retract(isPlant(X,Y1)),
                                             expAfter(farm,15),
+                                            retract(waterLevel(pineapple,Z)),
                                             questAddHarvest));
                                             ((Sum > 100) -> write('Can not harvest this crops !!'),nl,write( 'Your inventory is full!'))))
                                           )
@@ -284,6 +288,7 @@ harvest_strawberry :- player(X,Y),
                                             retract(strawberry(X,Y1)),
                                             retract(isPlant(X,Y1)),
                                             expAfter(farm,15),
+                                            retract(waterLevel(strawberry,Z)),
                                             questAddHarvest));
                                             ((Sum > 100) -> write('Can not harvest this crops !!'),nl,write( 'Your inventory is full!'))))
                                           )
