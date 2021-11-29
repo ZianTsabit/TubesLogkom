@@ -56,14 +56,19 @@ startGame:-
 help:-
     write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'),nl,
     write('%                              ~Harvest Star~                                  %'),nl,
-    write('% 1. start  : untuk memulai petualanganmu                                      %'),nl,
-    write('% 2. map    : menampilkan peta                                                 %'),nl,
-    write('% 3. status : menampilkan kondisimu terkini                                    %'),nl,
-    write('% 4. w      : gerak ke utara 1 langkah                                         %'),nl,   
-    write('% 5. s      : gerak ke selatan 1 langkah                                       %'),nl,
-    write('% 6. d      : gerak ke ke timur 1 langkah                                      %'),nl,
-    write('% 7. a      : gerak ke barat 1 langkah                                         %'),nl,
-    write('% 8. help   : menampilkan segala bantuan                                       %'),nl,
+    write('% 1. start     : untuk memulai petualanganmu                                   %'),nl,
+    write('% 2. map       : menampilkan peta                                              %'),nl,
+    write('% 3. status    : menampilkan kondisimu terkini                                 %'),nl,
+    write('% 4. inventory : menampilkan inventory                                         %'),nl,
+    write('% 5. w         : gerak ke utara 1 langkah                                      %'),nl,   
+    write('% 6. s         : gerak ke selatan 1 langkah                                    %'),nl,
+    write('% 7. d         : gerak ke ke timur 1 langkah                                   %'),nl,
+    write('% 8. a         : gerak ke barat 1 langkah                                      %'),nl,
+    write('% 9. help      : menampilkan segala bantuan                                    %'),nl,
+    write('% 10. help_fishing : menampilkan bantuan mengenai kegiatan fishing             %'),nl,
+    write('% 11. help_farming: menampilkan bantuan mengenai kegiatan farming              %'),nl,
+    write('% 12. help_ranching : menampilkan bantuan mengenai kegiatan ranching           %'),nl,
+    write('% 13. help_quest : menampilkan bantuan mengenai quest                          %'),nl,
     write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%').
 
 
@@ -146,6 +151,7 @@ failState               :-  write('You failed to collect 20000 Golds!'), nl, nl,
 /*** Goal State ***/    
 
 goalState               :-  write('Congratulations! You have finally collected 20000 Golds!'), nl,
+                            write('You are no longer in debt anymore!'),
                             retract(day(_)) ,retract(isStarted(_)), retract(diaryList(_)), retract(player(_,_)),
                             retract(clock(_)), retract(capacity(_)), retract(season(_)), retract(weather(_)),
                             (isRich(_) -> retract(isRich(_)); !),

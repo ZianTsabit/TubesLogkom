@@ -54,7 +54,7 @@ map :-                  isStarted(_) ->
                             alchemist(_,_) -> write('A : Alchemist position'),nl ; true,
                             chili(_,_) -> write('c : chili plant position'),nl ; true,
                             paddy(_,_) -> write('v : paddy plant position'),nl ; true,
-                            tomato(_,_) -> write('v : tomato plant position'),nl ; true,
+                            tomato(_,_) -> write('t : tomato plant position'),nl ; true,
                             pineapple(_,_) -> write('n : pineapple plant position'),nl ; true,
                             strawberry(_,_) ->write('s : strawberry plant position'),nl ; true
                         )); 
@@ -85,11 +85,11 @@ move(BeforeX, BeforeY, AfterX, AfterY) :-   wall(AfterX, AfterY) -> write('Oops!
                                             water(AfterX, AfterY) -> write('you can not walk on the water, fellas!'), nl, !,
                                             retract(player(AfterX,AfterY)), asserta(player(BeforeX, BeforeY));
                                             clockAfterMove;
-                                            (house(AfterX,AfterY) -> write('You are in your house!');
-                                            ranch(AfterX,AfterY) -> write('You are in your ranch!');
-                                            marketplace(AfterX,AfterY) -> write('You are in marketplace!');
+                                            (house(AfterX,AfterY) -> write('You are at house position! \nType house. to enter your house.');
+                                            ranch(AfterX,AfterY) -> write('You are at ranch postition! \nType ranch. to enter your ranch.');
+                                            marketplace(AfterX,AfterY) -> write('You are at marketplace position! \nType market. to enter marketplace.');
                                             digged(AfterX,AfterY) -> write('You are standing on digged tile!');
-                                            alchemist(AfterX,AfterY) -> write('You are in alchemist house!'));
+                                            alchemist(AfterX,AfterY) -> write('You are at alchemist position! \nType alchemist. to enter alchemist house.'));
                                             true.
                                             
 w :-                    \+ (isMarketplace(_)), \+ (isHouse(_)), \+ (isAlchemist(_)), \+ (isRanch(_)) ->
