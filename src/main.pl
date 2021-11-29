@@ -107,7 +107,7 @@ quest                   :-  isStarted(_), \+ isQuest(_),
 
 house                   :-  player(X,Y), X =:= 4, Y =:= 10, (\+ isHouse(_), writeActHouse, asserta(isHouse(true)), !;
                             write('You are already in house menu'), !); write('You are not in house').
-sleep                   :-  isHouse(_), goSleep, !; failHouse.
+sleep                   :-  day(X), (X \= 360, isHouse(_) -> goSleep, !; X = 360, isHouse(_) -> exit, failState, !); failHouse.
 writeDiary              :-  isHouse(_), writeInDiary, !; failHouse.
 readDiary               :-  isHouse(_), readTheDiary, !; failHouse.
 exit                    :-  retract(isHouse(_)).
@@ -133,18 +133,25 @@ exitRanch               :- retract(isRanch(_)), clockAfterRanching, !.
 
 /*** Fail State ***/
 
-failState               :-  write('You have worked hard, but in the end result is all that matters.'), nl,
+failState               :-  write('You failed to collect 20000 Golds!'), nl, nl,
+                            write('You have worked hard, but in the end result is all that matters.'), nl,
                             write('May God bless you in the future with kind people!'),
-                            retract(day(_)) ,retract(isStarted(_)), retract(diaryList(_)), 
+                            retract(day(_)) ,retract(isStarted(_)), retract(diaryList(_)), retract(player(_,_)),
                             retract(clock(_)), retract(capacity(_)), retract(season(_)), retract(weather(_)),
-                            retract(isRich(_)), retract(isSpeed(_)), retract(speedBoost(_)), retract(richBoost(_)).
+                            (isRich(_) -> retract(isRich(_)); !),
+                            (isSpeed(_) -> retract(isSpeed(_)); !),
+                            (richBoost(_) -> retract(richBoost(_)); !),
+                            (speedBoost(_) -> retract(speedBoost(_)); !).
 
 /*** Goal State ***/    
 
 goalState               :-  write('Congratulations! You have finally collected 20000 Golds!'), nl,
-                            retract(day(_)) ,retract(isStarted(_)), retract(diaryList(_)), 
+                            retract(day(_)) ,retract(isStarted(_)), retract(diaryList(_)), retract(player(_,_)),
                             retract(clock(_)), retract(capacity(_)), retract(season(_)), retract(weather(_)),
-                            retract(isRich(_)), retract(isSpeed(_)), retract(speedBoost(_)), retract(richBoost(_)).
+                            (isRich(_) -> retract(isRich(_)); !),
+                            (isSpeed(_) -> retract(isSpeed(_)); !),
+                            (richBoost(_) -> retract(richBoost(_)); !),
+                            (speedBoost(_) -> retract(speedBoost(_)); !).
 
 checkGoalState          :-  player(_,_,_,_,_,_,_,_,_,Gold),
                             Gold >= 20000 -> goalState; true.

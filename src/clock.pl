@@ -37,10 +37,11 @@ clockRules :-       clock(X), X > 1439,
                     chickenRules, sheepRules, cowRules, horseRules.
 
 
-punishTired :-     clock(Y), Y < 360,
+punishTired :-      day(X), (X \= 361 -> clock(Y), Y < 360,
                     write('player : "... What is happening to me?"'),nl,nl,
                     write('you are fainted, try not to push yourself to hard!'),
-                    retract(player(_,_)),retract(clock(_)), asserta(player(4,10)), asserta(clock(600)), !. 
+                    retract(player(_,_)),retract(clock(_)), asserta(player(4,10)), asserta(clock(600)), !);
+                    failState. 
 
 
 clockAfterSleep :-  retract(clock(X)),
