@@ -108,3 +108,15 @@ questProgress   :-  write('Current Quest Progress:'), nl, nl,
                     format('Fish    : ~w Fish    / ~w Fish',    [CFish, TFish]), nl,
                     format('Ranch   : ~w Ranch   / ~w Ranch',   [CRanch, TRanch]), nl,
                     format('Harvest : ~w Harvest / ~w Harvest', [CHarvest, THarvest]), nl.
+
+
+help_quest          :-  write('======================== Quest Help ====================='), nl,
+                        write('Steps:'), nl,
+                        write('1. Go to a Q tile'), nl,
+                        write('2. Use the command \'quest.\' to take the quest'), nl,
+                        write('3. Complete the quest by collecting certain number of items'), nl,
+                        write('4. Quests are automatically completed once you have enough items'), nl,
+                        write('5. The command \'questInfo\' will display your current quest progress'), nl,
+                        write('Command:'), nl,
+                        write('1. quest'), nl,
+                        write('2. questInfo'), nl.

@@ -105,3 +105,13 @@ fishWithL3Rod   :-  random(FishRNG),
                         FishRNG < 0.80 ->   (addConsumable(1, 1), write('You Got a Tuna!'),         nl, ExpGain is 30);
                                             (addConsumable(4, 1), write('You Got a Puffer Fish!'),  nl, ExpGain is 40)
                     ), !.
+
+help_fishing        :-  write('======================== Fishing Guide ====================='), nl,
+                        write('Steps:'), nl,
+                        write('1. Go near a lake'), nl,
+                        write('2. When fishing without a bait, there is 30% chance to not get anything'), nl,
+                        write('3. Fishing with a bait guarantees catching a fish'), nl,
+                        write('4. Bait is automatically consumed when fishing'), nl,
+                        write('Command:'), nl,
+                        write('1. fish'), nl.
+
