@@ -15,7 +15,7 @@ writeSleep                  :-  write('      ______________________'), nl,
 
 writePotion                 :-  (\+ isRich(_), \+ isSpeed(_), write('- Rich Potion (5000 gold)'), nl, write('- Speed Potion (7000 gold)');
                                 \+ isRich(_), write('- Rich Potion (5000 gold)');
-                                \+ isSpeed(_), write('- Speed Potion (7000 gold)')),
+                                \+ isSpeed(_), write('- Speed Potion (7000 gold)'); !),
                                 nl, write('- Secret Potion (? gold)').
 
 alchemistMenu               :-  player(X,Y), (X \= 1; Y \= 1), write('You are not in alchemist house');
