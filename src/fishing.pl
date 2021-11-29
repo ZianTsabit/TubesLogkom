@@ -44,8 +44,10 @@ canFishNearby   :-  player(XP, YP),
 fishWithoutBait :-  random(TrashGacha),
                     (
                         TrashGacha < 0.3 -> (
-                            write('You didn\'t get anything...'), nl
+                            write('You didn\'t get anything...'), nl,
                             % Nambah Fishing Exp
+                            expAfter(fish, 1),
+                            write('You got 1 exp!'), nl
                         );
                         getFish
                    ), !.
@@ -57,7 +59,7 @@ getFish         :-  (
                         cekItemExist(11, level3_fishing_rod) -> fishWithL3Rod;
                         cekItemExist(10, level2_fishing_rod) -> fishWithL2Rod;
                         fishWithL1Rod
-                    ), questAddFish.
+                    ), questAddFish, expAfter(fish, 10), write('You got 10 exp!'), nl.
 
 % Rod Lvl 1
 %

@@ -106,7 +106,7 @@ quest                   :-  isStarted(_), \+ isQuest(_),
 /*** House ***/
 
 house                   :-  player(X,Y), X =:= 4, Y =:= 10, (\+ isHouse(_), writeActHouse, asserta(isHouse(true)), !;
-                            write('You are already in house menu')); write('You are not in house').
+                            write('You are already in house menu'), !); write('You are not in house').
 sleep                   :-  isHouse(_), goSleep, !; failHouse.
 writeDiary              :-  isHouse(_), writeInDiary, !; failHouse.
 readDiary               :-  isHouse(_), readTheDiary, !; failHouse.
@@ -136,4 +136,15 @@ exitRanch               :- retract(isRanch(_)), clockAfterRanching, !.
 failState               :-  write('You have worked hard, but in the end result is all that matters.'), nl,
                             write('May God bless you in the future with kind people!'),
                             retract(day(_)) ,retract(isStarted(_)), retract(diaryList(_)), 
-                            retract(clock(_)), retract(capacity(_)), retract(season(_)), retract(weather(_)).
+                            retract(clock(_)), retract(capacity(_)), retract(season(_)), retract(weather(_)),
+                            retract(isRich(_)), retract(isSpeed(_)), retract(speedBoost(_)), retract(richBoost(_)).
+
+/*** Goal State ***/    
+
+goalState               :-  write('Congratulations! You have finally collected 20000 Golds!'), nl,
+                            retract(day(_)) ,retract(isStarted(_)), retract(diaryList(_)), 
+                            retract(clock(_)), retract(capacity(_)), retract(season(_)), retract(weather(_)),
+                            retract(isRich(_)), retract(isSpeed(_)), retract(speedBoost(_)), retract(richBoost(_)).
+
+checkGoalState          :-  player(_,_,_,_,_,_,_,_,_,Gold),
+                            Gold >= 20000 -> goalState; true.

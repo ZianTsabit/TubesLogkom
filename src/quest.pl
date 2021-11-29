@@ -68,27 +68,32 @@ questAddRanch   :-  isQuest(_)  ->  runQuest(ranch, RanchNum),
 completeQuest   :-  finalQuest(harvest, HTarget), finalQuest(fish, FTarget), finalQuest(ranch, RTarget),
                     runQuest(harvest, HCurr), runQuest(fish, FCurr), runQuest(ranch, RCurr),
                     (HTarget =< HCurr, FTarget =< FCurr, RTarget =< RCurr) -> (
-                    /* Kalau semua sama, nambahin Gold dan EXP */
-                    retract(player(A, B, C, D, E, F, G, H, I, OldGold)),
-                    /* Niatnya mau bikin bonus exp itu bergantung dengan
-                     * berapa susah questnya */
+                    player(Job, _, _, _, _, _, _, _, _, _),
                     /* Bonus Exp dan Gold dari Job */
-                     (A = fisherman -> FishBonus    is 2 ; FishBonus is 1),
-                     (A = rancher   -> RanchBonus   is 2 ; RanchBonus is 1),
-                     (A = farmer    -> HarvestBonus is 2 ; HarvestBonus is 1),
+                     (Job = fisherman -> FishBonus    is 2 ; FishBonus is 1),
+                     (Job = rancher   -> RanchBonus   is 2 ; RanchBonus is 1),
+                     (Job = farmer    -> HarvestBonus is 2 ; HarvestBonus is 1),
                     /* Ngehitung bonus Gold */
-                    BonusH  is HTarget * 250 * HarvestBonus,
-                    BonusF  is FTarget * 250 * FishBonus,
-                    BonusR  is RTarget * 250 * RanchBonus,
-                    TotalBonus is BonusH + BonusR + BonusF,
-                    NewGold is OldGold + TotalBonus,
-                    % Penambahan EXP belum ditambahkan
-                    ExpBonus is 10,
+                    BonusGH  is HTarget * 50 * HarvestBonus,
+                    BonusGF  is FTarget * 50 * FishBonus,
+                    BonusGR  is RTarget * 50 * RanchBonus,
+                    TotalBonusG is BonusGH + BonusGR + BonusGF,
+                    /* Ngehitung bonus Exp */
+                    BonusEH  is HTarget * HarvestBonus,
+                    BonusEF  is FTarget * FishBonus,
+                    BonusER  is RTarget * RanchBonus,
+                    ExpBonus is BonusEH + BonusER + BonusEF,
+                    /* Nambahin Exp */
+                    expAfter(farm, BonusEH),
+                    expAfter(fish, BonusEF),
+                    expAfter(ranch, BonusER),
+                    retract(player(A, B, C, D, E, F, G, H, I, OldGold)),
+                    NewGold is OldGold + TotalBonusG,
                     asserta(player(A, B, C, D, E, F, G, H, I, NewGold)),
                     retract(isQuest(_)), nl,
                     write('Quest Completed!'), nl, nl,
                     write('You Got:'), nl,
-                    format('> ~w Gold', [TotalBonus]), nl,
+                    format('> ~w Gold', [TotalBonusG]), nl,
                     format('> ~w Exp', [ExpBonus]), nl,
                     refreshQuest); true.
                     % format('~nQuest Completed!~n~nYou Got:~n> ~w Gold~n> ~w Exp~n', [NewGold, ExpBonus])).
