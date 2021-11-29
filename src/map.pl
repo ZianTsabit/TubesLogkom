@@ -84,7 +84,7 @@ move(BeforeX, BeforeY, AfterX, AfterY) :-   wall(AfterX, AfterY) -> write('Oops!
                                             retract(player(AfterX,AfterY)), asserta(player(BeforeX, BeforeY)), nl, !;
                                             water(AfterX, AfterY) -> write('you can not walk on the water, fellas!'), nl, !,
                                             retract(player(AfterX,AfterY)), asserta(player(BeforeX, BeforeY));
-                                            clockAfterMove;
+                                            clockAfterMove,
                                             (house(AfterX,AfterY) -> write('You are at house position! \nType house. to enter your house.');
                                             ranch(AfterX,AfterY) -> write('You are at ranch postition! \nType ranch. to enter your ranch.');
                                             marketplace(AfterX,AfterY) -> write('You are at marketplace position! \nType market. to enter marketplace.');
