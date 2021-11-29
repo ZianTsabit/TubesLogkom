@@ -40,8 +40,8 @@ clockRules :-       (clock(X), X > 1439,
 punishTired :-      day(X), (X \= 361 -> clock(Y), Y < 360,
                     write('player : "... What is happening to me?"'),nl,nl,
                     write('you are fainted, try not to push yourself to hard!'),
-                    retract(player(_,_)),retract(clock(_)), asserta(player(4,10)), asserta(clock(600)), !);
-                    (X = 361, failState); true. 
+                    retract(player(_,_)),retract(clock(_)), asserta(player(4,10)), asserta(clock(600)), !;
+                    X = 361, failState); true. 
 
 
 clockAfterSleep :-  retract(clock(X)),
