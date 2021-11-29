@@ -14,20 +14,19 @@ sum([H | T], L) :- sum(T, L1), L is H + L1.
 
 /* Tampilkan inventory */
 listItem :-             findall(Jumlah,inventoryI(_,_,item,_,_,Jumlah), ListJumlahItem),
-                        findall(Level,inventoryI(_,_,item,_,Level,_),ListLevelItem),
                         findall(Nama,inventoryI(_,Nama,item,_,_,_),ListNamaItem),
-                        showItem(ListJumlahItem,ListLevelItem,ListNamaItem).
+                        showItem(ListJumlahItem,ListNamaItem).
 
 listConsumable :-       findall(Jumlah,inventoryI(_,_,consumable,_,_,Jumlah), ListJumlahConsumable),
                         findall(Nama,inventoryI(_,Nama,consumable,_,_,_),ListNamaConsumable),
                         findall(ID,inventoryI(ID,_,consumable,_,_,_), ListIDConsumable),
                         showConsumable(ListIDConsumable, ListJumlahConsumable, ListNamaConsumable).
 
-showItem([],[],[]).
+showItem([],[]).
 
-showItem([Jumlah|TX],[Level|TY],[Nama|TZ]) :-
-                        (Jumlah > 0 -> write(Jumlah),write(' Level '),write(Level),write(' '),write(Nama),nl),
-                        showItem(TX,TY,TZ).
+showItem([Jumlah|TX],[Nama|TZ]) :-
+                        (Jumlah > 0 -> write(Jumlah),write(' '),write(Nama),nl),
+                        showItem(TX,TZ).
 
 showConsumable([],[],[]).
 

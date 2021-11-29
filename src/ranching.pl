@@ -167,7 +167,7 @@ delete_horse :-       show_horse,write('insert ID: '), read_integer(ID),
                         horse(ID,_,_,_) -> retract(horse(ID,_,_,_)), decreaseId_horse(ID),!;
                         write('invalid ID!'), fail, !.
 
-/* aturan ganti hari */
+/* aturan ganti hari menggunakan konsep rekurens */
 
 chickenRules :-                 silo(1,X),X > 0,chicken(ID1,_,_,_) ->hasil(Telur,_,_,_), checkProductionChicken(ID1),hasil(Telur2,_,_,_), (Telur2 > Telur -> questAddRanch;true), !;
                                 true, !.
@@ -200,6 +200,7 @@ checkProductionSheep(ID) :-     (sheep(ID,Nama,_,Time), silo(2,Isi), Isi =< 0) -
 
 checkProductionSheep(ID) :-     \+ sheep(ID,_,_,_), !,true.
 
+
 checkProductionCow(ID) :-       (cow(ID,Nama,_,Time), Time > 0, silo(3,Isi), Isi > 0) -> decreaseSilo(3),retract(cow(ID,Nama,_,Time)), NewTime is Time-1, assertz(cow(ID,Nama,false,NewTime)), NewID is ID-1, checkProductionCow(NewID).
 
 checkProductionCow(ID) :-       (cow(ID,Nama,_,Time), Time =:= 0, silo(3,Isi), Isi > 0) -> retract(cow(ID,Nama,_,Time)), NewTime is Time, assertz(cow(ID,Nama,false,NewTime)), NewID is ID-1, checkProductionCow(NewID).
@@ -222,14 +223,14 @@ fill_silo :-                    isRanch(_),
                                 write('Choose one of the option: '),nl,
                                 write('1. Fill chicken food'),nl,
                                 write('2. Fill sheep food'),nl,
-                                write('3, Fill cow food'),nl,
+                                write('3. Fill cow food'),nl,
                                 write('4. Fill horse food'),nl,
                                 write('Input choice : '), read_integer(X),nl,
                                 (X =:= 1 -> ItemID is 11, fill_food(X, ItemID);
                                  X =:= 2 -> ItemID is 12, fill_food(X, ItemID);
                                  X =:= 3 -> ItemID is 13, fill_food(X, ItemID);
                                  X =:= 4 -> ItemID is 14, fill_food(X, ItemID);
-                                 write('Invalid choice!'), !, fail), !.
+                                 write('Invalid choice!'), nl, nl, fill_silo), !.
 
 fill_silo :-                    \+ isRanch(_),
                                 write('you are not in ranch.'), !.
@@ -311,7 +312,7 @@ storageRanch :-                 isRanch(_),
                                 write('> '),read(Input), 
                                 (Input == yes -> withdrawStorage, !;
                                  Input == no -> !;
-                                 write('invalid input!'), !).
+                                 write('invalid input!'), nl,nl,storageRanch, !).
 
 storageRanch :-                 \+ (isRanch(_)),
                                 write('you are no in ranch!').
@@ -358,4 +359,4 @@ withdrawStorage :-              write('which one do you want to withdraw?'),nl,
                                   )
                                 )   
                                 ;
-                                write('invalid input!.')), !.
+                                write('invalid input!.')),!.
