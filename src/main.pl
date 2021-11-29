@@ -106,7 +106,7 @@ quest                   :-  isStarted(_), \+ isQuest(_),
 /*** House ***/
 
 house                   :-  player(X,Y), X =:= 4, Y =:= 10, (\+ isHouse(_), writeActHouse, asserta(isHouse(true)), !;
-                            write('You are already in house menu')); write('You are not in house').
+                            write('You are already in house menu'), !); write('You are not in house').
 sleep                   :-  isHouse(_), goSleep, !; failHouse.
 writeDiary              :-  isHouse(_), writeInDiary, !; failHouse.
 readDiary               :-  isHouse(_), readTheDiary, !; failHouse.
