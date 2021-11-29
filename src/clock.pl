@@ -10,7 +10,7 @@ showClock :-        clock(X), Jam is X // 60, Menit is X mod 60,
                     write(':'), 
                     ((Menit > 9) -> write(Menit) ; write('0'),write(Menit)), !.
 
-clockRules :-       clock(X), X > 1439, 
+clockRules :-       (clock(X), X > 1439, 
                     retract(day(Y)),NewY is Y+1,asserta(day(NewY)),
                     write('Day '), write(NewY), nl,
                     retract(clock(X)),NewX is X-1440,asserta(clock(NewX)), 
@@ -34,14 +34,14 @@ clockRules :-       clock(X), X > 1439,
                     (alchemist(A,B), NewY mod 17 =\= 0 -> nl, nl, retract(alchemist(A,B)), write('Alchemist has gone')); !),
                     (richBoost(_) -> retract(player(C,D,E,F,G,H,I,J,K,Gold)), NewGold is Gold + 40, 
                     asserta(player(C,D,E,F,G,H,I,J,K,NewGold)); !),
-                    chickenRules, sheepRules, cowRules, horseRules.
+                    chickenRules, sheepRules, cowRules, horseRules); true.
 
 
 punishTired :-      day(X), (X \= 361 -> clock(Y), Y < 360,
                     write('player : "... What is happening to me?"'),nl,nl,
                     write('you are fainted, try not to push yourself to hard!'),
                     retract(player(_,_)),retract(clock(_)), asserta(player(4,10)), asserta(clock(600)), !);
-                    failState. 
+                    (X = 361, failState); true. 
 
 
 clockAfterSleep :-  retract(clock(X)),
