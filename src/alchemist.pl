@@ -13,10 +13,10 @@ writeSleep                  :-  write('      ______________________'), nl,
                                 write('/_____________________/     ').
                                 
 
-writePotion                 :-  (\+ isRich(_), \+ isSpeed(_), write('- Rich Potion (5000 gold)'), nl, write('- Speed Potion (7000 gold)'), nl;
-                                \+ isRich(_), write('- Rich Potion (5000 gold)'), nl;
-                                \+ isSpeed(_), write('- Speed Potion (7000 gold)'), nl; !),
-                                write('- Secret Potion (? gold)').
+writePotion                 :-  (\+ isRich(_), \+ isSpeed(_), write('- rich (5000 gold)'), nl, write('- speed (7000 gold)'), nl;
+                                \+ isRich(_), write('- rich (5000 gold)'), nl;
+                                \+ isSpeed(_), write('- speed (7000 gold)'), nl; !),
+                                write('- secret (? gold)').
 
 alchemistMenu               :-  player(X,Y), (X \= 1; Y \= 1), write('You are not in alchemist house');
                                 player(X,Y), X = 1, Y = 1, alchemist(_,_), \+ isAlchemist(_), asserta(isAlchemist(true)), 
